@@ -1,6 +1,6 @@
 # Agent Context Foundation
 
-[![skills.sh](https://skills.sh/b/TheBaiter/agent-context-foundation)](https://skills.sh/TheBaiter/agent-context-foundation)
+[![Skill](https://img.shields.io/badge/skill-agent--context--foundation-blue)](https://github.com/TheBaiter/agent-context-foundation)
 
 Agent Context Foundation is a Codex/agent skill for creating task-routed agent documentation in a repository.
 
