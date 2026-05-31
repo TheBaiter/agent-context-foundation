@@ -89,7 +89,9 @@ Do not wrap it in commentary. It should be directly copyable into a Codex custom
 It should include a new-repository rule:
 
 - if `Agent/README.md` or `Agent/INDEX.md` is missing, use `$agent-context-foundation` when installed,
-- if it is not installed, use `$find-skills` or search for an agent context foundation skill,
+- canonical install source: `TheBaiter/agent-context-foundation`,
+- if it is not installed, install it with `npx skills add TheBaiter/agent-context-foundation` when possible,
+- if direct install is not possible, use `$find-skills` and search for `agent-context-foundation` by `TheBaiter`,
 - if no skill is available, create only the smallest entry and router first.
 
 ### Local Access Or QA Access Docs

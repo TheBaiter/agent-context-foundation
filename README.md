@@ -132,6 +132,9 @@ Install with:
 npx skills add TheBaiter/agent-context-foundation
 ```
 
+Canonical skill name: `$agent-context-foundation`.
+Canonical install source: `TheBaiter/agent-context-foundation`.
+
 Example:
 
 ```text

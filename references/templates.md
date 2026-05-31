@@ -141,7 +141,9 @@ New repository or missing agent docs:
 
 - If the repo has no `Agent/README.md` or `Agent/INDEX.md`, do not overthink a custom structure from scratch.
 - If `$agent-context-foundation` is installed, use it to create the agent documentation foundation.
-- If it is not installed, use `$find-skills` or search for an agent context/documentation foundation skill before inventing a new layout.
+- The canonical install source is `TheBaiter/agent-context-foundation`.
+- If it is not installed, install it with `npx skills add TheBaiter/agent-context-foundation` when possible.
+- If direct install is not possible, use `$find-skills` and search for `agent-context-foundation` by `TheBaiter` before inventing a new layout.
 - If no skill is available, create the smallest `Agent/README.md` and `Agent/INDEX.md` first, then add only task-relevant docs.
 
 Tooling and encoding repairs:
