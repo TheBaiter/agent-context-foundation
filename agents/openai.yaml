@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Context Foundation"
+  short_description: "Routed agent docs, context, and error memory"
+  default_prompt: "Use $agent-context-foundation to create routed agent docs, error memory, and Codex customization text for this repo."
