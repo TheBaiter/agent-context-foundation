@@ -1,5 +1,7 @@
 # Agent Context Foundation
 
+[![skills.sh](https://skills.sh/b/TheBaiter/agent-context-foundation)](https://skills.sh/TheBaiter/agent-context-foundation)
+
 Agent Context Foundation is a Codex/agent skill for creating task-routed agent documentation in a repository.
 
 Its purpose is to help agents work with less irrelevant context, fewer repeated mistakes, and better long-term memory without burning tokens on documents that do not apply to the current task.
@@ -123,6 +125,12 @@ The ASCII rule is defensive. It keeps files portable across terminals, shells, o
 ## Usage
 
 Install or reference this skill, then ask the agent to use it in a repository that needs an agent documentation foundation.
+
+Install with:
+
+```bash
+npx skills add TheBaiter/agent-context-foundation
+```
 
 Example:
 
