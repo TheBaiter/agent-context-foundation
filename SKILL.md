@@ -15,6 +15,35 @@ Reduce unnecessary context loading, repeated agent mistakes, duplicated document
 
 The skill helps a repository define where agent guidance lives, how it is routed, and when it should or should not be read.
 
+## First-Run User Handoff
+
+When the agent installed or selected this skill by itself because a repository had missing or weak agent docs, it should briefly explain the skill before making broad documentation changes.
+
+Tell the user:
+
+- what the skill does,
+- which files it is likely to create or update,
+- the golden rules future agents should follow,
+- the normal rules future agents should follow after the golden rules,
+- that generated `Agent/README.md` and `recommended-codex-customization.md` will put golden rules first,
+- that generated closeout guidance will include topic-based checklists,
+- whether the generated `Agent/` folder should be committed to Git or added to `.gitignore`,
+- that it will not store secrets, raw logs, or production credentials,
+- that it will keep generated agent docs English and ASCII-only,
+- that it will avoid reading or creating more documentation than the task needs.
+
+Keep this explanation short and practical. Do not turn it into a long proposal unless the user asks for one.
+
+Suggested first-run note:
+
+```text
+I am using Agent Context Foundation because this repo does not yet have the minimal routed agent docs.
+It creates a small Agent/ entrypoint, a task router, optional topic docs, indexed error memory, tool notes, and copy-ready Codex customization.
+Golden rules: read the entry docs first, route by task, do not read everything, do not store secrets, and update memory only when reusable knowledge changed.
+Normal rules: read source before editing, use the owner folder, run matching checks, and tell the user what route/checklist was used and what remains unverified.
+Before I finish, I will ask whether Agent/ should be committed to Git or added to .gitignore.
+```
+
 ## When To Use
 
 Use this skill when the user wants to:
@@ -58,6 +87,9 @@ It can create or refactor:
 - `Agent/recommended-codex-customization.md` for copy-ready Codex setup text,
 - local access or QA credential guidance when explicitly allowed,
 - `Agent/tools/README.md` for reusable scripts, tools, and learned procedures,
+- `Agent/summaries/README.md` for short page, flow, component, and topic summaries,
+- `Agent/project-rules.md` for non-secret project-specific operating constraints,
+- `Agent/closing-checklists.md` for intent-based and topic-based completion checks,
 - optional coverage checklists comparing local docs with the reusable skill,
 - rules for future documentation additions.
 
@@ -75,6 +107,11 @@ It creates a structure that tells future agents:
 - how to avoid duplicated error entries,
 - how to record allowed local QA/test credentials without leaking secrets,
 - how to create and document reusable tools instead of repeating fragile manual work,
+- how to keep short summaries for recurring pages, flows, components, scripts, and topics,
+- how to group reusable knowledge so future agents do not reread complex scripts, components, or flows from scratch,
+- how to record non-secret project constraints such as allowed environments, safe probes, and approval gates,
+- how to close work with an intent-based checklist instead of a generic final pass,
+- how to bootstrap derived projects by importing only relevant templates, summaries, and error-memory categories,
 - how to keep docs portable with English and ASCII-only text.
 
 ## What This Skill Does Not Do
@@ -99,6 +136,7 @@ The output should usually include:
 - an indexed error memory that is never bulk-loaded,
 - a copy-ready `recommended-codex-customization.md`,
 - a tool/procedure index for reusable scripts and learned repairs,
+- optional summary, project-rule, and closing-checklist docs when the repository needs them,
 - clear rules for adding future documentation.
 
 ## Core Rules
@@ -113,10 +151,12 @@ The output should usually include:
 - Keep error memory separate from general docs and treat it as expensive context.
 - Error memory must be routed through `error-memory/errors/INDEX.md`; never bulk-load error files.
 - Never store secrets, credentials, tokens, passwords, or private customer data.
+- Do not decide whether `Agent/` is committed or ignored without user input when creating it for the first time.
 - Store QA/test credentials only with explicit user permission and only for local, demo, or non-production accounts.
 - If the repo may be public or permission is unclear, store instructions or environment variable names instead of credential values.
 - For mojibake, encoding repairs, bulk mechanical edits, repeated formatting, or fragile transformations, create a script/tool, run it, inspect it, and fix it until it works.
 - Document reusable tools and learned procedures so future agents do not need to rediscover them from large source files.
+- Recommend local README or summary files for complex components, scripts, flows, or folders that future agents are likely to revisit.
 - Prefer placeholders and templates over invented project history.
 
 ## Workflow
@@ -133,8 +173,12 @@ The output should usually include:
 10. Add safe QA/test credential documentation rules when the project runs visual QA or tests.
 11. Create or update `Agent/recommended-codex-customization.md` as copy-ready text for Codex personalization.
 12. Create or update `Agent/tools/README.md` for reusable scripts, tools, and learned procedures.
-13. Add a task checklist that forces scoped reading before implementation.
-14. Validate that docs are ASCII-only and no deleted legacy file remains referenced as active.
+13. Create or update `Agent/summaries/README.md` when the repository benefits from short reusable summaries.
+14. Create or update `Agent/project-rules.md` when there are non-secret constraints, safe API probes, allowed environments, or approval gates.
+15. Add intent-based and topic-based closing checklist guidance so agents state what checklist was used, what was verified, and what remains unverified.
+16. If creating `Agent/` for the first time, ask the user whether it should be committed to Git or added to `.gitignore`; do not modify `.gitignore` without confirmation.
+17. Add a task checklist that forces scoped reading before implementation.
+18. Validate that docs are ASCII-only and no deleted legacy file remains referenced as active.
 
 ## Reference Loading
 
@@ -168,12 +212,41 @@ Generated docs should include a checklist that tells future agents to:
 5. Decide whether error memory is relevant.
 6. If error memory is not relevant, do not read it.
 7. If error memory is relevant, read only `error-memory/errors/INDEX.md` first.
-8. Before finishing, update docs or error memory only if the work changed reusable knowledge.
+8. Decide whether a summary, project rule, tool note, or closing checklist applies.
+9. Before finishing, update docs or error memory only if the work changed reusable knowledge.
+10. State which checklist or route was used, what was verified, and what remains risky or unverified.
+
+## Golden Rules Placement Principle
+
+Generated docs should put golden rules where agents and users see them before any detailed guidance.
+
+Required placements:
+
+- `Agent/README.md` must put `Golden Rules` immediately after the H1 title.
+- `Agent/recommended-codex-customization.md` must start with `Golden rules`.
+- The golden rules must include scoped reading, no bulk-loading, no secret storage, English and ASCII-only `Agent/` docs, and memory updates only for reusable knowledge.
+- Normal rules can follow after the golden rules and should cover source reading, owner folders, local patterns, tools for fragile transformations, checks, and final verification reporting.
+
+## Git Tracking Decision Principle
+
+When the agent creates `Agent/` for the first time, generated guidance should make the Git tracking decision explicit.
+
+Required behavior:
+
+- Ask the user whether `Agent/` should be committed to the repository or added to `.gitignore`.
+- Explain the tradeoff briefly: committed docs help all future agents and teammates; ignored docs keep local agent memory private.
+- Do not add `Agent/` to `.gitignore` unless the user explicitly chooses that.
+- Do not assume the folder should be ignored just because it is agent-facing.
+- If the user does not answer, leave `.gitignore` unchanged and report that the decision is pending.
 
 ## Error Memory Principle
 
 When creating or updating error memory, enforce this behavior in the generated docs:
 
+- group errors by recurring root cause and category, not by date or raw command log,
+- create category files under `error-memory/errors/` when a real recurring error class exists,
+- keep `error-memory/errors/INDEX.md` as the routing index for all category files,
+- add or update index entries when a category file is created, renamed, or changes scope,
 - decide whether error memory is relevant before reading it,
 - read only `errors/INDEX.md` first,
 - search only matching category files,
@@ -220,6 +293,100 @@ Generated docs should tell future agents:
 - Document reusable scripts, tools, and learned procedures in `Agent/tools/README.md` or the most relevant routed document.
 - If the tool prevents a meaningful recurring error, update `Agent/error-memory/` at the end of the task.
 
+## Internal Summaries Rule
+
+When the repository has pages, screens, flows, component groups, scripts, or recurring topics that future agents revisit, generated docs should include `Agent/summaries/README.md`.
+
+Summaries should:
+
+- reduce repeated source and documentation loading,
+- include when to read and when not to read,
+- list main files, contracts, assumptions, risks, verification, and last reviewed date,
+- remain short and link to source files instead of copying long code,
+- avoid secrets, credentials, raw logs, production customer data, and large copied code blocks.
+
+Do not create summaries for trivial one-line changes or one-off topics with no future reuse value.
+
+## Knowledge Grouping Principle
+
+Generated docs should encourage agents to group reusable knowledge close to the topic that needs it.
+
+Use this when a component, script, workflow, generated-file process, integration, or folder is complex enough that future agents would otherwise need to reread large source files to understand it.
+
+Recommended forms:
+
+- a local `README.md` inside the component, script, workflow, or folder when the knowledge belongs next to that owner,
+- an `Agent/summaries/<topic>.md` summary when the knowledge is cross-cutting or should stay in agent memory,
+- an `Agent/tools/README.md` entry when the knowledge is a reusable procedure, command, or tool,
+- an existing routed `Agent/` document when it already owns the topic.
+
+Do not create these files automatically for every task. Recommend or create them only when:
+
+- the source area is complex or easy to misuse,
+- the agent had to reconstruct non-obvious behavior,
+- the topic is likely to be revisited,
+- the note prevents repeated context loading or repeated mistakes,
+- the user asks for durable agent knowledge.
+
+Keep each knowledge note short, routed, and explicit about when to read and when not to read. Link to source files instead of copying large code blocks.
+
+## Project Rules Principle
+
+When a repository has operational constraints, generated docs should include `Agent/project-rules.md`.
+
+Use it for non-secret rules such as:
+
+- allowed environments, tenants, schema ids, or organizations,
+- safe API probes and query limits,
+- local verification commands,
+- test credential policy without storing secrets unless explicitly allowed,
+- actions that require explicit user approval,
+- known risky areas.
+
+Never store production credentials, tokens, passwords, API keys, refresh tokens, customer data, or other secrets.
+
+## Closing Checklist Principle
+
+Generated docs should teach agents to close work with a checklist matched to the intent and topic of the change.
+
+Use a closing checklist when the task changes behavior, UI, API contracts, data, deploy, auth, scripts, dependencies, or operational documentation.
+
+The checklist document should include topic-based sections when relevant, such as:
+
+- trivial change,
+- implementation change,
+- documentation change,
+- UI or frontend change,
+- API, data, or contract change,
+- auth, security, or credentials change,
+- deployment, environment, or dependency change,
+- tooling or mechanical repair,
+- project rules,
+- internal summaries,
+- error memory.
+
+Every checklist should require the final response to state:
+
+- which route or checklist was used,
+- what was verified,
+- what remains risky, unverified, or intentionally skipped,
+- whether summaries, project rules, tools, or error memory needed updates.
+- if this was first-time `Agent/` creation, whether the Git tracking decision was confirmed or remains pending.
+
+For trivial file-local edits or pure analysis with no changes, agents may skip a full checklist but should say why.
+
+## Derived Project Bootstrap Principle
+
+When the foundation is used to start or guide a derived project, generated docs should explain what to import and what to avoid.
+
+Recommended rules:
+
+- create or update the derived project's agent docs first,
+- copy only relevant templates, summaries, project rules, and error-memory categories,
+- route inherited docs through the derived project's `Agent/INDEX.md`,
+- do not import secrets, raw logs, production credentials, customer data, or unrelated history,
+- keep project-specific constraints in `Agent/project-rules.md`.
+
 ## Codex Customization Recommendation
 
 When the foundation is created, include `Agent/recommended-codex-customization.md` as copy-ready text for the user's Codex personalization.
@@ -235,6 +402,8 @@ Agent/
   README.md
   INDEX.md
   Agent.md
+  closing-checklists.md
+  project-rules.md
   recommended-codex-customization.md
   skill-coverage-checklist.md
   core/
@@ -262,6 +431,8 @@ Agent/
       performance-errors.md
   tools/
     README.md
+  summaries/
+    README.md
 ```
 
 Adjust names to the repository, but keep the same routing principle.
@@ -277,5 +448,8 @@ Before finishing:
 - Error memory starts with `error-memory/errors/INDEX.md`.
 - Error category files are not required reading unless routed by the index.
 - Future documentation rules are explicit.
+- Optional summaries, project rules, tools, and closing checklists are routed only when they apply.
+- First-time `Agent/` creation asks whether the folder should be committed or ignored.
+- Derived project bootstrap guidance imports only relevant, non-secret context.
 - All new or updated files are ASCII-only.
 - Legacy paths are either removed or clearly marked as historical, not active.

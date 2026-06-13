@@ -36,13 +36,28 @@ Purpose:
 
 Keep it short. Do not put full project details here.
 
+The top of this file should help a user understand the installed foundation without reading the whole folder.
+
+Recommended first sections:
+
+- `Golden Rules` - first section after the H1 title. These rules should almost never be bypassed: route by task, do not read everything, do not store secrets, keep docs ASCII-only, update memory only for reusable knowledge, and ask before deciding whether first-time `Agent/` docs are committed or ignored.
+- `What This Does` - one short explanation of the foundation and the optional files it may create.
+- `Normal Rules` - everyday operating rules: read source before editing, use owner folders, prefer local patterns, use tools for fragile transformations, run matching checks, and report verification.
+
 Required content:
 
+- brief "what this does" explanation for users and future agents,
+- golden rules that are always true and placed immediately after the H1 title,
+- normal rules that apply after routing is understood,
+- first-time `Agent/` Git tracking decision rule,
 - minimal reading flow,
 - rule against reading the whole docs folder,
 - rule against reading broad docs for trivial known-file changes,
 - English and ASCII-only policy,
 - task checklist,
+- closing checklist rule,
+- routes for summaries, tools, project rules, and error memory when relevant,
+- guidance for grouping reusable knowledge in local README files, summaries, tools, or existing routed docs,
 - where to add new documentation.
 
 ### INDEX.md
@@ -59,7 +74,9 @@ Required content:
 - global rules,
 - core document table,
 - specialized document table,
+- summary, tool, project-rule, and closing-checklist routes when present,
 - error memory routing,
+- derived project bootstrap routing when the repo contains reusable templates or starter flows,
 - adding-new-guidance policy.
 
 ### Agent.md
@@ -80,6 +97,8 @@ Purpose:
 
 - provide copy-ready text for Codex personalization,
 - make future sessions start with the same routing rules,
+- put golden rules at the very beginning,
+- include the first-time `Agent/` Git tracking decision rule,
 - tell agents to read the root README, `Agent/README.md`, and `Agent/INDEX.md`,
 - enforce English and ASCII-only documentation rules,
 - enforce scoped reading and error-memory routing.
@@ -131,6 +150,101 @@ Required rule:
 Use `skill-coverage-checklist.md` only for maintaining the reusable skill or comparing it with the local `Agent/` structure.
 
 Do not route normal implementation tasks to that file.
+
+### Closing Checklists
+
+Use `closing-checklists.md` when the repository benefits from intent-based closeout checks.
+
+Read it only when:
+
+- the task changes behavior, UI, API contracts, data, deploy, auth, scripts, dependencies, or operational documentation,
+- there was a failed verification, wrong assumption, or recurring error,
+- the work creates reusable knowledge for future agents.
+
+Do not read it for trivial file-local edits, pure chat answers, or analysis with no changes.
+
+At minimum, require agents to state in the final response:
+
+- which route or checklist was used,
+- what was verified,
+- what remains risky, unverified, or intentionally skipped,
+- whether summaries, project rules, tools, or error memory were updated.
+- whether first-time `Agent/` Git tracking was confirmed or remains pending.
+
+Include topic-based sections when the repository needs them:
+
+- trivial change,
+- implementation change,
+- documentation change,
+- UI or frontend change,
+- API, data, or contract change,
+- auth, security, or credentials change,
+- deployment, environment, or dependency change,
+- tooling or mechanical repair,
+- project rules,
+- internal summaries,
+- error memory.
+
+The documentation checklist should include a first-time `Agent/` Git tracking check:
+
+- ask whether `Agent/` should be committed to Git or added to `.gitignore`,
+- explain committed docs versus local-only docs briefly,
+- change `.gitignore` only with explicit user confirmation,
+- leave `.gitignore` unchanged if the user does not answer.
+
+### Project Rules
+
+Use `project-rules.md` for non-secret operational constraints.
+
+Read it when a task may depend on:
+
+- allowed environments, tenants, schemas, organizations, or accounts,
+- safe API probes and query limits,
+- local verification commands,
+- actions requiring explicit user approval,
+- test credential policy,
+- known risky areas.
+
+Do not store credentials, tokens, API keys, refresh tokens, passwords, production customer data, or other secrets.
+
+### Internal Summaries
+
+Use `summaries/README.md` when future agents need short reusable context for pages, screens, flows, component groups, scripts, or recurring topics.
+
+Summaries reduce repeated source and documentation loading. They do not replace source inspection or tests.
+
+Read or update summaries when:
+
+- a task touches a page, flow, component group, script, or topic future agents may revisit,
+- behavior, contracts, risks, or verification steps changed,
+- source exploration produced reusable context worth preserving.
+
+Do not create summaries for trivial one-line edits or one-off topics with no likely reuse.
+
+### Knowledge Grouping
+
+Use knowledge grouping when a complex source area would otherwise force future agents to reread large files.
+
+Recommended locations:
+
+- local `README.md` inside a component, script, workflow, integration, generated-file process, or folder when the knowledge belongs next to that owner,
+- `summaries/<topic>.md` when the knowledge is cross-cutting or belongs in agent memory,
+- `tools/README.md` when the knowledge is a reusable command, script, or procedure,
+- an existing routed `Agent/` document when it already owns the topic.
+
+Do not create a README or summary for every task. Recommend or create one only when the topic is complex, likely to be revisited, or the note prevents repeated context loading or repeated mistakes.
+
+### Derived Project Bootstrap
+
+If a repository provides templates, starter flows, or reusable docs for other projects, include a bootstrap route.
+
+The route should tell agents to:
+
+- create or update the derived project's agent docs first,
+- copy only relevant templates, summaries, project rules, and error-memory categories,
+- link inherited guidance through the derived project's `Agent/INDEX.md`,
+- keep project-specific constraints in `Agent/project-rules.md`,
+- avoid importing secrets, raw logs, production credentials, customer data, or unrelated history.
 
 ## Core Folder
 
@@ -185,7 +299,8 @@ Add a compact checklist to the entry docs:
 4. Decide whether error memory is relevant.
 5. If error memory is not relevant, do not read it.
 6. If error memory is relevant, route through `error-memory/errors/INDEX.md`.
-7. Update docs only when reusable knowledge changed.
+7. Decide whether summaries, project rules, tools, or closing checklists apply.
+8. Update docs only when reusable knowledge changed.
 
 Examples of trivial tasks:
 
@@ -208,5 +323,9 @@ Before adding:
 4. Choose `error-memory/` for error patterns.
 5. Choose local access docs only for approved non-production QA/test credentials.
 6. Choose `tools/README.md` for reusable scripts, tools, and learned procedures.
-7. Update `INDEX.md`.
-8. Keep the file English and ASCII-only.
+7. Choose `summaries/` for short reusable page, flow, component, script, or topic context.
+8. Choose a local source-folder `README.md` when the knowledge belongs next to a complex component, script, workflow, integration, generated-file process, or folder.
+9. Choose `project-rules.md` for non-secret operating constraints.
+10. Choose `closing-checklists.md` for intent-based closeout checks.
+11. Update `INDEX.md` when the new document is part of the routed Agent foundation.
+12. Keep the file English and ASCII-only.

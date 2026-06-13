@@ -54,6 +54,16 @@ Adjust categories to the repository, but keep `errors/INDEX.md` as the router.
 
 The agent must not read all error documents by default.
 
+Error memory must be grouped by category and recurring root cause. Do not organize it by date, by chat session, by agent name, or by raw terminal output.
+
+Use this structure:
+
+- `errors/INDEX.md` routes every category.
+- `errors/<category>-errors.md` stores entries for one recurring error class.
+- Each entry stores one root cause and final fix.
+- New category files are created only when a meaningful recurring error class exists.
+- `errors/INDEX.md` is updated only when category routing changes.
+
 Default flow:
 
 1. Understand the current task.

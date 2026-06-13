@@ -18,9 +18,51 @@ This skill helps create a cleaner structure:
 - specialized docs only when needed,
 - indexed error memory,
 - reusable tool/procedure notes,
+- internal summaries for recurring pages, flows, components, scripts, and topics,
+- local README or summary guidance for complex components, scripts, flows, and folders,
+- non-secret project operating rules,
+- intent-based and topic-based closing checklists,
 - copy-ready Codex customization text.
 
 The goal is not to reduce quality. The goal is to preserve useful context while making agents read only what is relevant.
+
+## When To Use This Skill
+
+Use this skill when a repository needs a clear place for agent instructions and the existing guidance is missing, too large, duplicated, or hard to route.
+
+It is a good fit when agents keep rereading the same broad docs, repeating the same mistakes, losing useful setup knowledge, or mixing project rules with raw logs and one-off notes. It is also useful when a repo needs a small `Agent/README.md`, a task router, indexed error memory, reusable tool notes, safe credential rules, or copy-ready Codex customization text.
+
+It can also help when a project has complex components, scripts, workflows, integrations, or generated-file processes that future agents keep rediscovering from source. In those cases, the skill should recommend a short local `README.md`, an `Agent/summaries/` note, or an `Agent/tools/README.md` entry instead of forcing every future agent to reread the whole implementation.
+
+Use it when the goal is to make future agents read less but act with more reliable context.
+
+## When Not To Use This Skill
+
+Do not use this skill for ordinary feature work, one-file edits, bug fixes that do not change agent guidance, product documentation for end users, or business requirements that are not meant for agents.
+
+Do not use it to archive every failed attempt or every terminal log. Error memory should be grouped by recurring root cause and final fix, not stored as a raw history.
+
+Do not use it to store secrets, production credentials, API keys, tokens, passwords, private customer data, or sensitive raw logs.
+
+## First Install Behavior
+
+If an agent installs or selects this skill by itself because a repository has missing or weak agent docs, it should first explain the foundation in plain language.
+
+That explanation should cover:
+
+- what the skill does,
+- which files it may create or update,
+- the golden rules future agents must follow,
+- the normal operating rules future agents should follow,
+- the no-secrets policy,
+- the English and ASCII-only rule for generated `Agent/` docs,
+- whether the generated `Agent/` folder should be committed to Git or added to `.gitignore`.
+
+Generated `Agent/README.md` files should put "Golden Rules" immediately after the title, followed by compact "What This Does" and "Normal Rules" sections so users can understand and configure the foundation without reading every generated document.
+
+Generated Codex customization text should also start with the same golden rules.
+
+The agent should not modify `.gitignore` for `Agent/` unless the user explicitly chooses local-only agent docs. If the user does not answer, `.gitignore` should remain unchanged and the final response should say the Git tracking decision is pending.
 
 ## Main Idea
 
@@ -44,6 +86,8 @@ Agent/
   README.md
   INDEX.md
   Agent.md
+  closing-checklists.md
+  project-rules.md
   recommended-codex-customization.md
   skill-coverage-checklist.md
   core/
@@ -71,6 +115,8 @@ Agent/
       performance-errors.md
   tools/
     README.md
+  summaries/
+    README.md
 ```
 
 The exact structure can be adapted to the repository, but the routing principle should stay the same.
@@ -83,6 +129,10 @@ The exact structure can be adapted to the repository, but the routing principle 
 - Creating `Agent/core/` for broad but task-specific guidance.
 - Creating `Agent/error-memory/` as routed, searchable memory.
 - Creating `Agent/tools/README.md` for reusable scripts and learned procedures.
+- Creating `Agent/summaries/README.md` for short reusable context on pages, flows, components, scripts, and recurring topics.
+- Recommending local README or summary files for complex source areas when they would reduce repeated rereading.
+- Creating `Agent/project-rules.md` for non-secret operating constraints such as allowed environments, safe probes, and approval gates.
+- Creating `Agent/closing-checklists.md` so agents close work with the matching intent-based or topic-based checklist and report verification clearly.
 - Creating `Agent/recommended-codex-customization.md` for copy-ready Codex personalization.
 - Adding safe rules for local, demo, QA, or test credentials with explicit user permission.
 
@@ -94,6 +144,7 @@ The exact structure can be adapted to the repository, but the routing principle 
 - It does not turn error memory into a generic log archive.
 - It does not force agents to read all generated documents.
 - It does not solve every repo process problem by adding more docs.
+- It does not store production credentials, customer data, raw logs, or project-specific secrets in reusable templates.
 
 ## Error Memory Philosophy
 
