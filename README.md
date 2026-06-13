@@ -55,8 +55,12 @@ That explanation should cover:
 
 - what the skill does,
 - which files it may create or update,
+- why the skill is being used in this repository,
 - the golden rules future agents must follow,
 - the normal operating rules future agents should follow,
+- the privacy choice for `Agent/`,
+- the agent permissions and actions that require explicit user approval,
+- prohibited actions and credential handling rules,
 - the no-secrets policy,
 - the English and ASCII-only rule for generated `Agent/` docs,
 - whether the generated `Agent/` folder should be committed to Git or added to `.gitignore`.
@@ -66,6 +70,10 @@ Generated `Agent/README.md` files should put "Golden Rules" immediately after th
 Generated `Agent/README.md` and Codex customization text should also include an initial operating checklist immediately after the golden rules. That checklist tells agents to define scope, plan before editing, use routed docs as evidence, check relevant error memory, choose verification, and avoid blind implementation.
 
 Generated `Agent/README.md` files should also include a short "Foundation Identity" section naming `agent-context-foundation`, the canonical source `TheBaiter/agent-context-foundation`, and the purpose of the generated `Agent/` folder. This makes the folder self-identifying for other project users and future agents.
+
+Generated `Agent/README.md` files should also include first-time setup transparency. If privacy, permissions, prohibited actions, credential handling, or Git tracking are not decided, the generated docs should leave those items as pending decisions and the agent should mention them in the final response.
+
+Generated `Agent/README.md` files should include a skill update check that points to `TheBaiter/agent-context-foundation`. Active repositories should check about once per month, quiet repositories should check at least once per year, and agents should check sooner when repeated mistakes return or the user asks for skill improvements.
 
 Generated Codex customization text should also start with the same golden rules.
 

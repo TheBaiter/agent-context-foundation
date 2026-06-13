@@ -54,6 +54,35 @@ These docs are for agents and project collaborators. They are not end-user produ
 
 This folder contains task-routed operational memory for agents working in this repository.
 
+## First-Time Setup Transparency
+
+When this `Agent/` folder is created for the first time, the agent must explain the setup before making broad documentation changes.
+
+The explanation must cover:
+
+- what `agent-context-foundation` does,
+- why it is being used in this repository,
+- which files or folders may be created or updated,
+- whether `Agent/` should be committed to Git or kept local/private,
+- what the agent is allowed to do,
+- what the agent must not do without explicit user approval,
+- the no-secrets and credential rules,
+- whether `.gitignore` will change.
+
+If privacy, permissions, prohibited actions, or Git tracking are not decided, leave them as pending decisions and mention them in the final response.
+
+## Skill Update Check
+
+Future agents should periodically check whether `TheBaiter/agent-context-foundation` has relevant updates.
+
+Recommended cadence:
+
+- Active repositories: check about once per month.
+- Quiet or maintenance-only repositories: check at least once per year.
+- Check sooner if repeated agent mistakes return, routing stops fitting the project, or the user asks for skill improvements.
+
+Before applying broad template changes from a newer skill version, explain what changed and ask the user to confirm.
+
 ## What This Does
 
 This foundation tells agents what to read first, what not to read, where task-specific guidance lives, and how to record reusable knowledge without loading unnecessary context.
@@ -246,6 +275,22 @@ Git tracking decision:
 - Explain the tradeoff briefly: committed docs help future agents and teammates; ignored docs keep local agent memory private.
 - Do not add `Agent/` to `.gitignore` without explicit user confirmation.
 - If the user does not answer, leave `.gitignore` unchanged and report that the decision is pending.
+
+First-time setup transparency:
+
+- If `Agent/` is created for the first time, explain what `agent-context-foundation` does before making broad documentation changes.
+- Explain why it is being used, which files or folders may be created or updated, and how it changes future agent behavior.
+- Ask or record pending decisions for privacy, Git tracking, agent permissions, prohibited actions, and `.gitignore` changes.
+- Never assume permission to store credentials, change Git tracking, or perform destructive actions.
+- Leave undecided items as pending in `Agent/README.md` and mention them in the final response.
+
+Skill update check:
+
+- Periodically check whether `TheBaiter/agent-context-foundation` has relevant updates.
+- For active repositories, check about once per month.
+- For quiet or maintenance-only repositories, check at least once per year.
+- Check sooner when repeated agent mistakes return, routing stops fitting the project, or the user asks for improvements.
+- Before applying broad template changes from a newer skill version, explain what changed and ask the user to confirm.
 
 New repository or missing agent docs:
 

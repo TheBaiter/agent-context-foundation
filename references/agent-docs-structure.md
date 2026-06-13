@@ -43,6 +43,8 @@ Recommended first sections:
 - `Golden Rules` - first section after the H1 title. These rules should almost never be bypassed: route by task, do not read everything, do not store secrets, keep docs ASCII-only, update memory only for reusable knowledge, and ask before deciding whether first-time `Agent/` docs are committed or ignored.
 - `Initial Operating Checklist` - second section. It should force scope, plan, routed documentation, error-memory relevance, risk, verification, and checklist decisions before editing.
 - `Foundation Identity` - short self-reference naming `agent-context-foundation`, canonical source `TheBaiter/agent-context-foundation`, and the purpose of the generated `Agent/` folder.
+- `First-Time Setup Transparency` - short setup contract explaining that first-time creation must disclose the skill goal, likely files, privacy choice, permissions, prohibited actions, credential rules, and Git tracking decision.
+- `Skill Update Check` - short maintenance note telling future agents to periodically check `TheBaiter/agent-context-foundation` for relevant updates.
 - `What This Does` - one short explanation of the foundation and the optional files it may create.
 - `Normal Rules` - everyday operating rules: read source before editing, use owner folders, prefer local patterns, use tools for fragile transformations, run matching checks, and report verification.
 
@@ -52,6 +54,8 @@ Required content:
 - golden rules that are always true and placed immediately after the H1 title,
 - initial operating checklist placed immediately after golden rules,
 - foundation identity that states which skill generated or maintains the folder,
+- first-time setup transparency for privacy, permissions, prohibited actions, credential rules, and Git tracking,
+- periodic skill update check guidance,
 - normal rules that apply after routing is understood,
 - first-time `Agent/` Git tracking decision rule,
 - minimal reading flow,
@@ -104,6 +108,8 @@ Purpose:
 - make future sessions start with the same routing rules,
 - put golden rules at the very beginning,
 - put the initial operating checklist immediately after golden rules,
+- include first-time setup transparency rules,
+- include periodic skill update check rules,
 - include the first-time `Agent/` Git tracking decision rule,
 - tell agents to read the root README, `Agent/README.md`, and `Agent/INDEX.md`,
 - enforce English and ASCII-only documentation rules,
@@ -197,6 +203,20 @@ The documentation checklist should include a first-time `Agent/` Git tracking ch
 - explain committed docs versus local-only docs briefly,
 - change `.gitignore` only with explicit user confirmation,
 - leave `.gitignore` unchanged if the user does not answer.
+
+The documentation checklist should also include first-time setup transparency:
+
+- explain what `agent-context-foundation` does before creating broad `Agent/` docs,
+- explain why it is being used and which files or folders may change,
+- ask or record pending decisions for privacy, permissions, prohibited actions, credential handling, Git tracking, and `.gitignore`,
+- document pending decisions in `Agent/README.md` and mention them in the final response.
+
+Generated `Agent/README.md` should include a skill update check:
+
+- active repositories should check `TheBaiter/agent-context-foundation` about once per month,
+- quiet or maintenance-only repositories should check at least once per year,
+- agents should check sooner when repeated agent mistakes return or the user asks for improvements,
+- broad template updates from a newer skill version require a short explanation and user confirmation.
 
 ### Project Rules
 
