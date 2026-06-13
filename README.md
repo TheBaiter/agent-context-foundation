@@ -60,6 +60,8 @@ That explanation should cover:
 
 Generated `Agent/README.md` files should put "Golden Rules" immediately after the title, followed by compact "What This Does" and "Normal Rules" sections so users can understand and configure the foundation without reading every generated document.
 
+Generated `Agent/README.md` files should also include a short "Foundation Identity" section naming `agent-context-foundation`, the canonical source `TheBaiter/agent-context-foundation`, and the purpose of the generated `Agent/` folder. This makes the folder self-identifying for other project users and future agents.
+
 Generated Codex customization text should also start with the same golden rules.
 
 The agent should not modify `.gitignore` for `Agent/` unless the user explicitly chooses local-only agent docs. If the user does not answer, `.gitignore` should remain unchanged and the final response should say the Git tracking decision is pending.

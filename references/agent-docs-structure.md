@@ -41,6 +41,7 @@ The top of this file should help a user understand the installed foundation with
 Recommended first sections:
 
 - `Golden Rules` - first section after the H1 title. These rules should almost never be bypassed: route by task, do not read everything, do not store secrets, keep docs ASCII-only, update memory only for reusable knowledge, and ask before deciding whether first-time `Agent/` docs are committed or ignored.
+- `Foundation Identity` - short self-reference naming `agent-context-foundation`, canonical source `TheBaiter/agent-context-foundation`, and the purpose of the generated `Agent/` folder.
 - `What This Does` - one short explanation of the foundation and the optional files it may create.
 - `Normal Rules` - everyday operating rules: read source before editing, use owner folders, prefer local patterns, use tools for fragile transformations, run matching checks, and report verification.
 
@@ -48,6 +49,7 @@ Required content:
 
 - brief "what this does" explanation for users and future agents,
 - golden rules that are always true and placed immediately after the H1 title,
+- foundation identity that states which skill generated or maintains the folder,
 - normal rules that apply after routing is understood,
 - first-time `Agent/` Git tracking decision rule,
 - minimal reading flow,

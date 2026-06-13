@@ -27,6 +27,18 @@ Place this near the top of the repository root `README.md`:
 7. Update memory only when reusable knowledge changed.
 8. When creating `Agent/` for the first time, ask whether it should be committed to Git or added to `.gitignore`.
 
+## Foundation Identity
+
+This `Agent/` foundation was generated or maintained with `agent-context-foundation`.
+
+Canonical source:
+`TheBaiter/agent-context-foundation`
+
+Purpose:
+Task-routed agent guidance with scoped reading, indexed error memory, reusable tool notes, summaries, project rules, and closing checklists.
+
+These docs are for agents and project collaborators. They are not end-user product documentation.
+
 This folder contains task-routed operational memory for agents working in this repository.
 
 ## What This Does
