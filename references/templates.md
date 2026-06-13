@@ -27,6 +27,19 @@ Place this near the top of the repository root `README.md`:
 7. Update memory only when reusable knowledge changed.
 8. When creating `Agent/` for the first time, ask whether it should be committed to Git or added to `.gitignore`.
 
+## Initial Operating Checklist
+
+Before changing files:
+
+1. Read the golden rules above.
+2. Classify the task as trivial, narrow, or domain-specific.
+3. Define scope, success criteria, and likely touched owners.
+4. Plan before editing. For trivial tasks, a one-line scope is enough; for complex tasks, use phases and checkpoints.
+5. Back the plan with routed docs and source inspection. Do not plan from assumptions alone.
+6. Decide whether error memory is relevant. If relevant, read only `Agent/error-memory/errors/INDEX.md` first, then only matching categories.
+7. Identify technical criteria, risks, verification commands, and the closing checklist before applying changes.
+8. Ask the user before continuing when scope, credentials, Git tracking, or destructive actions are unclear.
+
 ## Foundation Identity
 
 This `Agent/` foundation was generated or maintained with `agent-context-foundation`.
@@ -197,6 +210,17 @@ Golden rules:
 6. Keep new or updated `Agent/` docs English and ASCII-only.
 7. Update memory only when reusable knowledge changed.
 8. When creating `Agent/` for the first time, ask whether it should be committed to Git or added to `.gitignore`.
+
+Initial operating checklist:
+
+1. Read the golden rules.
+2. Classify the task as trivial, narrow, or domain-specific.
+3. Define scope, success criteria, and likely touched owners.
+4. Plan before editing. For trivial tasks, a one-line scope is enough; for complex tasks, use phases and checkpoints.
+5. Back the plan with routed docs and source inspection. Do not plan from assumptions alone.
+6. Decide whether error memory is relevant. If relevant, read only `Agent/error-memory/errors/INDEX.md` first, then only matching categories.
+7. Identify technical criteria, risks, verification commands, and the closing checklist before applying changes.
+8. Ask the user before continuing when scope, credentials, Git tracking, or destructive actions are unclear.
 
 Before any change in this repo:
 

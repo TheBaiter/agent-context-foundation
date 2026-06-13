@@ -63,6 +63,8 @@ That explanation should cover:
 
 Generated `Agent/README.md` files should put "Golden Rules" immediately after the title, followed by compact "What This Does" and "Normal Rules" sections so users can understand and configure the foundation without reading every generated document.
 
+Generated `Agent/README.md` and Codex customization text should also include an initial operating checklist immediately after the golden rules. That checklist tells agents to define scope, plan before editing, use routed docs as evidence, check relevant error memory, choose verification, and avoid blind implementation.
+
 Generated `Agent/README.md` files should also include a short "Foundation Identity" section naming `agent-context-foundation`, the canonical source `TheBaiter/agent-context-foundation`, and the purpose of the generated `Agent/` folder. This makes the folder self-identifying for other project users and future agents.
 
 Generated Codex customization text should also start with the same golden rules.
