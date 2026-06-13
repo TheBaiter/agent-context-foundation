@@ -1,4 +1,4 @@
 interface:
   display_name: "Agent Context Foundation"
-  short_description: "Routed agent docs, summaries, project rules, and error memory"
-  default_prompt: "Use $agent-context-foundation to explain the foundation, then create routed agent docs, summaries, project rules, closing checklists, error memory, and Codex customization text for this repo."
+  short_description: "Routed agent docs, planning style, summaries, project rules, and error memory"
+  default_prompt: "Use $agent-context-foundation to explain the foundation, then create routed agent docs, planning guidance, summaries, project rules, closing checklists, error memory, and Codex customization text for this repo."

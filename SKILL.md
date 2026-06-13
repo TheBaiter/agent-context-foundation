@@ -90,6 +90,7 @@ It can create or refactor:
 - local access or QA credential guidance when explicitly allowed,
 - `Agent/tools/README.md` for reusable scripts, tools, and learned procedures,
 - `Agent/summaries/README.md` for short page, flow, component, and topic summaries,
+- `Agent/planning/README.md` for project-specific planning preferences and user planning style,
 - `Agent/project-rules.md` for non-secret project-specific operating constraints,
 - `Agent/closing-checklists.md` for intent-based and topic-based completion checks,
 - optional coverage checklists comparing local docs with the reusable skill,
@@ -111,6 +112,7 @@ It creates a structure that tells future agents:
 - how to create and document reusable tools instead of repeating fragile manual work,
 - how to keep short summaries for recurring pages, flows, components, scripts, and topics,
 - how to group reusable knowledge so future agents do not reread complex scripts, components, or flows from scratch,
+- how to preserve the user's planning style so generic planning skills can become project-specific,
 - how to record non-secret project constraints such as allowed environments, safe probes, and approval gates,
 - how to close work with an intent-based checklist instead of a generic final pass,
 - how to bootstrap derived projects by importing only relevant templates, summaries, and error-memory categories,
@@ -138,6 +140,7 @@ The output should usually include:
 - an indexed error memory that is never bulk-loaded,
 - a copy-ready `recommended-codex-customization.md`,
 - a tool/procedure index for reusable scripts and learned repairs,
+- optional planning guidance that adapts planning behavior to the project and user,
 - optional summary, project-rule, and closing-checklist docs when the repository needs them,
 - clear rules for adding future documentation.
 
@@ -177,11 +180,12 @@ The output should usually include:
 11. Create or update `Agent/recommended-codex-customization.md` as copy-ready text for Codex personalization.
 12. Create or update `Agent/tools/README.md` for reusable scripts, tools, and learned procedures.
 13. Create or update `Agent/summaries/README.md` when the repository benefits from short reusable summaries.
-14. Create or update `Agent/project-rules.md` when there are non-secret constraints, safe API probes, allowed environments, or approval gates.
-15. Add intent-based and topic-based closing checklist guidance so agents state what checklist was used, what was verified, and what remains unverified.
-16. If creating `Agent/` for the first time, ask the user whether it should be committed to Git or added to `.gitignore`; do not modify `.gitignore` without confirmation.
-17. Add a task checklist that forces scoped reading before implementation.
-18. Validate that docs are ASCII-only and no deleted legacy file remains referenced as active.
+14. Create or update `Agent/planning/README.md` when the repository benefits from project-specific planning preferences.
+15. Create or update `Agent/project-rules.md` when there are non-secret constraints, safe API probes, allowed environments, or approval gates.
+16. Add intent-based and topic-based closing checklist guidance so agents state what checklist was used, what was verified, and what remains unverified.
+17. If creating `Agent/` for the first time, ask the user whether it should be committed to Git or added to `.gitignore`; do not modify `.gitignore` without confirmation.
+18. Add a task checklist that forces scoped reading before implementation.
+19. Validate that docs are ASCII-only and no deleted legacy file remains referenced as active.
 
 ## Reference Loading
 
@@ -347,6 +351,32 @@ Do not create these files automatically for every task. Recommend or create them
 
 Keep each knowledge note short, routed, and explicit about when to read and when not to read. Link to source files instead of copying large code blocks.
 
+## Planning Style Principle
+
+Generated docs should optionally preserve project-specific planning preferences so agents do not rely only on generic planning methods.
+
+Use `Agent/planning/README.md` when:
+
+- the user has a clear preferred planning style,
+- the project has recurring implementation phases or review gates,
+- plans need a specific level of detail,
+- agents should know when to ask for confirmation before proceeding,
+- other planning skills should adapt to this repository's conventions.
+
+The planning doc should describe:
+
+- when to create a plan and when not to,
+- how detailed the plan should be,
+- how to split phases and checkpoints,
+- when to ask the user before continuing,
+- how to update a plan during execution,
+- how to close a plan with verification and checklist evidence,
+- how to combine this repository's planning preferences with external planning skills.
+
+Do not create planning guidance automatically for every repository. Recommend or create it when the user's planning style is known, when planning mistakes repeat, or when the repo has complex multi-step workflows.
+
+Planning guidance should not replace source inspection, tests, or domain-specific routed docs. It should shape how agents plan after they have selected the right task context.
+
 ## Project Rules Principle
 
 When a repository has operational constraints, generated docs should include `Agent/project-rules.md`.
@@ -379,6 +409,7 @@ The checklist document should include topic-based sections when relevant, such a
 - deployment, environment, or dependency change,
 - tooling or mechanical repair,
 - project rules,
+- planning style,
 - internal summaries,
 - error memory.
 
@@ -448,6 +479,8 @@ Agent/
       performance-errors.md
   tools/
     README.md
+  planning/
+    README.md
   summaries/
     README.md
 ```
@@ -466,6 +499,7 @@ Before finishing:
 - Error category files are not required reading unless routed by the index.
 - Future documentation rules are explicit.
 - Optional summaries, project rules, tools, and closing checklists are routed only when they apply.
+- Optional planning guidance captures the user's planning style without replacing other planning skills.
 - First-time `Agent/` creation asks whether the folder should be committed or ignored.
 - Derived project bootstrap guidance imports only relevant, non-secret context.
 - All new or updated files are ASCII-only.

@@ -53,6 +53,7 @@ It may include:
 - `error-memory/` for indexed recurring errors,
 - `tools/` for reusable scripts and learned procedures,
 - `summaries/` for short page, flow, component, script, or topic summaries,
+- `planning/` for project-specific planning preferences,
 - `project-rules.md` for non-secret operating constraints,
 - `closing-checklists.md` for intent-based and topic-based completion checks,
 - `recommended-codex-customization.md` for copy-ready Codex setup text.
@@ -64,9 +65,10 @@ It may include:
 3. Prefer small, task-specific docs over one large manual.
 4. Use scripts/tools for fragile repeated transformations.
 5. Recommend a local README or summary when a complex component, script, flow, or folder would otherwise need to be rediscovered from source.
-6. Run the checks that match the change.
-7. Do not modify `.gitignore` for agent docs without explicit user confirmation.
-8. Before finishing, state the route or checklist used, what was verified, and what remains risky or unverified.
+6. Use `planning/README.md` when the task needs project-specific planning style or checkpoints.
+7. Run the checks that match the change.
+8. Do not modify `.gitignore` for agent docs without explicit user confirmation.
+9. Before finishing, state the route or checklist used, what was verified, and what remains risky or unverified.
 
 ## Minimal Reading Rule
 
@@ -158,6 +160,7 @@ Do not read every document. Pick the smallest relevant set for the task.
 | Non-secret project constraints, safe probes, approval gates | `project-rules.md` |
 | Reusable scripts, local tools, encoding fixes, or learned procedures | `tools/README.md` |
 | Internal summaries for pages, flows, components, scripts, or recurring topics | `summaries/README.md` |
+| Project-specific planning style, phases, gates, or user planning preferences | `planning/README.md` |
 | Intent-based completion checks | `closing-checklists.md` |
 | Coverage comparison between local Agent docs and the reusable skill | `skill-coverage-checklist.md` |
 
@@ -268,6 +271,68 @@ Checklist rules:
 - If no checklist matches, create a short task-specific checklist before finishing.
 - In the final response, state which checklist was used, what was verified, and what remains risky or unverified.
 - If this was first-time `Agent/` creation, state whether the user confirmed that `Agent/` should be committed or ignored.
+```
+
+## Agent Planning README.md
+
+Use this as `Agent/planning/README.md` when the repository needs project-specific planning preferences.
+
+Do not create it automatically for every repository. Recommend or create it when the user has a known planning style, planning mistakes repeat, or the repo has complex multi-step work.
+
+```md
+# Planning Guidance
+
+This document captures project-specific planning preferences for agents.
+
+It complements generic planning skills. It does not replace source inspection, tests, routed domain docs, or user instructions.
+
+## When to read
+
+- The task is multi-step, risky, ambiguous, or crosses multiple owners.
+- The user asks for a plan, roadmap, phased execution, or review checkpoints.
+- Another planning skill is being used and should adapt to this repository.
+- Previous planning attempts were too generic, too detailed, too vague, or missed project gates.
+
+## When not to read
+
+- The task is a trivial edit in one named file.
+- The user asks for direct implementation and the change is narrow.
+- The plan would add ceremony without reducing risk.
+
+## Planning style
+
+- Preferred plan length:
+- Preferred phase size:
+- Preferred checkpoint style:
+- When to ask before continuing:
+- When to proceed autonomously:
+
+## Required plan contents
+
+- Objective:
+- Scope:
+- Files or owners likely affected:
+- Risks:
+- Verification:
+- Documentation or memory updates:
+
+## Execution updates
+
+- Keep progress updates short.
+- Update the plan when scope changes.
+- Mark steps complete only after evidence.
+- Do not use planning as a substitute for reading source code.
+
+## Closing a plan
+
+- State what was completed.
+- State what was verified.
+- State what remains risky or unverified.
+- State which checklist was used.
+- Update summaries, tools, planning guidance, or error memory only if reusable knowledge changed.
+
+## Last reviewed
+YYYY-MM-DD
 ```
 
 ## Local Or QA Access Document
@@ -485,6 +550,7 @@ Before the final response, identify:
 ## Implementation change
 
 - [ ] The matching routed docs were read, and unrelated docs were not bulk-loaded.
+- [ ] `Agent/planning/README.md` was used when project-specific planning style or gates mattered.
 - [ ] Source code was read before editing.
 - [ ] Behavior, contracts, edge cases, and regressions were considered.
 - [ ] The smallest useful verification command was run or the reason it could not run is documented.
@@ -536,6 +602,12 @@ Before the final response, identify:
 - [ ] `Agent/project-rules.md` exists if the project has allowed environments, schemas, tenants, safe probes, credentials policy, or approval gates.
 - [ ] Project rules contain no secrets.
 - [ ] Any real API or environment interaction followed the documented safe probes.
+
+## Planning guidance
+
+- [ ] `Agent/planning/README.md` exists if the project has recurring planning phases, user planning preferences, review gates, or repeated planning mistakes.
+- [ ] Planning guidance complements other planning skills instead of replacing them.
+- [ ] Planning guidance was updated only if the user's planning style or project gates changed.
 
 ## Internal summaries
 

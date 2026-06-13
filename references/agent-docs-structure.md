@@ -77,6 +77,7 @@ Required content:
 - core document table,
 - specialized document table,
 - summary, tool, project-rule, and closing-checklist routes when present,
+- planning route when the repository has project-specific planning preferences,
 - error memory routing,
 - derived project bootstrap routing when the repo contains reusable templates or starter flows,
 - adding-new-guidance policy.
@@ -209,6 +210,36 @@ Read it when a task may depend on:
 
 Do not store credentials, tokens, API keys, refresh tokens, passwords, production customer data, or other secrets.
 
+### Planning Guidance
+
+Use `planning/README.md` when generic planning skills need to adapt to this repository or user.
+
+Read it when:
+
+- the task is multi-step, risky, ambiguous, or crosses multiple owners,
+- the user asks for a plan, phased execution, roadmap, or review checkpoints,
+- previous plans were too generic, too detailed, too vague, or missed project gates,
+- the repository has a known preferred planning style.
+
+Do not read it when:
+
+- the task is a trivial edit in one named file,
+- the user asks for direct implementation and the change is narrow,
+- planning would add ceremony without reducing risk.
+
+The planning file should capture:
+
+- when to plan and when not to,
+- preferred plan length and phase size,
+- checkpoint and approval style,
+- when to ask before continuing,
+- required plan contents,
+- how to update plans during execution,
+- how to close plans with verification evidence,
+- how to combine this repository's style with external planning skills.
+
+Do not create planning guidance automatically for every repository. Recommend or create it when the user's planning style is known, planning mistakes repeat, or the project has complex multi-step workflows.
+
 ### Internal Summaries
 
 Use `summaries/README.md` when future agents need short reusable context for pages, screens, flows, component groups, scripts, or recurring topics.
@@ -327,7 +358,8 @@ Before adding:
 6. Choose `tools/README.md` for reusable scripts, tools, and learned procedures.
 7. Choose `summaries/` for short reusable page, flow, component, script, or topic context.
 8. Choose a local source-folder `README.md` when the knowledge belongs next to a complex component, script, workflow, integration, generated-file process, or folder.
-9. Choose `project-rules.md` for non-secret operating constraints.
-10. Choose `closing-checklists.md` for intent-based closeout checks.
-11. Update `INDEX.md` when the new document is part of the routed Agent foundation.
-12. Keep the file English and ASCII-only.
+9. Choose `planning/README.md` for project-specific planning preferences, phases, gates, and user planning style.
+10. Choose `project-rules.md` for non-secret operating constraints.
+11. Choose `closing-checklists.md` for intent-based closeout checks.
+12. Update `INDEX.md` when the new document is part of the routed Agent foundation.
+13. Keep the file English and ASCII-only.

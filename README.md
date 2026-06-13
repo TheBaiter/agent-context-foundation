@@ -19,6 +19,7 @@ This skill helps create a cleaner structure:
 - indexed error memory,
 - reusable tool/procedure notes,
 - internal summaries for recurring pages, flows, components, scripts, and topics,
+- project-specific planning guidance that captures the user's planning style,
 - local README or summary guidance for complex components, scripts, flows, and folders,
 - non-secret project operating rules,
 - intent-based and topic-based closing checklists,
@@ -33,6 +34,8 @@ Use this skill when a repository needs a clear place for agent instructions and 
 It is a good fit when agents keep rereading the same broad docs, repeating the same mistakes, losing useful setup knowledge, or mixing project rules with raw logs and one-off notes. It is also useful when a repo needs a small `Agent/README.md`, a task router, indexed error memory, reusable tool notes, safe credential rules, or copy-ready Codex customization text.
 
 It can also help when a project has complex components, scripts, workflows, integrations, or generated-file processes that future agents keep rediscovering from source. In those cases, the skill should recommend a short local `README.md`, an `Agent/summaries/` note, or an `Agent/tools/README.md` entry instead of forcing every future agent to reread the whole implementation.
+
+It can also preserve planning preferences. If the user or project has a specific way to plan work, the skill can add `Agent/planning/README.md` so generic planning skills know the local style before producing broad plans.
 
 Use it when the goal is to make future agents read less but act with more reliable context.
 
@@ -117,6 +120,8 @@ Agent/
       performance-errors.md
   tools/
     README.md
+  planning/
+    README.md
   summaries/
     README.md
 ```
@@ -132,6 +137,7 @@ The exact structure can be adapted to the repository, but the routing principle 
 - Creating `Agent/error-memory/` as routed, searchable memory.
 - Creating `Agent/tools/README.md` for reusable scripts and learned procedures.
 - Creating `Agent/summaries/README.md` for short reusable context on pages, flows, components, scripts, and recurring topics.
+- Creating `Agent/planning/README.md` for project-specific planning preferences when the user's planning style or project planning gates need to be preserved.
 - Recommending local README or summary files for complex source areas when they would reduce repeated rereading.
 - Creating `Agent/project-rules.md` for non-secret operating constraints such as allowed environments, safe probes, and approval gates.
 - Creating `Agent/closing-checklists.md` so agents close work with the matching intent-based or topic-based checklist and report verification clearly.
