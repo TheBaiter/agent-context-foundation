@@ -112,10 +112,13 @@ It creates a structure that tells future agents:
 - what not to read,
 - which document owns each topic,
 - how to avoid bulk-loading docs,
+- how to compact existing agent docs into topic routers and one-purpose files,
 - how to record useful error patterns,
 - how to avoid duplicated error entries,
 - how to record allowed local QA/test credentials without leaking secrets,
 - how to create and document reusable tools instead of repeating fragile manual work,
+- how to keep agent-owned scripts under `Agent/tools/scripts/`,
+- how to maintain a short `Agent/project-map.md` so agents do not rediscover the repository from scratch,
 - how to keep short summaries for recurring pages, flows, components, scripts, and topics,
 - how to group reusable knowledge so future agents do not reread complex scripts, components, or flows from scratch,
 - how to preserve the user's planning style so generic planning skills can become project-specific,
@@ -149,6 +152,7 @@ The output should usually include:
 - optional planning guidance that adapts planning behavior to the project and user,
 - optional summary, project-rule, and closing-checklist docs when the repository needs them,
 - clear rules for adding future documentation.
+- an explicit folder order so future agents place guidance consistently.
 
 ## Core Rules
 
@@ -156,7 +160,10 @@ The output should usually include:
 - Do not create one large manual as the primary entry point.
 - Make the first-read document short.
 - Route task-specific context through an index.
+- Treat `Agent/README.md` and `Agent/INDEX.md` as mandatory active reads before changes. Agents should not wait for the user to remind them.
 - Organize broad topics into subfolders with local README or index files.
+- Prefer compact topic routers over long grouped manuals. Use the file name as the title when possible and avoid repeated headings that add no routing value.
+- Split recurring error knowledge into one case per file under a category folder when the category is large enough.
 - Include `when to read` and `when not to read` in task-specific docs.
 - Make generated `Agent/README.md` self-identify as created by `agent-context-foundation` and include the canonical source.
 - Do not read all docs for trivial edits such as adding a `console.log`, fixing a typo, or making a small known-file change.
@@ -168,6 +175,9 @@ The output should usually include:
 - If the repo may be public or permission is unclear, store instructions or environment variable names instead of credential values.
 - For mojibake, encoding repairs, bulk mechanical edits, repeated formatting, or fragile transformations, create a script/tool, run it, inspect it, and fix it until it works.
 - Document reusable tools and learned procedures so future agents do not need to rediscover them from large source files.
+- Put reusable agent-owned scripts in `Agent/tools/scripts/` and document the public command in `Agent/tools/README.md`.
+- When a requested task conflicts with a documented rule, stop and report the conflict, explain the rule, ask for clarification or explicit override, and record reusable learning in `Agent/error-memory/` if it exposes a recurring failure mode.
+- Prefer a refreshed `Agent/project-map.md` for broad orientation instead of rereading many source files.
 - Recommend local README or summary files for complex components, scripts, flows, or folders that future agents are likely to revisit.
 - Prefer placeholders and templates over invented project history.
 
@@ -179,22 +189,25 @@ The output should usually include:
 4. Add or update a short root `README.md` notice for LLMs.
 5. Create or update a minimal `Agent/README.md` with a foundation identity section naming `agent-context-foundation` and `TheBaiter/agent-context-foundation`.
 6. Create or update `Agent/INDEX.md` as the main router.
-7. Split broad project guidance into `Agent/core/` documents.
-8. Create or update `Agent/error-memory/` using an index-first structure.
-9. Migrate existing error logs only when useful, deduplicating by root cause.
-10. Add safe QA/test credential documentation rules when the project runs visual QA or tests.
-11. Create or update `Agent/recommended-codex-customization.md` as copy-ready text for Codex personalization.
-12. Create or update `Agent/tools/README.md` for reusable scripts, tools, and learned procedures.
-13. Create or update `Agent/summaries/README.md` when the repository benefits from short reusable summaries.
-14. Create or update `Agent/planning/README.md` when the repository benefits from project-specific planning preferences.
-15. Create or update `Agent/project-rules.md` when there are non-secret constraints, safe API probes, allowed environments, or approval gates.
-16. Add intent-based and topic-based closing checklist guidance so agents state what checklist was used, what was verified, and what remains unverified.
-17. If creating `Agent/` for the first time, ask the user whether it should be committed to Git or added to `.gitignore`; do not modify `.gitignore` without confirmation.
-18. Add a task checklist that forces scoped reading before implementation.
-19. Add an initial operating checklist that forces scope, plan, routed documentation, error-memory relevance, and verification decisions before editing.
-20. Add first-time setup transparency guidance for privacy, permissions, prohibited actions, and Git tracking.
-21. Add periodic skill update check guidance that points to `TheBaiter/agent-context-foundation`.
-22. Validate that docs are ASCII-only and no deleted legacy file remains referenced as active.
+7. Compact oversized docs by topic. Keep routers short and move reusable details into one-purpose files.
+8. Split broad project guidance into `Agent/core/` documents.
+9. Create or update `Agent/project-map.md` when broad repo orientation would otherwise require repeated source-tree reading.
+10. Create or update `Agent/error-memory/` using an index-first, category-router, one-case-per-file structure.
+11. Migrate existing error logs only when useful, deduplicating by root cause.
+12. Add safe QA/test credential documentation rules when the project runs visual QA or tests.
+13. Create or update `Agent/recommended-codex-customization.md` as copy-ready text for Codex personalization.
+14. Create or update `Agent/tools/README.md` and `Agent/tools/scripts/` for reusable scripts, tools, and learned procedures.
+15. Create or update `Agent/summaries/README.md` when the repository benefits from short reusable summaries.
+16. Create or update `Agent/planning/README.md` when the repository benefits from project-specific planning preferences.
+17. Create or update `Agent/project-rules.md` when there are non-secret constraints, safe API probes, allowed environments, or approval gates.
+18. Add intent-based and topic-based closing checklist guidance so agents state what checklist was used, what was verified, and what remains unverified.
+19. If creating `Agent/` for the first time, ask the user whether it should be committed to Git or added to `.gitignore`; do not modify `.gitignore` without confirmation.
+20. Add a task checklist that forces scoped reading before implementation.
+21. Add an initial operating checklist that forces scope, plan, routed documentation, error-memory relevance, and verification decisions before editing.
+22. Add a conflict rule: when a task conflicts with a documented rule, explain the conflict before continuing and update memory only if the conflict reveals reusable guidance.
+23. Add first-time setup transparency guidance for privacy, permissions, prohibited actions, and Git tracking.
+24. Add periodic skill update check guidance that points to `TheBaiter/agent-context-foundation`.
+25. Validate that docs are ASCII-only and no deleted legacy file remains referenced as active.
 
 ## Reference Loading
 
@@ -324,7 +337,8 @@ Required behavior:
 When creating or updating error memory, enforce this behavior in the generated docs:
 
 - group errors by recurring root cause and category, not by date or raw command log,
-- create category files under `error-memory/errors/` when a real recurring error class exists,
+- keep `error-memory/errors/<category>-errors.md` as a small router for the category,
+- create one case file per root cause under `error-memory/errors/<category>/` when the category has multiple entries,
 - keep `error-memory/errors/INDEX.md` as the routing index for all category files,
 - add or update index entries when a category file is created, renamed, or changes scope,
 - decide whether error memory is relevant before reading it,
@@ -333,7 +347,9 @@ When creating or updating error memory, enforce this behavior in the generated d
 - read exact matching sections when possible,
 - update memory only at the end of meaningful work,
 - store root cause and final fix, not raw logs,
-- update `errors/INDEX.md` only when routing changes.
+- update `errors/INDEX.md` only when routing changes,
+- add new cases as small files with `Pattern` or `Read when`, `Root cause`, `Fix`, and `Avoid` sections,
+- avoid repeating the file title inside the file unless the title would otherwise be unclear.
 
 ## Trivial Task Rule
 
@@ -371,7 +387,38 @@ Generated docs should tell future agents:
 - For mojibake, encoding repairs, bulk mechanical edits, repeated formatting, or fragile transformations, create a script/tool instead of manual one-off edits.
 - Run the tool, inspect the output, and fix the tool until it works.
 - Document reusable scripts, tools, and learned procedures in `Agent/tools/README.md` or the most relevant routed document.
+- Put agent-owned scripts in `Agent/tools/scripts/`, not in unrelated root folders.
+- Expose frequently used scripts through `package.json` when human developers should know them.
+- Document public agent maintenance commands in the human `README.md` when they are safe and useful for developers.
 - If the tool prevents a meaningful recurring error, update `Agent/error-memory/` at the end of the task.
+
+## Compaction And Folder Order Principle
+
+Generated docs should reduce default reading cost, not just move text around.
+
+Apply these rules when refactoring an existing `Agent/` folder:
+
+- preserve only reusable guidance, current rules, root causes, commands, and route decisions,
+- remove repeated titles, repeated intros, stale notes, and raw attempt history,
+- keep `README.md` and `INDEX.md` short enough to read on every meaningful task,
+- use router files to point to the smallest relevant document, not to restate the document,
+- split one large grouped document into one-purpose files when agents often need only one topic,
+- keep optional or generated output under explicit folders such as `.generated/`,
+- keep agent-owned scripts under `tools/scripts/`,
+- keep error-memory cases under category folders when a category grows,
+- refresh or create `project-map.md` when broad orientation is useful, and prefer that map over repeated source-tree scanning.
+
+Default folder order:
+
+1. `README.md` - mandatory entry and golden rules.
+2. `INDEX.md` - mandatory router.
+3. `project-map.md` - generated or maintained project orientation.
+4. `recommended-codex-customization.md` and compatibility docs.
+5. `core/` - broad routed topic docs.
+6. `checklists/` or `closing-checklists.md` - closeout routing.
+7. `tools/README.md` and `tools/scripts/` - reusable agent tools.
+8. `error-memory/` - indexed recurring errors.
+9. `summaries/`, `planning/`, and `project-rules.md` - optional scoped memory.
 
 ## Internal Summaries Rule
 
@@ -508,9 +555,8 @@ The default output is:
 Agent/
   README.md
   INDEX.md
+  project-map.md
   Agent.md
-  closing-checklists.md
-  project-rules.md
   recommended-codex-customization.md
   skill-coverage-checklist.md
   core/
@@ -522,6 +568,11 @@ Agent/
     ui-and-forms.md
     env-scripts-quality.md
     security-and-agent-roles.md
+  checklists/
+    INDEX.md
+    agent-self-audit.md
+    tests-and-smoke.md
+    git-traceability.md
   error-memory/
     README.md
     migration-summary.md
@@ -529,19 +580,39 @@ Agent/
       INDEX.md
       TEMPLATE.md
       powershell-errors.md
+      powershell/
+        <case>.md
       node-npm-errors.md
+      node-npm/
+        <case>.md
       git-errors.md
+      git/
+        <case>.md
       database-errors.md
+      database/
+        <case>.md
       api-errors.md
+      api/
+        <case>.md
       frontend-errors.md
+      frontend/
+        <case>.md
       deployment-errors.md
+      deployment/
+        <case>.md
       performance-errors.md
+      performance/
+        <case>.md
   tools/
     README.md
+    scripts/
+      <agent-tool>.mjs
+  project-rules.md
   planning/
     README.md
   summaries/
     README.md
+  .generated/
 ```
 
 Adjust names to the repository, but keep the same routing principle.
@@ -553,10 +624,15 @@ Before finishing:
 - `README.md` is short and points to `INDEX.md`.
 - `INDEX.md` tells agents what to read and what not to read.
 - Large guidance is split by task area.
+- Oversized legacy docs were compacted into routers and one-purpose files where useful.
+- `project-map.md` exists when broad orientation would otherwise require repeated source-tree scanning.
 - No document instructs agents to read the whole documentation folder by default.
 - Error memory starts with `error-memory/errors/INDEX.md`.
 - Error category files are not required reading unless routed by the index.
+- Error cases are split into category folders when a category has multiple entries.
+- Reusable scripts are under `Agent/tools/scripts/` and listed in `Agent/tools/README.md`.
 - Future documentation rules are explicit.
+- Rule conflicts are handled by reporting the conflict before continuing.
 - Optional summaries, project rules, tools, and closing checklists are routed only when they apply.
 - Optional planning guidance captures the user's planning style without replacing other planning skills.
 - First-time `Agent/` creation asks whether the folder should be committed or ignored.

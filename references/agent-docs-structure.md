@@ -60,8 +60,10 @@ Required content:
 - first-time `Agent/` Git tracking decision rule,
 - minimal reading flow,
 - rule against reading the whole docs folder,
+- active reading rule: agents must read the entry docs before changes without waiting for the user to remind them,
 - rule against reading broad docs for trivial known-file changes,
 - English and ASCII-only policy,
+- conflict rule: if a user request conflicts with a documented rule, explain the conflict and ask for clarification or explicit override before continuing,
 - task checklist,
 - closing checklist rule,
 - routes for summaries, tools, project rules, and error memory when relevant,
@@ -82,6 +84,7 @@ Required content:
 - global rules,
 - core document table,
 - specialized document table,
+- `project-map.md` route for broad repo orientation,
 - summary, tool, project-rule, and closing-checklist routes when present,
 - planning route when the repository has project-specific planning preferences,
 - error memory routing,
@@ -155,7 +158,38 @@ Required rule:
 - run it,
 - inspect the result,
 - fix the script until it works,
-- document it only if it is reusable.
+- document it only if it is reusable,
+- store agent-owned scripts under `tools/scripts/`,
+- expose safe human-facing commands through `package.json` and the root `README.md` when useful.
+
+### Project Map
+
+Use `project-map.md` when broad orientation would otherwise make agents scan many folders.
+
+The map should:
+
+- list major source roots and their purpose,
+- prefer short descriptions over copied implementation detail,
+- include generated or last-reviewed status when useful,
+- be refreshed by a script when the repository changes often,
+- be routed from `INDEX.md`,
+- not replace source inspection before editing.
+
+Do not read it for trivial known-file tasks.
+
+### Compaction Rules
+
+When refactoring an existing agent folder, compact context instead of only moving text.
+
+Rules:
+
+- keep `README.md` and `INDEX.md` short enough to read every meaningful task,
+- use routers to point to files, not to repeat file contents,
+- remove repeated titles, repeated intros, stale attempts, and raw logs,
+- split large grouped docs into one-purpose files when agents usually need only one topic,
+- use the file name as the title when possible,
+- store generated preview output under `.generated/`,
+- preserve source-of-truth rules, commands, root causes, and verification guidance.
 
 ### Skill Coverage Checklist
 
@@ -326,6 +360,45 @@ Each task-specific file should include:
 - concrete source files or folders,
 - rules for future updates.
 
+## Recommended Folder Order
+
+Use this order unless the repository already has a strong convention:
+
+```text
+Agent/
+  README.md
+  INDEX.md
+  project-map.md
+  recommended-codex-customization.md
+  Agent.md
+  skill-coverage-checklist.md
+  core/
+  checklists/
+  tools/
+    README.md
+    scripts/
+  error-memory/
+    README.md
+    errors/
+      INDEX.md
+      <category>-errors.md
+      <category>/
+        <case>.md
+  project-rules.md
+  planning/
+  summaries/
+  .generated/
+```
+
+Rules:
+
+- put mandatory entry and routing files first,
+- keep broad reusable docs in `core/`,
+- keep closeout rules in `checklists/` or a single `closing-checklists.md`,
+- keep scripts and procedures in `tools/`,
+- keep generated preview output in `.generated/`,
+- keep error cases below category folders after the category router.
+
 ## Specialized Docs
 
 Keep narrow docs outside `core/` when they are used only for specific workflows.
@@ -356,7 +429,8 @@ Add a compact checklist to the entry docs:
 5. If error memory is not relevant, do not read it.
 6. If error memory is relevant, route through `error-memory/errors/INDEX.md`.
 7. Decide whether summaries, project rules, tools, or closing checklists apply.
-8. Update docs only when reusable knowledge changed.
+8. If the task conflicts with a documented rule, report the conflict before continuing.
+9. Update docs only when reusable knowledge changed.
 
 Examples of trivial tasks:
 

@@ -39,13 +39,29 @@ error-memory/
     INDEX.md
     TEMPLATE.md
     powershell-errors.md
+    powershell/
+      <case>.md
     node-npm-errors.md
+    node-npm/
+      <case>.md
     git-errors.md
+    git/
+      <case>.md
     database-errors.md
+    database/
+      <case>.md
     api-errors.md
+    api/
+      <case>.md
     frontend-errors.md
+    frontend/
+      <case>.md
     deployment-errors.md
+    deployment/
+      <case>.md
     performance-errors.md
+    performance/
+      <case>.md
 ```
 
 Adjust categories to the repository, but keep `errors/INDEX.md` as the router.
@@ -59,8 +75,9 @@ Error memory must be grouped by category and recurring root cause. Do not organi
 Use this structure:
 
 - `errors/INDEX.md` routes every category.
-- `errors/<category>-errors.md` stores entries for one recurring error class.
-- Each entry stores one root cause and final fix.
+- `errors/<category>-errors.md` is a compact router for one category.
+- `errors/<category>/<case>.md` stores one root cause and final fix when the category has more than one meaningful case.
+- Small repositories may keep a tiny category file only until it becomes too large.
 - New category files are created only when a meaningful recurring error class exists.
 - `errors/INDEX.md` is updated only when category routing changes.
 
@@ -71,7 +88,7 @@ Default flow:
 3. If not relevant, do not read any error memory.
 4. If relevant, read only `errors/INDEX.md` first.
 5. Use the index as a router.
-6. Open or search only the relevant error file.
+6. Open or search only the relevant category router or category folder.
 7. Prefer reading only the exact matching section.
 8. Do not read unrelated error files.
 9. Do not update error memory until the end of meaningful work.
@@ -172,17 +189,18 @@ Command syntax and execution behavior in PowerShell.
 
 ## Error File Design
 
-Each error file should be organized into small sections.
+Each case file should describe one unique root cause.
 
-Each section should describe one unique error pattern.
+Keep category router files short. They should route to case files and define category scope, not store every detail.
 
-Entry template:
+Case file template:
 
 ```md
-## <CATEGORY_CODE><NUMBER> - <short title>
+Pattern:
+<when this case applies>
 
-Category:
-<category name>
+Read when:
+<task or symptom conditions>
 
 Keywords:
 <keyword1>, <keyword2>, <keyword3>
@@ -211,6 +229,8 @@ Related files:
 Last updated:
 YYYY-MM-DD
 ```
+
+Avoid repeating the case title inside the file when the filename already carries it.
 
 ## What To Store
 
@@ -274,7 +294,7 @@ At the end:
 1. Review what actually mattered.
 2. Identify unique error patterns.
 3. Check for duplicates.
-4. Update the correct category file.
+4. Update the correct category router or case file.
 5. Add concise, useful information only.
 6. Update `errors/INDEX.md` only if needed.
 7. Do not store noise.
@@ -342,6 +362,8 @@ When migrating a legacy error log:
 - keep only useful patterns,
 - normalize to English and ASCII,
 - deduplicate by root cause,
+- create one case file per unique root cause when a legacy category has multiple useful entries,
+- keep the legacy category file as a router after migration,
 - skip noise and repeated failures,
 - keep a short migration summary,
 - avoid fake project-specific history,

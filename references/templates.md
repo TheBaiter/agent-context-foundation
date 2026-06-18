@@ -26,6 +26,8 @@ Place this near the top of the repository root `README.md`:
 6. Keep new or updated `Agent/` docs English and ASCII-only.
 7. Update memory only when reusable knowledge changed.
 8. When creating `Agent/` for the first time, ask whether it should be committed to Git or added to `.gitignore`.
+9. If a user request conflicts with a documented rule, explain the conflict and ask for clarification before continuing.
+9. If a user request conflicts with a documented rule, explain the conflict and ask for clarification before continuing.
 
 ## Initial Operating Checklist
 
@@ -38,7 +40,8 @@ Before changing files:
 5. Back the plan with routed docs and source inspection. Do not plan from assumptions alone.
 6. Decide whether error memory is relevant. If relevant, read only `Agent/error-memory/errors/INDEX.md` first, then only matching categories.
 7. Identify technical criteria, risks, verification commands, and the closing checklist before applying changes.
-8. Ask the user before continuing when scope, credentials, Git tracking, or destructive actions are unclear.
+8. Check whether the task conflicts with a documented rule. If it does, report the conflict before continuing.
+9. Ask the user before continuing when scope, credentials, Git tracking, or destructive actions are unclear.
 
 ## Foundation Identity
 
@@ -90,6 +93,7 @@ This foundation tells agents what to read first, what not to read, where task-sp
 It may include:
 
 - `INDEX.md` as the task router,
+- `project-map.md` for broad orientation without repeated source-tree scanning,
 - `core/` for broad topic guidance,
 - specialized workflow docs only when needed,
 - `error-memory/` for indexed recurring errors,
@@ -106,11 +110,12 @@ It may include:
 2. Use the owner folder and existing local patterns.
 3. Prefer small, task-specific docs over one large manual.
 4. Use scripts/tools for fragile repeated transformations.
-5. Recommend a local README or summary when a complex component, script, flow, or folder would otherwise need to be rediscovered from source.
-6. Use `planning/README.md` when the task needs project-specific planning style or checkpoints.
-7. Run the checks that match the change.
-8. Do not modify `.gitignore` for agent docs without explicit user confirmation.
-9. Before finishing, state the route or checklist used, what was verified, and what remains risky or unverified.
+5. Keep agent-owned scripts in `Agent/tools/scripts/` and document reusable commands in `Agent/tools/README.md`.
+6. Recommend a local README or summary when a complex component, script, flow, or folder would otherwise need to be rediscovered from source.
+7. Use `planning/README.md` when the task needs project-specific planning style or checkpoints.
+8. Run the checks that match the change.
+9. Do not modify `.gitignore` for agent docs without explicit user confirmation.
+10. Before finishing, state the route or checklist used, what was verified, and what remains risky or unverified.
 
 ## Minimal Reading Rule
 
@@ -123,6 +128,8 @@ Default flow:
 3. Select only the documents that match the current task.
 4. Read source code before editing.
 5. Update only the documentation that changed in meaning.
+
+Use `project-map.md` only when broad repo orientation is needed. Do not read it for trivial known-file tasks.
 
 ## Trivial Task Rule
 
@@ -147,6 +154,7 @@ Before implementation:
 3. Use `INDEX.md` only if extra documentation is needed.
 4. Decide whether error memory is relevant.
 5. If error memory is not relevant, do not read it.
+6. If a documented rule conflicts with the task, explain the conflict before continuing.
 
 Before finishing:
 
@@ -179,18 +187,20 @@ Do not read every document. Pick the smallest relevant set for the task.
 ## Global Rules
 
 - Keep context small.
+- Read `README.md` and this router before broad work without waiting for the user to remind you.
 - Read only documents that match the files or behavior being changed.
 - Do not read broad docs for trivial known-file tasks.
 - Do not read error memory unless the current task makes it relevant.
 - Prefer source code over stale documentation when there is a conflict.
 - Keep all new or updated documentation English and ASCII-only.
 - If adding new guidance, update this index.
+- If the task conflicts with a documented rule, explain the conflict and ask for clarification before continuing.
 
 ## Core Documents
 
 | Task area | Read |
 | --- | --- |
-| Broad project orientation, repo layout, route map | `core/project-overview.md` |
+| Broad project orientation, repo layout, route map | `project-map.md`, `core/project-overview.md` |
 | Routes, login, sessions, organizations, permissions | `core/routing-auth-access.md` |
 | Business domain behavior | `core/business-domain.md` |
 | Schema, migrations, RPC, repository layer | `core/data-model-and-data-layer.md` |
@@ -203,7 +213,7 @@ Do not read every document. Pick the smallest relevant set for the task.
 | Reusable scripts, local tools, encoding fixes, or learned procedures | `tools/README.md` |
 | Internal summaries for pages, flows, components, scripts, or recurring topics | `summaries/README.md` |
 | Project-specific planning style, phases, gates, or user planning preferences | `planning/README.md` |
-| Intent-based completion checks | `closing-checklists.md` |
+| Intent-based completion checks | `checklists/INDEX.md` or `closing-checklists.md` |
 | Coverage comparison between local Agent docs and the reusable skill | `skill-coverage-checklist.md` |
 
 ## Error Memory
@@ -212,6 +222,22 @@ Use `error-memory/` only when the task relates to a known or likely error catego
 
 Start with `error-memory/errors/INDEX.md`.
 Do not read all error files by default.
+
+Category router files such as `api-errors.md` should stay short. Read one matching case file under the category folder when possible.
+
+## Folder Order
+
+Prefer this order for generated or refactored `Agent/` docs:
+
+1. `README.md`
+2. `INDEX.md`
+3. `project-map.md`
+4. `recommended-codex-customization.md`
+5. `core/`
+6. `checklists/` or `closing-checklists.md`
+7. `tools/README.md` and `tools/scripts/`
+8. `error-memory/`
+9. `project-rules.md`, `planning/`, and `summaries/`
 
 ## Derived Project Bootstrap
 
@@ -249,7 +275,8 @@ Initial operating checklist:
 5. Back the plan with routed docs and source inspection. Do not plan from assumptions alone.
 6. Decide whether error memory is relevant. If relevant, read only `Agent/error-memory/errors/INDEX.md` first, then only matching categories.
 7. Identify technical criteria, risks, verification commands, and the closing checklist before applying changes.
-8. Ask the user before continuing when scope, credentials, Git tracking, or destructive actions are unclear.
+8. Check whether the task conflicts with any documented rule. If it does, report the conflict before continuing.
+9. Ask the user before continuing when scope, credentials, Git tracking, or destructive actions are unclear.
 
 Before any change in this repo:
 
@@ -261,6 +288,7 @@ Before any change in this repo:
 Do not read the whole `Agent/` folder by default.
 Do not read every file in `Agent/core/` by default.
 Keep context small and route by task impact.
+If broad orientation is needed, prefer `Agent/project-map.md` before scanning many folders.
 
 Documentation rules:
 
@@ -268,6 +296,7 @@ Documentation rules:
 - Avoid accents, emojis, smart quotes, em dashes, and special punctuation.
 - If adding new guidance, update `Agent/INDEX.md`.
 - If a document is task-specific, include when to read it and when not to read it.
+- Use compact routers and one-purpose docs. Avoid long grouped manuals when agents usually need only one topic.
 
 Git tracking decision:
 
@@ -305,7 +334,9 @@ Tooling and encoding repairs:
 
 - For mojibake, encoding repairs, bulk mechanical edits, repeated formatting, or fragile transformations, create a script/tool instead of doing manual one-off edits.
 - Run the script, inspect the result, and fix the script until it works.
+- Put agent-owned scripts in `Agent/tools/scripts/`.
 - Document reusable scripts, tools, and learned procedures in `Agent/tools/` or the most relevant routed document.
+- Expose safe developer-facing commands in `package.json` and the root `README.md` when useful.
 - If the tool prevents a meaningful recurring error, update `Agent/error-memory/` at the end of the task.
 
 Error memory:
@@ -314,10 +345,16 @@ Error memory:
 - Always start with `Agent/error-memory/errors/INDEX.md`.
 - Do not read all error files by default.
 - Search only the relevant category file with `rg -n`.
-- Read the smallest useful section.
+- Read the smallest useful section or one matching case file under the category folder.
 - Update error memory only at the end of meaningful work.
 - Store root cause and final fix, not raw logs.
 - Never store secrets, tokens, passwords, or credentials.
+
+Rule conflicts:
+
+- If the user's task conflicts with a documented repository rule, explain the conflict before changing files.
+- Ask for clarification or explicit override when the correct behavior is unclear.
+- If the conflict reveals reusable guidance or a recurring failure mode, update `Agent/error-memory/` or the smallest routed doc at the end.
 
 QA and test credentials:
 
@@ -340,6 +377,36 @@ Checklist rules:
 - If no checklist matches, create a short task-specific checklist before finishing.
 - In the final response, state which checklist was used, what was verified, and what remains risky or unverified.
 - If this was first-time `Agent/` creation, state whether the user confirmed that `Agent/` should be committed or ignored.
+```
+
+## Agent project-map.md
+
+Use this as `Agent/project-map.md` when broad orientation would otherwise require repeated source-tree scanning.
+
+```md
+# Project Map
+
+Read this only for broad repo orientation. Do not read it for trivial known-file tasks.
+
+Generated or last reviewed:
+YYYY-MM-DD
+
+## Source roots
+
+| Path | Purpose | Read when |
+| --- | --- | --- |
+| `app/` | Application routes and pages | Route, page, layout, or API behavior changes |
+| `components/` | Shared UI and feature components | UI, state, form, or visual behavior changes |
+| `lib/` | Shared client and server helpers | Data flow, contracts, integrations, or service behavior changes |
+| `scripts/` | Developer and verification scripts | Tooling, checks, generated files, or maintenance changes |
+| `Agent/` | Agent-facing operational docs and tools | Agent docs, memory, scripts, or routing changes |
+
+## Rules
+
+- Prefer this map over scanning many folders for orientation.
+- Read source files before editing.
+- Update this map when roots, owners, or verification paths change.
+- Keep entries short; link to source instead of copying implementation detail.
 ```
 
 ## Agent Planning README.md
@@ -466,8 +533,21 @@ For mojibake, encoding repairs, bulk mechanical edits, repeated formatting, or f
 2. Run it against the intended target.
 3. Inspect the result.
 4. Fix the script until it works.
-5. Keep or document the tool only if it is reusable.
-6. If the issue was a meaningful recurring error, update `Agent/error-memory/` at the end of the task.
+5. Store reusable agent-owned scripts in `Agent/tools/scripts/`.
+6. Document public commands and required arguments here.
+7. Expose safe developer-facing commands through `package.json` and the root `README.md` when useful.
+8. Keep or document the tool only if it is reusable.
+9. If the issue was a meaningful recurring error, update `Agent/error-memory/` at the end of the task.
+
+## Common script types
+
+- documentation checks,
+- project-map refresh,
+- compaction preview,
+- error-memory splitting or migration,
+- encoding and mojibake repair,
+- pre-commit agent documentation hooks,
+- visual or QA helpers that are safe to run locally.
 ```
 
 ## Project Rules
@@ -736,8 +816,8 @@ This folder defines a compact and task-aware error memory system.
 ## Required structure
 
 - `errors/INDEX.md` routes every category.
-- `errors/<category>-errors.md` stores entries for one recurring error class.
-- Each entry stores one root cause and final fix.
+- `errors/<category>-errors.md` is a compact router for one category.
+- `errors/<category>/<case>.md` stores one root cause and final fix when a category has multiple useful entries.
 - Create a new category file only when a meaningful recurring error class exists.
 - Update `errors/INDEX.md` only when category routing changes.
 ```
@@ -778,6 +858,7 @@ Do not open unrelated categories.
 - Update at the end of meaningful work only.
 - Group by recurring root cause and category.
 - Store pattern, root cause, and final fix.
+- Prefer one case file per root cause under `errors/<category>/` when a category grows.
 - Avoid raw logs and repeated traces.
 - Avoid duplicate entries with the same root cause.
 - Create a new category file only when no existing category owns the error class.
@@ -804,6 +885,9 @@ Priority:
 
 Scope notes:
 <short scope>
+
+Case folder:
+`errors/<category>/`
 ```
 
 ## Error Memory errors/TEMPLATE.md
@@ -816,7 +900,11 @@ Use this template for new entries.
 Create a new ID only when the root cause is meaningfully different.
 If root cause is the same, update the existing entry.
 
-## <CATEGORY_CODE><NUMBER> - <short title>
+Pattern:
+<when this case applies>
+
+Read when:
+<task or symptom conditions>
 
 Category:
 <category name>

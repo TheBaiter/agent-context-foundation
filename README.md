@@ -14,10 +14,11 @@ This skill helps create a cleaner structure:
 
 - short entry documents,
 - a central routing index,
+- a project map for broad orientation without repeated source-tree scans,
 - topic-specific core documents,
 - specialized docs only when needed,
-- indexed error memory,
-- reusable tool/procedure notes,
+- indexed error memory with compact category routers and one case file per recurring root cause,
+- reusable tool/procedure notes and agent-owned scripts under `Agent/tools/scripts/`,
 - internal summaries for recurring pages, flows, components, scripts, and topics,
 - project-specific planning guidance that captures the user's planning style,
 - local README or summary guidance for complex components, scripts, flows, and folders,
@@ -26,6 +27,8 @@ This skill helps create a cleaner structure:
 - copy-ready Codex customization text.
 
 The goal is not to reduce quality. The goal is to preserve useful context while making agents read only what is relevant.
+
+The skill now treats compaction as a first-class requirement: routers should route, case files should stay small, repeated titles and stale attempt history should be removed, and generated previews should live under explicit generated folders.
 
 ## When To Use This Skill
 
@@ -90,7 +93,8 @@ They should:
 3. Use `Agent/INDEX.md` as the router.
 4. Read only the docs that match the task.
 5. Read error memory only when the task is related to a known or likely error category.
-6. Update documentation and error memory only when reusable knowledge changed.
+6. Report any conflict between the task and documented rules before changing files.
+7. Update documentation and error memory only when reusable knowledge changed.
 
 ## What The Skill Creates
 
@@ -100,9 +104,8 @@ Default foundation:
 Agent/
   README.md
   INDEX.md
+  project-map.md
   Agent.md
-  closing-checklists.md
-  project-rules.md
   recommended-codex-customization.md
   skill-coverage-checklist.md
   core/
@@ -114,6 +117,11 @@ Agent/
     ui-and-forms.md
     env-scripts-quality.md
     security-and-agent-roles.md
+  checklists/
+    INDEX.md
+    agent-self-audit.md
+    tests-and-smoke.md
+    git-traceability.md
   error-memory/
     README.md
     migration-summary.md
@@ -121,19 +129,39 @@ Agent/
       INDEX.md
       TEMPLATE.md
       powershell-errors.md
+      powershell/
+        <case>.md
       node-npm-errors.md
+      node-npm/
+        <case>.md
       git-errors.md
+      git/
+        <case>.md
       database-errors.md
+      database/
+        <case>.md
       api-errors.md
+      api/
+        <case>.md
       frontend-errors.md
+      frontend/
+        <case>.md
       deployment-errors.md
+      deployment/
+        <case>.md
       performance-errors.md
+      performance/
+        <case>.md
   tools/
     README.md
+    scripts/
+      <agent-tool>.mjs
+  project-rules.md
   planning/
     README.md
   summaries/
     README.md
+  .generated/
 ```
 
 The exact structure can be adapted to the repository, but the routing principle should stay the same.
@@ -143,9 +171,10 @@ The exact structure can be adapted to the repository, but the routing principle 
 - Splitting large `AGENTS.md`, `Agent.md`, or similar files.
 - Creating `Agent/README.md` as a minimal entry point.
 - Creating `Agent/INDEX.md` as the main routing document.
+- Creating `Agent/project-map.md` when broad orientation would otherwise require repeated scanning.
 - Creating `Agent/core/` for broad but task-specific guidance.
-- Creating `Agent/error-memory/` as routed, searchable memory.
-- Creating `Agent/tools/README.md` for reusable scripts and learned procedures.
+- Creating `Agent/error-memory/` as routed, searchable memory with category routers and small case files.
+- Creating `Agent/tools/README.md` and `Agent/tools/scripts/` for reusable scripts and learned procedures.
 - Creating `Agent/summaries/README.md` for short reusable context on pages, flows, components, scripts, and recurring topics.
 - Creating `Agent/planning/README.md` for project-specific planning preferences when the user's planning style or project planning gates need to be preserved.
 - Recommending local README or summary files for complex source areas when they would reduce repeated rereading.
@@ -172,7 +201,8 @@ Agents should:
 
 - read `error-memory/errors/INDEX.md` first,
 - select only matching categories,
-- search exact sections with `rg -n`,
+- search category routers or folders with `rg -n`,
+- read one matching case file when possible,
 - avoid unrelated error files,
 - update memory only at the end of meaningful work,
 - store root causes and fixes, not raw logs.
