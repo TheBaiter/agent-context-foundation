@@ -27,7 +27,8 @@ Place this near the top of the repository root `README.md`:
 7. Update memory only when reusable knowledge changed.
 8. When creating `Agent/` for the first time, ask whether it should be committed to Git or added to `.gitignore`.
 9. If a user request conflicts with a documented rule, explain the conflict and ask for clarification before continuing.
-9. If a user request conflicts with a documented rule, explain the conflict and ask for clarification before continuing.
+10. Before creating or publishing a branch or pull request, tell the user its purpose and scope. Keep pull requests as drafts unless requested otherwise, and do not start unrelated work while one is pending without asking how to proceed.
+11. Never merge a pull request without an explicit user decision after reporting its changed behavior, checks, and unresolved risks.
 
 ## Initial Operating Checklist
 
@@ -440,6 +441,7 @@ It complements generic planning skills. It does not replace source inspection, t
 - Preferred plan length:
 - Preferred phase size:
 - Preferred checkpoint style:
+- Branch and pull request decision points: announce purpose and scope before creation or publication; before task switching, ask whether pending work should continue, pause, or close; before merging, require explicit approval after reporting status.
 - When to ask before continuing:
 - When to proceed autonomously:
 
@@ -581,6 +583,10 @@ Do not store production credentials, customer credentials, API keys, tokens, ref
 ## API query limits and safe probes
 
 ## Actions requiring user approval
+
+- Creating or publishing a branch or pull request: announce purpose and scope first; keep the pull request as a draft unless the user requests otherwise.
+- Switching to unrelated work while a branch or pull request is pending: ask whether to continue, pause, or close it.
+- Merging a pull request: report changed behavior, checks, and unresolved risks, then wait for explicit user approval.
 
 ## Local verification commands
 

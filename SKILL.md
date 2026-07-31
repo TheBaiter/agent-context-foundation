@@ -177,6 +177,8 @@ The output should usually include:
 - Document reusable tools and learned procedures so future agents do not need to rediscover them from large source files.
 - Put reusable agent-owned scripts in `Agent/tools/scripts/` and document the public command in `Agent/tools/README.md`.
 - When a requested task conflicts with a documented rule, stop and report the conflict, explain the rule, ask for clarification or explicit override, and record reusable learning in `Agent/error-memory/` if it exposes a recurring failure mode.
+- Treat a branch or pull request as a user-visible decision point: announce its purpose and scope before creating or publishing it, keep it as a draft unless requested otherwise, and do not move to unrelated work while it is pending without asking the user how to proceed.
+- Never merge a pull request based on agent judgment alone. Before merging, report its changed behavior, checks, and unresolved risks, then require an explicit user decision.
 - Prefer a refreshed `Agent/project-map.md` for broad orientation instead of rereading many source files.
 - Recommend local README or summary files for complex components, scripts, flows, or folders that future agents are likely to revisit.
 - Prefer placeholders and templates over invented project history.
@@ -207,7 +209,8 @@ The output should usually include:
 22. Add a conflict rule: when a task conflicts with a documented rule, explain the conflict before continuing and update memory only if the conflict reveals reusable guidance.
 23. Add first-time setup transparency guidance for privacy, permissions, prohibited actions, and Git tracking.
 24. Add periodic skill update check guidance that points to `TheBaiter/agent-context-foundation`.
-25. Validate that docs are ASCII-only and no deleted legacy file remains referenced as active.
+25. Add branch and pull request guidance: announce new work, preserve draft status by default, surface pending work before task switching, and require explicit approval before merge.
+26. Validate that docs are ASCII-only and no deleted legacy file remains referenced as active.
 
 ## Reference Loading
 
@@ -494,6 +497,7 @@ Use it for non-secret rules such as:
 - local verification commands,
 - test credential policy without storing secrets unless explicitly allowed,
 - actions that require explicit user approval,
+- branch and pull request announcement, task-switch, and merge approval rules,
 - known risky areas.
 
 Never store production credentials, tokens, passwords, API keys, refresh tokens, customer data, or other secrets.

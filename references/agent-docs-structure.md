@@ -262,6 +262,7 @@ Read it when a task may depend on:
 - safe API probes and query limits,
 - local verification commands,
 - actions requiring explicit user approval,
+- branch and pull request lifecycle rules: announce new work, keep drafts by default, ask before switching to unrelated work, and require explicit approval before merge,
 - test credential policy,
 - known risky areas.
 
@@ -289,6 +290,7 @@ The planning file should capture:
 - when to plan and when not to,
 - preferred plan length and phase size,
 - checkpoint and approval style,
+- branch and pull request decision points,
 - when to ask before continuing,
 - required plan contents,
 - how to update plans during execution,
