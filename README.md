@@ -4,7 +4,7 @@
 
 Agent Context Foundation is a Codex/agent skill for creating task-routed agent documentation in a repository.
 
-Its purpose is to help agents work with less irrelevant context, fewer repeated mistakes, and better long-term memory without burning tokens on documents that do not apply to the current task.
+Its purpose is to help agents work with less irrelevant context, fewer repeated mistakes, better long-term memory, and clear task traceability without burning tokens on documentation that does not apply to the current task.
 
 ## What It Solves
 
@@ -26,9 +26,24 @@ This skill helps create a cleaner structure:
 - intent-based and topic-based closing checklists,
 - copy-ready Codex customization text.
 
-The goal is not to reduce quality. The goal is to preserve useful context while making agents read only what is relevant.
+The goal is not to reduce quality or to minimize files for its own sake. The goal is to minimize the total cost of completing work correctly: reading, discovery, correction, verification, recovery, and handoff.
 
-The skill now treats compaction as a first-class requirement: routers should route, case files should stay small, repeated titles and stale attempt history should be removed, and generated previews should live under explicit generated folders.
+The foundation follows these rules:
+
+- every persistent line must justify its future context cost,
+- entrypoints route and owners explain,
+- one durable fact or rule has one canonical owner,
+- optional modules are created only when evidence shows they reduce future risk or rediscovery,
+- existing standards such as root or nested `AGENTS.md` are preserved when they already own agent instructions,
+- durable guidance, current state, task history, observations, and recurring error knowledge are kept distinct,
+- new knowledge is promoted only after evidence: `discovered -> candidate -> verified -> durable`,
+- stale or contradictory memory is consolidated, superseded, reverified, retired, or removed,
+- context health is reviewed for distraction, confusion, clashes, poisoning, and lost critical anchors,
+- exact paths, symbols, commands, tests, owners, and handoff points are preserved when they prevent expensive rediscovery,
+- the correct result may be to create no new documentation,
+- every meaningful task leaves a durable execution trace in the project's existing issue, ticket, plan, or task system.
+
+Task traceability records how work progressed. Durable memory records only what future agents should continue to know after the task is over.
 
 ## When To Use This Skill
 
@@ -94,81 +109,46 @@ They should:
 4. Read only the docs that match the task.
 5. Read error memory only when the task is related to a known or likely error category.
 6. Report any conflict between the task and documented rules before changing files.
-7. Update documentation and error memory only when reusable knowledge changed.
+7. Establish or reuse the project's task record for meaningful work and update it while decisions, failures, verification, and handoff happen.
+8. Update durable documentation and error memory only when reusable verified knowledge changed.
 
 ## What The Skill Creates
 
-Default foundation:
+The skill no longer assumes that every repository needs the same large `Agent/` tree.
+
+If a repository already has a valid agent instruction standard such as `AGENTS.md`, preserve it and add routed supporting context only when needed.
+
+If a new routed foundation is needed, start with the minimum:
 
 ```text
 Agent/
   README.md
   INDEX.md
+```
+
+Then add only evidence-backed modules:
+
+```text
+Agent/
   project-map.md
-  Agent.md
-  recommended-codex-customization.md
-  skill-coverage-checklist.md
   core/
-    README.md
-    project-overview.md
-    routing-auth-access.md
-    business-domain.md
-    data-model-and-data-layer.md
-    ui-and-forms.md
-    env-scripts-quality.md
-    security-and-agent-roles.md
-  checklists/
-    INDEX.md
-    agent-self-audit.md
-    tests-and-smoke.md
-    git-traceability.md
   error-memory/
-    README.md
-    migration-summary.md
-    errors/
-      INDEX.md
-      TEMPLATE.md
-      powershell-errors.md
-      powershell/
-        <case>.md
-      node-npm-errors.md
-      node-npm/
-        <case>.md
-      git-errors.md
-      git/
-        <case>.md
-      database-errors.md
-      database/
-        <case>.md
-      api-errors.md
-      api/
-        <case>.md
-      frontend-errors.md
-      frontend/
-        <case>.md
-      deployment-errors.md
-      deployment/
-        <case>.md
-      performance-errors.md
-      performance/
-        <case>.md
   tools/
-    README.md
-    scripts/
-      <agent-tool>.mjs
-  project-rules.md
-  planning/
-    README.md
   summaries/
-    README.md
+  planning/
+  project-rules.md
+  checklists/
+  recommended-codex-customization.md
   .generated/
 ```
 
-The exact structure can be adapted to the repository, but the routing principle should stay the same.
+A module exists only when it has a demonstrated job. Empty structure and hypothetical knowledge are not a feature.
+
+Task execution history belongs in the project's existing coordination system, not in `Agent/` by default. The foundation teaches agents to maintain that trace during work and to promote only verified reusable conclusions into durable project context.
 
 ## What It Covers
 
-- Splitting large `AGENTS.md`, `Agent.md`, or similar files.
+- Preserving and improving existing root or nested `AGENTS.md`, `Agent.md`, or similar instruction systems without creating competing sources of truth.
 - Creating `Agent/README.md` as a minimal entry point.
 - Creating `Agent/INDEX.md` as the main routing document.
 - Creating `Agent/project-map.md` when broad orientation would otherwise require repeated scanning.
@@ -176,7 +156,8 @@ The exact structure can be adapted to the repository, but the routing principle 
 - Creating `Agent/error-memory/` as routed, searchable memory with category routers and small case files.
 - Creating `Agent/tools/README.md` and `Agent/tools/scripts/` for reusable scripts and learned procedures.
 - Creating `Agent/summaries/README.md` for short reusable context on pages, flows, components, scripts, and recurring topics.
-- Creating `Agent/planning/README.md` for project-specific planning preferences when the user's planning style or project planning gates need to be preserved.
+- Creating `Agent/planning/README.md` only when project-specific planning preferences need durable guidance.
+- Requiring meaningful work to use the project's existing issue, ticket, plan, or task system for execution traceability.
 - Recommending local README or summary files for complex source areas when they would reduce repeated rereading.
 - Creating `Agent/project-rules.md` for non-secret operating constraints such as allowed environments, safe probes, and approval gates.
 - Creating `Agent/closing-checklists.md` so agents close work with the matching intent-based or topic-based checklist and report verification clearly.
@@ -247,12 +228,14 @@ For a new repository with no agent docs, use the skill before inventing a custom
 ```text
 SKILL.md
 agents/openai.yaml
+references/foundation-principles.md
+references/task-traceability.md
 references/agent-docs-structure.md
 references/error-memory-structure.md
 references/templates.md
 ```
 
-`SKILL.md` is the skill entry point. The `references/` files are loaded only when needed.
+`SKILL.md` is the operational entry point. `references/foundation-principles.md` owns the V2 context model, `references/task-traceability.md` owns execution traceability, and the remaining `references/` files are loaded only when their phase or module is relevant.
 
 ## Validation
 
