@@ -4,7 +4,22 @@ Use this reference when creating or refactoring agent-facing documentation.
 
 ## Goal
 
-Make documentation task-routed so agents do not read irrelevant context.
+Make documentation task-routed so agents do not read irrelevant context, preserve canonical ownership, and keep task execution history traceable without polluting durable project memory.
+
+## Existing Agent Entrypoints And Scope
+
+Inspect the repository's current instruction standard before creating new entry files.
+
+If root or nested `AGENTS.md` files, local instruction files, or another established agent convention already exist:
+
+- preserve the valid standard,
+- do not create a competing root authority,
+- use the root file only for truly global rules,
+- place subtree-specific rules close to the owning subtree,
+- prefer the closest applicable scoped instruction when the repository has no conflicting precedence rule,
+- use `Agent/` only as routed supporting context when it adds value.
+
+If no valid agent entrypoint exists, create the smallest one that can route future work correctly.
 
 ## Entry Files
 
@@ -16,12 +31,14 @@ Purpose:
 - tell LLMs where agent-specific docs live,
 - prevent agents from searching randomly for instructions.
 
-Recommended notice near the top:
+Recommended notice near the top when `Agent/README.md` is the chosen entrypoint:
 
 ```md
 > This `README.md` is aimed at human developers.
-> If you are an LLM, read `Agent/README.md` before acting in this repo and load only task-relevant documents listed there.
+> If you are an LLM, read `Agent/README.md` before broad work in this repo and load only task-relevant documents listed there.
 ```
+
+If `AGENTS.md` or another established instruction entrypoint already owns agent routing, point to that file instead of creating a competing notice.
 
 Keep this notice short. Do not duplicate the full agent guide in the root README.
 
@@ -32,7 +49,8 @@ Purpose:
 - first file agents read inside the docs folder,
 - short operating rules,
 - ASCII policy,
-- pointer to `INDEX.md`.
+- pointer to `INDEX.md`,
+- task traceability rule for meaningful work.
 
 Keep it short. Do not put full project details here.
 
@@ -62,7 +80,10 @@ Required content:
 - rule against reading the whole docs folder,
 - active reading rule: agents must read the entry docs before changes without waiting for the user to remind them,
 - rule against reading broad docs for trivial known-file changes,
-- English and ASCII-only policy,
+- canonical ownership and evidence-based module creation rules,
+- task traceability rule: meaningful work uses the project's existing issue, ticket, plan, or task system and is updated during execution,
+- rule that task history is not promoted into durable memory without verification,
+- English and ASCII-only policy unless the repository defines another explicit documentation policy,
 - conflict rule: if a user request conflicts with a documented rule, explain the conflict and ask for clarification or explicit override before continuing,
 - task checklist,
 - closing checklist rule,
@@ -89,7 +110,9 @@ Required content:
 - planning route when the repository has project-specific planning preferences,
 - error memory routing,
 - derived project bootstrap routing when the repo contains reusable templates or starter flows,
-- adding-new-guidance policy.
+- adding-new-guidance policy,
+- the authoritative task-tracking or planning system when the project has one,
+- rule that task history stays in that system rather than being copied into `Agent/`.
 
 ### Agent.md
 
@@ -114,7 +137,8 @@ Purpose:
 - include first-time setup transparency rules,
 - include periodic skill update check rules,
 - include the first-time `Agent/` Git tracking decision rule,
-- tell agents to read the root README, `Agent/README.md`, and `Agent/INDEX.md`,
+- tell agents to follow the repository's active instruction entrypoint and use `Agent/README.md` / `Agent/INDEX.md` when they are the chosen route,
+- tell agents to locate or create the authoritative task record for meaningful work before substantial edits,
 - enforce English and ASCII-only documentation rules,
 - enforce scoped reading and error-memory routing.
 
@@ -122,7 +146,7 @@ Do not wrap it in commentary. It should be directly copyable into a Codex custom
 
 It should include a new-repository rule:
 
-- if `Agent/README.md` or `Agent/INDEX.md` is missing, use `$agent-context-foundation` when installed,
+- if no valid `AGENTS.md`, `Agent/README.md`, `Agent/INDEX.md`, or equivalent agent route exists, use `$agent-context-foundation` when installed,
 - canonical install source: `TheBaiter/agent-context-foundation`,
 - if it is not installed, install it with `npx skills add TheBaiter/agent-context-foundation` when possible,
 - if direct install is not possible, use `$find-skills` and search for `agent-context-foundation` by `TheBaiter`,
@@ -199,7 +223,7 @@ Do not route normal implementation tasks to that file.
 
 ### Closing Checklists
 
-Use `closing-checklists.md` when the repository benefits from intent-based closeout checks.
+Use `checklists/INDEX.md` when the repository benefits from intent-based closeout checks.
 
 Read it only when:
 
@@ -362,44 +386,45 @@ Each task-specific file should include:
 - concrete source files or folders,
 - rules for future updates.
 
-## Recommended Folder Order
+## Minimum Foundation And Optional Modules
 
-Use this order unless the repository already has a strong convention:
+Do not create the full folder tree by default.
+
+If the repository already has a valid agent instruction standard, preserve it and add supporting routed context only when evidence requires it.
+
+If a new `Agent/` foundation is needed, start with:
 
 ```text
 Agent/
   README.md
   INDEX.md
-  project-map.md
+```
+
+Then add only modules with a demonstrated job:
+
+```text
+Agent/
+  project-map.md              # expensive owner/entrypoint discovery
+  core/                       # real cross-cutting topic owners
+  checklists/                 # specialized verification or closeout routing
+  tools/                      # reusable procedures or scripts
+  error-memory/               # recurring verified failures
+  project-rules.md            # truly project-wide constraints
+  planning/                   # durable project-specific planning conventions
+  summaries/                  # repeatedly rediscovered complex areas
   recommended-codex-customization.md
-  Agent.md
-  skill-coverage-checklist.md
-  core/
-  checklists/
-  tools/
-    README.md
-    scripts/
-  error-memory/
-    README.md
-    errors/
-      INDEX.md
-      <category>-errors.md
-      <category>/
-        <case>.md
-  project-rules.md
-  planning/
-  summaries/
   .generated/
 ```
 
 Rules:
 
-- put mandatory entry and routing files first,
-- keep broad reusable docs in `core/`,
-- keep closeout rules in `checklists/` or a single `closing-checklists.md`,
-- keep scripts and procedures in `tools/`,
-- keep generated preview output in `.generated/`,
-- keep error cases below category folders after the category router.
+- absence of evidence means absence of the module,
+- do not create empty category folders or hypothetical error memory,
+- keep mandatory entrypoints and routers small,
+- keep local rules close to their owning subtree when possible,
+- keep generated or raw artifacts outside default-read paths,
+- keep task execution history in the project's work-tracking system, not in this folder by default,
+- promote only verified reusable knowledge from task history into the canonical durable owner.
 
 ## Specialized Docs
 
@@ -422,17 +447,20 @@ Link each specialized doc from `INDEX.md`.
 
 ## Task Checklist
 
-Add a compact checklist to the entry docs:
+Add a compact checklist to the active entry docs:
 
 1. Identify whether the task is trivial, narrow, or domain-specific.
-2. For trivial tasks, read only the entry router and the named source file.
-3. For domain tasks, read only documents routed by `INDEX.md`.
-4. Decide whether error memory is relevant.
-5. If error memory is not relevant, do not read it.
-6. If error memory is relevant, route through `error-memory/errors/INDEX.md`.
-7. Decide whether summaries, project rules, tools, or closing checklists apply.
-8. If the task conflicts with a documented rule, report the conflict before continuing.
-9. Update docs only when reusable knowledge changed.
+2. For meaningful work, locate or create the authoritative issue, ticket, plan, or task record.
+3. Record scope, success criteria, current status, initial plan, and known constraints before substantial edits.
+4. For trivial tasks, read only the active entry route and the named source file.
+5. For domain tasks, read only documents routed to the affected owner.
+6. Decide whether error memory is relevant.
+7. If error memory is not relevant, do not read it.
+8. If error memory is relevant, route through `error-memory/errors/INDEX.md`.
+9. Decide whether summaries, project rules, tools, planning guidance, or closing checklists actually apply.
+10. If the task conflicts with a documented rule, report the conflict before continuing.
+11. Update the task record during scope changes, important decisions, failures, blockers, verification, and handoff.
+12. Before finishing, promote only verified reusable learning into durable docs; leave chronology in the task record.
 
 Examples of trivial tasks:
 
@@ -441,24 +469,27 @@ Examples of trivial tasks:
 - adjust formatting in one named file,
 - answer a simple question.
 
-These tasks should not trigger reading all docs or all error files.
+These tasks should not trigger reading all docs, loading all error files, or creating heavyweight task ceremony.
 
 ## Adding New Documentation
 
-Add a new file only when it prevents repeated context loading or captures a reusable rule.
+Add a new file only when evidence shows that it prevents repeated context loading, clarifies ownership, reduces risk, or captures verified reusable knowledge.
+
+Creating no new documentation is a valid result.
 
 Before adding:
 
-1. Check whether an existing document owns the topic.
-2. Choose `core/` for broad reusable guidance.
-3. Choose a specialized doc for narrow workflow rules.
-4. Choose `error-memory/` for error patterns.
-5. Choose local access docs only for approved non-production QA/test credentials.
-6. Choose `tools/README.md` for reusable scripts, tools, and learned procedures.
-7. Choose `summaries/` for short reusable page, flow, component, script, or topic context.
-8. Choose a local source-folder `README.md` when the knowledge belongs next to a complex component, script, workflow, integration, generated-file process, or folder.
-9. Choose `planning/README.md` for project-specific planning preferences, phases, gates, and user planning style.
-10. Choose `project-rules.md` for non-secret operating constraints.
-11. Choose `closing-checklists.md` for intent-based closeout checks.
-12. Update `INDEX.md` when the new document is part of the routed Agent foundation.
-13. Keep the file English and ASCII-only.
+1. Check whether source code, configuration, an existing document, local scoped instruction, or the task system already owns the truth.
+2. If an owner already exists, update it or point to it instead of creating a duplicate.
+3. Choose `core/` for broad reusable guidance.
+4. Choose a specialized doc for narrow workflow rules.
+5. Choose `error-memory/` for error patterns.
+6. Choose local access docs only for approved non-production QA/test credentials.
+7. Choose `tools/README.md` for reusable scripts, tools, and learned procedures.
+8. Choose `summaries/` for short reusable page, flow, component, script, or topic context.
+9. Choose a local source-folder `README.md` when the knowledge belongs next to a complex component, script, workflow, integration, generated-file process, or folder.
+10. Choose `planning/README.md` for project-specific planning preferences, phases, gates, and user planning style.
+11. Choose `project-rules.md` for non-secret operating constraints.
+12. Choose `checklists/INDEX.md` for intent-based closeout checks.
+13. Update `INDEX.md` when the new document is part of the routed Agent foundation.
+14. Keep the file English and ASCII-only.

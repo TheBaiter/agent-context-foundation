@@ -189,7 +189,9 @@ Command syntax and execution behavior in PowerShell.
 
 ## Error File Design
 
-Each case file should describe one unique root cause.
+Each case file should describe one unique verified root cause or one high-value recurring failure pattern.
+
+Task investigation history does not belong here. Keep attempts, hypotheses, and temporary observations in the task record until the lesson is verified and reusable.
 
 Keep category router files short. They should route to case files and define category scope, not store every detail.
 
@@ -223,14 +225,39 @@ Avoid:
 Affected tools or modules:
 <tool/module list or N/A>
 
-Related files:
-<internal paths only, optional>
+Evidence / anchors:
+<paths, symbols, tests, commands, issue/decision ids, optional>
 
-Last updated:
+Status:
+active | challenged | superseded
+
+Supersedes:
+<case path or N/A, optional>
+
+Last verified:
 YYYY-MM-DD
 ```
 
 Avoid repeating the case title inside the file when the filename already carries it.
+
+## Promotion Gate
+
+Do not write an error-memory case merely because an error occurred.
+
+Use this lifecycle:
+
+`discovered -> candidate -> verified -> durable`
+
+During investigation:
+
+- keep raw symptoms, attempts, hypotheses, and partial findings in the task record,
+- mark a reusable lesson as a candidate only when it may matter beyond the current step,
+- verify the root cause and fix through reproducible behavior, source inspection, exact tests, authoritative documentation, or an explicit project decision,
+- promote the case to durable error memory only when the lesson is stable enough to guide future work.
+
+A one-off anomaly with no verified reusable lesson should stay in task history.
+
+A single occurrence may still justify durable memory when the root cause is verified and the failure is expensive, dangerous, non-obvious, or likely to recur.
 
 ## What To Store
 
@@ -245,6 +272,8 @@ Store:
 - relevant keywords,
 - affected tools or modules,
 - internal links only when useful,
+- evidence or source anchors when they help future re-verification,
+- status when a case is challenged or superseded,
 - short examples when they clarify the pattern.
 
 Do not store:
@@ -260,6 +289,8 @@ Do not store:
 - passwords,
 - unrelated conversation history,
 - every failed attempt,
+- unverified hypotheses,
+- transient task chronology,
 - duplicated errors with the same root cause.
 
 ## Deduplication Policy
@@ -278,6 +309,35 @@ If the root cause is the same, update the existing entry.
 
 Create a new entry only when root cause, context, or fix is meaningfully different.
 
+## Staleness And Superseding
+
+Error memory must not remain active merely because it was once correct.
+
+When a case depends on specific files, symbols, configuration, commands, schemas, or external contracts, keep compact anchors that make re-verification possible.
+
+Treat a case as potentially stale when:
+
+- anchored source changes materially,
+- the owning architecture changes,
+- a command or dependency is replaced,
+- a new verified fix contradicts the old one,
+- the documented symptom no longer reproduces.
+
+Use these states when needed:
+
+- `active` - currently verified and applicable,
+- `challenged` - evidence suggests it may no longer be reliable; reverify before high-impact use,
+- `superseded` - replaced by a newer verified case or rule.
+
+Do not keep two contradictory cases active.
+
+When a new case replaces an old one:
+
+1. update the canonical active case,
+2. mark or remove the old case,
+3. keep only the historical pointer needed to understand the transition,
+4. update routers only if routing changed.
+
 ## Writing Policy
 
 Do not update error memory continuously during every small step.
@@ -286,18 +346,22 @@ During the task:
 
 - solve the problem,
 - observe errors,
-- keep temporary notes if needed,
-- avoid permanent memory updates too early.
+- keep attempts, hypotheses, and temporary findings in the authoritative task record when they affect continuation,
+- identify candidate reusable lessons,
+- avoid permanent memory updates before the root cause and fix are verified.
 
 At the end:
 
 1. Review what actually mattered.
-2. Identify unique error patterns.
-3. Check for duplicates.
-4. Update the correct category router or case file.
-5. Add concise, useful information only.
-6. Update `errors/INDEX.md` only if needed.
-7. Do not store noise.
+2. Identify candidate reusable error patterns.
+3. Verify the root cause, fix, and applicability.
+4. Check for duplicates, stale cases, and contradictions.
+5. Promote only verified reusable lessons.
+6. Update the canonical category router or case file.
+7. Supersede or retire conflicting old guidance when needed.
+8. Update `errors/INDEX.md` only if routing changed.
+9. Keep task chronology in the task record.
+10. Do not store noise.
 
 ## When To Update INDEX.md
 
@@ -362,7 +426,8 @@ When migrating a legacy error log:
 - keep only useful patterns,
 - normalize to English and ASCII,
 - deduplicate by root cause,
-- create one case file per unique root cause when a legacy category has multiple useful entries,
+- distinguish verified reusable cases from historical task noise,
+- create one case file per unique verified root cause when a legacy category has multiple useful entries,
 - keep the legacy category file as a router after migration,
 - skip noise and repeated failures,
 - keep a short migration summary,
@@ -377,10 +442,12 @@ Before finishing work involving error memory, verify:
 - Did the agent avoid unrelated error files?
 - Did the agent search before reading a full file?
 - Did the agent read only the smallest useful section?
-- Did the agent avoid updating memory during every step?
-- Did the agent update memory only at the end?
+- Did the agent keep investigation history in the task record instead of durable error memory?
+- Did the agent avoid updating memory before verification?
+- Did the agent promote only verified reusable lessons?
 - Did the agent avoid duplicate entries?
-- Did the agent store root cause, not just symptoms?
+- Did the agent check for stale, challenged, superseded, or contradictory cases?
+- Did the agent store root cause and evidence, not just symptoms?
 - Did the agent avoid secrets and raw logs?
 - Did the agent update `errors/INDEX.md` only when needed?
 - Did the final documentation remain English and ASCII-only?

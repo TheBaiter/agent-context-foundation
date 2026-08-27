@@ -1,4 +1,4 @@
 interface:
   display_name: "Agent Context Foundation"
   short_description: "Compact routed agent docs, scripts, project maps, planning, and error memory"
-  default_prompt: "Use $agent-context-foundation to explain the foundation, then create or compact routed Agent docs, a project map, reusable Agent tools/scripts, planning guidance, summaries, project rules, closing checklists, per-case error memory, and Codex customization text for this repo."
+  default_prompt: "Use $agent-context-foundation to inspect the repository, establish or reuse task traceability, preserve existing agent-instruction standards, create only the minimum viable routed context, and add evidence-backed maps, memory, tools, summaries, planning, rules, checklists, or customization only when they reduce future cost or risk."

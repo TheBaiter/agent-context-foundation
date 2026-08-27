@@ -1,6 +1,6 @@
 ---
 name: agent-context-foundation
-description: Create or refactor a repository's agent-facing operational documentation into a token-efficient, task-routed foundation. Use when the user asks to reduce agent context usage, split a large AGENTS/Agent document, create an Agent/ documentation index, establish core task documents, create an error-memory system, migrate an error log, add LLM README routing, create reusable Codex customization text, document QA/test credential rules, or define rules for future agent documentation.
+description: Create or refactor a repository's agent-facing operational documentation into a token-efficient, task-routed foundation with minimum viable context, progressive disclosure, canonical ownership, evidence-based memory, context-health rules, and durable task traceability. Use when the user asks to reduce agent context usage, split a large AGENTS/Agent document, create or audit agent routing, establish an error-memory system, preserve reusable project knowledge, define task planning or handoff traceability, or improve future agent documentation.
 ---
 
 # Agent Context Foundation
@@ -14,6 +14,28 @@ Create a compact documentation foundation that helps agents read only the contex
 Reduce unnecessary context loading, repeated agent mistakes, duplicated documentation, and noisy error history.
 
 The skill helps a repository define where agent guidance lives, how it is routed, and when it should or should not be read.
+
+## Foundation Principles
+
+Treat context as a limited operational resource.
+
+- Every persistent line must justify the future context cost it creates.
+- Start with the minimum viable foundation and add modules only when evidence shows they reduce future risk or rediscovery.
+- Use progressive disclosure: entrypoints route, owners explain, supporting references load only when relevant.
+- Give each durable fact, rule, contract, decision, or procedure one canonical owner. Other docs should point to it instead of copying it.
+- Respect existing standards such as root or nested `AGENTS.md`; do not create a competing instruction system when the repository already has a valid one.
+- Keep global guidance global and local behavior close to its owning subtree.
+- Separate durable guidance, current state, task history, observations, and recurring error knowledge.
+- Promote knowledge only after evidence: `discovered -> candidate -> verified -> durable`.
+- Consolidate, supersede, reverify, or retire stale memory instead of only appending.
+- Optimize total task cost, including reading, discovery, correction, verification, and recovery. Do not compress away anchors that prevent expensive rediscovery.
+- Treat oversized mandatory reads, ambiguous routing, duplicate rules, contradictions, stale guidance, and missing handoff anchors as context-health failures.
+- Verification guidance must be exact and tied to the affected surface. Never invent commands or checks.
+- The correct result may be to create no new documentation when there is no reusable knowledge to preserve.
+- Every meaningful task must have a durable execution trace in the project's existing coordination system or, when none exists, the smallest suitable planning record.
+
+Read `references/foundation-principles.md` when designing or auditing the context architecture.
+Read `references/task-traceability.md` when defining planning, task records, decision history, progress updates, failures, verification, handoff, or completion traceability.
 
 ## First-Run User Handoff
 
@@ -98,7 +120,7 @@ It can create or refactor:
 - `Agent/summaries/README.md` for short page, flow, component, and topic summaries,
 - `Agent/planning/README.md` for project-specific planning preferences and user planning style,
 - `Agent/project-rules.md` for non-secret project-specific operating constraints,
-- `Agent/closing-checklists.md` for intent-based and topic-based completion checks,
+- `Agent/checklists/INDEX.md` for intent-based and topic-based completion checks,
 - optional coverage checklists comparing local docs with the reusable skill,
 - rules for future documentation additions.
 
@@ -139,20 +161,16 @@ It does not:
 - force error memory reads for unrelated tasks,
 - require a fixed folder name if the repository already has a better convention.
 
-The output should usually include:
+The output should start with the smallest foundation that solves a demonstrated routing or memory problem.
 
-- a root `README.md` note that tells LLMs where the agent docs live,
-- a minimal entry document,
-- a router index,
-- split core documents by task area,
-- specialized documents only when needed,
-- an indexed error memory that is never bulk-loaded,
-- a copy-ready `recommended-codex-customization.md`,
-- a tool/procedure index for reusable scripts and learned repairs,
-- optional planning guidance that adapts planning behavior to the project and user,
-- optional summary, project-rule, and closing-checklist docs when the repository needs them,
-- clear rules for adding future documentation.
-- an explicit folder order so future agents place guidance consistently.
+Usually this means:
+
+- preserve an existing standard entrypoint such as `AGENTS.md` when valid,
+- otherwise create only the smallest entrypoint and router needed to orient future agents,
+- add project maps, topic docs, error memory, summaries, tools, planning guidance, project rules, checklists, or customization text only when there is evidence they will be used,
+- prefer local scoped guidance when a rule belongs to one subtree,
+- create no new document when existing source, configuration, or task tracking already owns the needed truth,
+- establish or reuse a durable task record for meaningful work so decisions, failures, verification, and handoff remain traceable.
 
 ## Core Rules
 
@@ -160,7 +178,7 @@ The output should usually include:
 - Do not create one large manual as the primary entry point.
 - Make the first-read document short.
 - Route task-specific context through an index.
-- Treat `Agent/README.md` and `Agent/INDEX.md` as mandatory active reads before changes. Agents should not wait for the user to remind them.
+- Read the active repository instruction entrypoint before meaningful changes. Use `Agent/README.md` and `Agent/INDEX.md` when they are the repository's chosen route; preserve `AGENTS.md` or another established standard when it already owns that role.
 - Organize broad topics into subfolders with local README or index files.
 - Prefer compact topic routers over long grouped manuals. Use the file name as the title when possible and avoid repeated headings that add no routing value.
 - Split recurring error knowledge into one case per file under a category folder when the category is large enough.
@@ -177,45 +195,42 @@ The output should usually include:
 - Document reusable tools and learned procedures so future agents do not need to rediscover them from large source files.
 - Put reusable agent-owned scripts in `Agent/tools/scripts/` and document the public command in `Agent/tools/README.md`.
 - When a requested task conflicts with a documented rule, stop and report the conflict, explain the rule, ask for clarification or explicit override, and record reusable learning in `Agent/error-memory/` if it exposes a recurring failure mode.
-- Treat a branch or pull request as a user-visible decision point: announce its purpose and scope before creating or publishing it, keep it as a draft unless requested otherwise, and do not move to unrelated work while it is pending without asking the user how to proceed.
-- Never merge a pull request based on agent judgment alone. Before merging, report its changed behavior, checks, and unresolved risks, then require an explicit user decision.
+- Follow the repository's own Git, branch, review, and merge policy. When branches, commits, or pull requests are used, link them to the task trace when practical instead of inventing a universal workflow in the foundation.
 - Prefer a refreshed `Agent/project-map.md` for broad orientation instead of rereading many source files.
 - Recommend local README or summary files for complex components, scripts, flows, or folders that future agents are likely to revisit.
 - Prefer placeholders and templates over invented project history.
+- Maintain a durable task trace for meaningful work in the coordination system the project already uses. Update it during execution at scope changes, important decisions, failures, blockers, verification, and handoff points.
+- Keep task history out of durable project memory unless a verified lesson is promoted to its canonical owner.
+- Prefer source anchors, exact paths, symbols, tests, and commands over long copied explanations when those anchors prevent rediscovery.
+- Do not create optional modules without evidence that they reduce future cost or risk.
 
 ## Workflow
 
-1. Inspect the repository's existing agent docs and nearby documentation.
-2. Identify oversized or duplicated entry points.
-3. Decide the target folder. Prefer an existing `Agent/` or `agents/` folder; otherwise create `Agent/`.
-4. Add or update a short root `README.md` notice for LLMs.
-5. Create or update a minimal `Agent/README.md` with a foundation identity section naming `agent-context-foundation` and `TheBaiter/agent-context-foundation`.
-6. Create or update `Agent/INDEX.md` as the main router.
-7. Compact oversized docs by topic. Keep routers short and move reusable details into one-purpose files.
-8. Split broad project guidance into `Agent/core/` documents.
-9. Create or update `Agent/project-map.md` when broad repo orientation would otherwise require repeated source-tree reading.
-10. Create or update `Agent/error-memory/` using an index-first, category-router, one-case-per-file structure.
-11. Migrate existing error logs only when useful, deduplicating by root cause.
-12. Add safe QA/test credential documentation rules when the project runs visual QA or tests.
-13. Create or update `Agent/recommended-codex-customization.md` as copy-ready text for Codex personalization.
-14. Create or update `Agent/tools/README.md` and `Agent/tools/scripts/` for reusable scripts, tools, and learned procedures.
-15. Create or update `Agent/summaries/README.md` when the repository benefits from short reusable summaries.
-16. Create or update `Agent/planning/README.md` when the repository benefits from project-specific planning preferences.
-17. Create or update `Agent/project-rules.md` when there are non-secret constraints, safe API probes, allowed environments, or approval gates.
-18. Add intent-based and topic-based closing checklist guidance so agents state what checklist was used, what was verified, and what remains unverified.
-19. If creating `Agent/` for the first time, ask the user whether it should be committed to Git or added to `.gitignore`; do not modify `.gitignore` without confirmation.
-20. Add a task checklist that forces scoped reading before implementation.
-21. Add an initial operating checklist that forces scope, plan, routed documentation, error-memory relevance, and verification decisions before editing.
-22. Add a conflict rule: when a task conflicts with a documented rule, explain the conflict before continuing and update memory only if the conflict reveals reusable guidance.
-23. Add first-time setup transparency guidance for privacy, permissions, prohibited actions, and Git tracking.
-24. Add periodic skill update check guidance that points to `TheBaiter/agent-context-foundation`.
-25. Add branch and pull request guidance: announce new work, preserve draft status by default, surface pending work before task switching, and require explicit approval before merge.
-26. Validate that docs are ASCII-only and no deleted legacy file remains referenced as active.
+1. Establish or locate the durable task record for meaningful work in the project's existing issue, ticket, plan, or task system. Record scope, success criteria, initial plan, and known constraints before substantial edits.
+2. Inspect the repository's active agent-instruction entrypoints, local scoped instructions, nearby documentation, source structure, and project tracking conventions.
+3. Classify the task and decide what context is actually required. Do not load broad docs merely because they exist.
+4. Define the success criteria, affected owners, important risks, and exact verification route before implementation.
+5. Audit the current context for oversized mandatory reads, duplication, ambiguous ownership, contradictions, stale guidance, or missing high-value anchors.
+6. Decide whether the correct action is no documentation change, compaction, routing repair, or creation of the minimum missing context.
+7. Preserve valid repository standards such as root or nested `AGENTS.md`. Create `Agent/README.md` and `Agent/INDEX.md` only when the repository needs that routed foundation.
+8. Load references progressively. Open only the reference needed for the current phase or module.
+9. Establish canonical owners for durable rules and knowledge. Replace duplicated prose with pointers.
+10. Create or refresh `project-map.md` only when owner, entrypoint, boundary, or verification discovery is repeatedly expensive.
+11. Create topic docs or local scoped instructions only when a real domain, subtree, or workflow needs durable non-obvious guidance.
+12. Create error memory only for recurring verified failure patterns. Do not convert raw task history or hypotheses into error memory.
+13. Create tools, summaries, planning guidance, project rules, checklists, or Codex customization only when evidence shows they reduce future cost or risk.
+14. Promote new knowledge through `discovered -> candidate -> verified -> durable`; preserve source anchors and avoid promoting unfinished or unverified observations.
+15. Consolidate duplicate, stale, challenged, or superseded guidance instead of only appending.
+16. Update the task record during meaningful scope changes, decisions, evidence changes, failures, blockers, verification, and handoff points.
+17. Validate the resulting context architecture, exact verification guidance, active routes, canonical ownership, stale references, and secret handling.
+18. Before closing or pausing, update the task record with current status, decisions, changed surfaces, verification results, remaining risk, and next action. Update durable memory only if reusable verified knowledge actually changed.
 
 ## Reference Loading
 
 Use references progressively:
 
+- For foundation architecture, context budgets, canonical ownership, evidence-based growth, scoped instructions, knowledge lifecycle, staleness, and context-health rules, read `references/foundation-principles.md`.
+- For task planning, issue/ticket records, decision trace, progress updates, failures, verification, and handoff, read `references/task-traceability.md`.
 - For the general folder and router structure, read `references/agent-docs-structure.md`.
 - For error memory structure, reading rules, writing rules, deduplication, exact-section search, and migration rules, read `references/error-memory-structure.md`.
 - For copy-ready templates, read `references/templates.md`.
@@ -238,15 +253,16 @@ Generated Codex customization should tell future agents:
 Generated docs should include a checklist that tells future agents to:
 
 1. Classify the task before reading extra docs.
-2. Decide whether the task is trivial or narrow.
-3. If trivial or narrow, read only the entry router and the source file being changed.
-4. If domain-specific, read only the matching routed docs.
-5. Decide whether error memory is relevant.
-6. If error memory is not relevant, do not read it.
-7. If error memory is relevant, read only `error-memory/errors/INDEX.md` first.
-8. Decide whether a summary, project rule, tool note, or closing checklist applies.
-9. Before finishing, update docs or error memory only if the work changed reusable knowledge.
-10. State which checklist or route was used, what was verified, and what remains risky or unverified.
+2. For meaningful work, locate or create the project's authoritative task record and record scope, success criteria, and an initial plan before substantial edits.
+3. Decide whether the task is trivial or narrow.
+4. If trivial or narrow, read only the entry router and the source file being changed.
+5. If domain-specific, read only the matching routed docs.
+6. Decide whether error memory is relevant.
+7. If error memory is not relevant, do not read it.
+8. If error memory is relevant, read only `error-memory/errors/INDEX.md` first.
+9. Decide whether a summary, project rule, tool note, or closing checklist applies.
+10. Before finishing, update docs or error memory only if the work changed reusable knowledge.
+11. State which checklist or route was used, what was verified, and what remains risky or unverified.
 
 ## Golden Rules Placement Principle
 
@@ -411,17 +427,19 @@ Apply these rules when refactoring an existing `Agent/` folder:
 - keep error-memory cases under category folders when a category grows,
 - refresh or create `project-map.md` when broad orientation is useful, and prefer that map over repeated source-tree scanning.
 
-Default folder order:
+When an `Agent/` foundation is the repository's chosen route, keep existing modules in a predictable order without treating optional modules as mandatory:
 
-1. `README.md` - mandatory entry and golden rules.
-2. `INDEX.md` - mandatory router.
-3. `project-map.md` - generated or maintained project orientation.
-4. `recommended-codex-customization.md` and compatibility docs.
-5. `core/` - broad routed topic docs.
-6. `checklists/` or `closing-checklists.md` - closeout routing.
-7. `tools/README.md` and `tools/scripts/` - reusable agent tools.
-8. `error-memory/` - indexed recurring errors.
-9. `summaries/`, `planning/`, and `project-rules.md` - optional scoped memory.
+1. `README.md` - compact entry when this route is used.
+2. `INDEX.md` - compact router when this route is used.
+3. `project-map.md` - only when orientation is repeatedly expensive.
+4. `core/` or local scoped docs - only for real routed topic ownership.
+5. `checklists/` - only for specialized verification or closeout needs.
+6. `tools/` - only for reusable procedures or scripts.
+7. `error-memory/` - only for recurring verified failures.
+8. `summaries/`, `planning/`, and `project-rules.md` - only when their specific need is demonstrated.
+9. `recommended-codex-customization.md` and `.generated/` - only when requested or operationally useful.
+
+Do not create missing items merely to satisfy this order.
 
 ## Internal Summaries Rule
 
@@ -553,73 +571,35 @@ In the final response, tell the user to paste `Agent/recommended-codex-customiza
 
 ## Expected Structure
 
-The default output is:
+Do not generate a large default tree.
+
+Start with the repository's existing standard when one exists. If a new routed foundation is needed, the minimum default is:
 
 ```text
 Agent/
   README.md
   INDEX.md
-  project-map.md
-  Agent.md
-  recommended-codex-customization.md
-  skill-coverage-checklist.md
-  core/
-    README.md
-    project-overview.md
-    routing-auth-access.md
-    business-domain.md
-    data-model-and-data-layer.md
-    ui-and-forms.md
-    env-scripts-quality.md
-    security-and-agent-roles.md
-  checklists/
-    INDEX.md
-    agent-self-audit.md
-    tests-and-smoke.md
-    git-traceability.md
-  error-memory/
-    README.md
-    migration-summary.md
-    errors/
-      INDEX.md
-      TEMPLATE.md
-      powershell-errors.md
-      powershell/
-        <case>.md
-      node-npm-errors.md
-      node-npm/
-        <case>.md
-      git-errors.md
-      git/
-        <case>.md
-      database-errors.md
-      database/
-        <case>.md
-      api-errors.md
-      api/
-        <case>.md
-      frontend-errors.md
-      frontend/
-        <case>.md
-      deployment-errors.md
-      deployment/
-        <case>.md
-      performance-errors.md
-      performance/
-        <case>.md
-  tools/
-    README.md
-    scripts/
-      <agent-tool>.mjs
-  project-rules.md
-  planning/
-    README.md
-  summaries/
-    README.md
-  .generated/
 ```
 
-Adjust names to the repository, but keep the same routing principle.
+Add only evidence-backed modules:
+
+```text
+Agent/
+  project-map.md              # when owner/entrypoint discovery is repeatedly expensive
+  core/                       # when broad project knowledge needs routed topic owners
+  error-memory/               # when recurring verified failures exist
+  tools/                      # when reusable procedures or agent-owned scripts exist
+  summaries/                  # when complex areas are repeatedly rediscovered
+  planning/                   # when project-specific planning rules actually exist
+  project-rules.md            # when truly project-wide non-secret constraints exist
+  checklists/                 # when specialized verification/closeout routing is useful
+  recommended-codex-customization.md  # when the user wants reusable Codex setup
+  .generated/                 # when generated artifacts need a non-default-read home
+```
+
+If the repository already uses root or nested `AGENTS.md`, preserve that convention and route supporting detail from it instead of forcing a competing entrypoint.
+
+Task history does not belong in this tree by default. Keep task execution trace in the project's issue, ticket, plan, or task system and promote only verified reusable knowledge into the foundation.
 
 ## Validation Checklist
 
@@ -643,3 +623,10 @@ Before finishing:
 - Derived project bootstrap guidance imports only relevant, non-secret context.
 - All new or updated files are ASCII-only.
 - Legacy paths are either removed or clearly marked as historical, not active.
+- Optional modules exist only when there is evidence they reduce future context cost, risk, or rediscovery.
+- Canonical owners are clear and routers do not duplicate detailed rules.
+- Durable memory does not contain unverified task history or temporary observations.
+- Stale, contradictory, superseded, or duplicate guidance was consolidated, challenged, retired, or removed.
+- Task trace exists for meaningful work and records current status, decisions, evidence, verification, failures/blockers when relevant, and next action or completion.
+- Git artifacts used for the task are linked to the task trace when practical.
+- The final result explicitly allows "no new documentation" when no reusable knowledge was discovered.
