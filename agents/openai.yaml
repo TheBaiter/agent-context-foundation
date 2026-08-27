@@ -1,4 +1,4 @@
 interface:
   display_name: "Agent Context Foundation"
   short_description: "Modular routed context, verified memory, and task traceability"
-  default_prompt: "Use $agent-context-foundation to inspect the repository's active agent instructions and task system, decide the minimum evidence-backed context change, load only the relevant module and template, preserve canonical ownership and project-specific policies, validate the result, and keep meaningful work traceable."
+  default_prompt: "Use $agent-context-foundation to inspect the repository's active agent instructions and task system, decide the minimum evidence-backed context change, load only the relevant module and template, preserve canonical ownership and project-specific policies, keep disposable QA/visual artifacts in the repository's single temporary workspace, validate the result, and keep meaningful work traceable."
