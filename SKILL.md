@@ -11,10 +11,25 @@ Make repository context cheaper to load, easier to route, safer to maintain, and
 
 This skill is a decision engine. It should not become the repository's universal operating manual.
 
+## Operational Application
+
+When this skill applies, treat its applicable rules as actions to perform, not background information to mention.
+
+- Apply every relevant rule by default when the agent has authority to do so.
+- Do not downgrade an applicable rule into a recommendation, suggestion, consideration, or future improvement.
+- Do not merely tell the user that a rule should be followed when the agent can follow it directly.
+- A module being optional means its activation is conditional. Once evidence activates that module, its applicable rules are operational.
+- Apply only the relevant subset of the skill. Do not load or execute unrelated modules.
+- Use recommendations only for genuinely optional improvements or when a real decision boundary belongs to the user or project.
+- Ask for approval only when required by authority, project policy, destructive impact, credentials, unclear scope, or another real decision boundary.
+- If a required action cannot be performed, record the blocker and the exact next action instead of presenting the rule as if it were satisfied.
+- Final reporting should state what was applied, skipped, blocked, or intentionally not applicable; it should not restate the skill as advice.
+
 ## Core Invariants
 
 - Preserve a valid existing instruction standard such as root or nested `AGENTS.md`; do not create a competing authority.
 - Load only context relevant to the current task.
+- Execute applicable skill rules directly when authorized; do not treat them as passive recommendations.
 - Give each durable rule, fact, contract, decision, or procedure one canonical owner.
 - Prefer pointers to owners over duplicated prose.
 - Create documentation or modules only when evidence shows they reduce future risk, confusion, or rediscovery.
@@ -55,7 +70,7 @@ Detailed traceability rules are owned by `references/task-traceability.md`.
 6. Decide the minimum useful action: no change, compact, repair routing, migrate, or add one evidence-backed module.
 7. Load only the module reference required for that action.
 8. Load only the specific template required for output generation.
-9. Apply the smallest coherent change while preserving existing project conventions.
+9. Apply the smallest coherent change while preserving existing project conventions. Execute applicable rules directly rather than restating them as recommendations.
 10. Update the task record during meaningful execution checkpoints.
 11. Validate routing, ownership, staleness, secrets, language/encoding preservation, and exact verification guidance.
 12. Before finishing or pausing, update the task record with current status, verification, remaining risk, and next action.
@@ -162,6 +177,7 @@ Fix the cause rather than adding another layer of documentation.
 Before finishing a foundation change, verify:
 
 - Is the default read smaller or more focused?
+- Were applicable skill rules actually executed rather than merely recommended?
 - Does each durable concept have one canonical owner?
 - Are routers pointing instead of explaining?
 - Is any optional module present without evidence?
