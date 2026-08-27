@@ -1,4 +1,4 @@
 interface:
   display_name: "Agent Context Foundation"
-  short_description: "Compact routed agent docs, scripts, project maps, planning, and error memory"
-  default_prompt: "Use $agent-context-foundation to inspect the repository, establish or reuse task traceability, preserve existing agent-instruction standards, create only the minimum viable routed context, and add evidence-backed maps, memory, tools, summaries, planning, rules, checklists, or customization only when they reduce future cost or risk."
+  short_description: "Modular routed context, verified memory, and task traceability"
+  default_prompt: "Use $agent-context-foundation to inspect the repository's active agent instructions and task system, decide the minimum evidence-backed context change, load only the relevant module and template, preserve canonical ownership and project-specific policies, validate the result, and keep meaningful work traceable."
