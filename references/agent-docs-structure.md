@@ -223,7 +223,7 @@ Do not route normal implementation tasks to that file.
 
 ### Closing Checklists
 
-Use `closing-checklists.md` when the repository benefits from intent-based closeout checks.
+Use `checklists/INDEX.md` when the repository benefits from intent-based closeout checks.
 
 Read it only when:
 
@@ -490,6 +490,6 @@ Before adding:
 9. Choose a local source-folder `README.md` when the knowledge belongs next to a complex component, script, workflow, integration, generated-file process, or folder.
 10. Choose `planning/README.md` for project-specific planning preferences, phases, gates, and user planning style.
 11. Choose `project-rules.md` for non-secret operating constraints.
-12. Choose `closing-checklists.md` for intent-based closeout checks.
+12. Choose `checklists/INDEX.md` for intent-based closeout checks.
 13. Update `INDEX.md` when the new document is part of the routed Agent foundation.
 14. Keep the file English and ASCII-only.
