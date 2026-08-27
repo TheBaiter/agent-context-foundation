@@ -26,6 +26,7 @@ This skill is a decision engine. It should not become the repository's universal
 - Never store secrets, production credentials, tokens, or private customer data in reusable agent context.
 - Preserve the repository's established language and encoding. Default to UTF-8 when no explicit portability constraint exists.
 - Follow the repository's own Git, review, approval, credential, security, and deployment policies.
+- Keep disposable QA, visual, debugging, and intermediate artifacts in one repository temporary workspace. Reuse the project's existing temporary root; otherwise use `.agent-temp/`.
 - The correct result may be no documentation change.
 
 Detailed context principles are owned by `references/foundation-principles.md`.
@@ -76,6 +77,7 @@ Read a module only when its condition is true.
 | Specialized recurring verification or closeout is needed | `references/modules/checklists.md` |
 | Existing agent docs or memory need migration/compaction | `references/modules/migration.md` |
 | The user wants reusable Codex personalization | `references/modules/codex-customization.md` |
+| Disposable QA/visual/debug artifacts are generated | `references/modules/temporary-workspace.md` |
 
 Do not read every module to decide whether it is needed. The workflow and repository evidence decide first.
 
@@ -127,7 +129,8 @@ Use the smallest canonical owner:
 - error memory for verified reusable failures,
 - local README for owner-local reusable knowledge,
 - summaries for cross-cutting expensive rediscovery,
-- tools for reusable deterministic procedures.
+- tools for reusable deterministic procedures,
+- the repository's single temporary workspace for disposable QA/visual/debug artifacts.
 
 ## First Run
 
@@ -170,6 +173,7 @@ Before finishing a foundation change, verify:
 - Are Git/review/merge rules project-specific instead of universal?
 - Can another agent resume meaningful work from the task trace?
 - Did the change preserve exact source and verification anchors that prevent rediscovery?
+- Are temporary QA/visual/debug artifacts contained in the repository's single temporary workspace instead of scattered across the tree?
 - Would creating no additional documentation now be the better result?
 
 If any answer exposes a conflict, fix it before adding more context.
