@@ -33,6 +33,16 @@ The skill follows these principles:
 - repository language/encoding preservation,
 - one temporary workspace for disposable QA/visual/debug artifacts.
 
+## Operational By Default
+
+When the skill applies, its relevant rules are meant to be executed.
+
+An optional module is optional only until repository evidence makes it relevant. Once activated, its applicable rules are operational defaults.
+
+The agent should not turn executable rules into "recommendations" or "things to consider" when it has authority to apply them directly. Recommendations are reserved for genuinely optional improvements or real user/project decision boundaries.
+
+The final report should describe what was applied, skipped, blocked, or not applicable.
+
 ## Why
 
 Agent documentation often grows into a second codebase: large entry files, duplicated rules, stale memory, generic checklists, and historical logs that every future task pays to read.
