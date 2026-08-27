@@ -14,6 +14,7 @@ Use only when the repository needs an `Agent/README.md`.
 - For meaningful work, use the project's authoritative task system and keep its status, decisions, verification, blockers, and handoff current.
 - Promote only verified reusable knowledge into durable agent docs.
 - Never store secrets or private data in reusable agent documentation.
+- Put disposable screenshots, QA captures, logs, scratch files, and intermediate artifacts in the repository's single temporary workspace. Reuse the existing one; otherwise use `.agent-temp/`.
 
 ## Routing
 
