@@ -207,34 +207,23 @@ Usually this means:
 ## Workflow
 
 1. Establish or locate the durable task record for meaningful work in the project's existing issue, ticket, plan, or task system. Record scope, success criteria, initial plan, and known constraints before substantial edits.
-
-2. Inspect the repository's existing agent docs and nearby documentation.
-3. Identify oversized or duplicated entry points.
-4. Decide the target folder. Prefer an existing `Agent/` or `agents/` folder; otherwise create `Agent/`.
-5. Add or update a short root `README.md` notice for LLMs.
-6. Create or update a minimal `Agent/README.md` with a foundation identity section naming `agent-context-foundation` and `TheBaiter/agent-context-foundation`.
-7. Create or update `Agent/INDEX.md` as the main router.
-8. Compact oversized docs by topic. Keep routers short and move reusable details into one-purpose files.
-9. Split broad project guidance into `Agent/core/` documents.
-10. Create or update `Agent/project-map.md` when broad repo orientation would otherwise require repeated source-tree reading.
-11. Create or update `Agent/error-memory/` using an index-first, category-router, one-case-per-file structure.
-12. Migrate existing error logs only when useful, deduplicating by root cause.
-13. Add safe QA/test credential documentation rules when the project runs visual QA or tests.
-14. Create or update `Agent/recommended-codex-customization.md` as copy-ready text for Codex personalization.
-15. Create or update `Agent/tools/README.md` and `Agent/tools/scripts/` for reusable scripts, tools, and learned procedures.
-16. Create or update `Agent/summaries/README.md` when the repository benefits from short reusable summaries.
-17. Create or update `Agent/planning/README.md` when the repository benefits from project-specific planning preferences.
-18. Create or update `Agent/project-rules.md` when there are non-secret constraints, safe API probes, allowed environments, or approval gates.
-19. Add intent-based and topic-based closing checklist guidance so agents state what checklist was used, what was verified, and what remains unverified.
-20. If creating `Agent/` for the first time, ask the user whether it should be committed to Git or added to `.gitignore`; do not modify `.gitignore` without confirmation.
-21. Add a task checklist that forces scoped reading before implementation.
-22. Add an initial operating checklist that forces scope, plan, routed documentation, error-memory relevance, and verification decisions before editing.
-23. Add a conflict rule: when a task conflicts with a documented rule, explain the conflict before continuing and update memory only if the conflict reveals reusable guidance.
-24. Add first-time setup transparency guidance for privacy, permissions, prohibited actions, and Git tracking.
-25. Add periodic skill update check guidance that points to `TheBaiter/agent-context-foundation`.
-26. Add branch and pull request guidance: announce new work, preserve draft status by default, surface pending work before task switching, and require explicit approval before merge.
-27. Update the task record with decisions, evidence, failures or blockers, verification results, current status, and handoff/next action before closing or pausing meaningful work.
-27. Validate that docs are ASCII-only and no deleted legacy file remains referenced as active.
+2. Inspect the repository's active agent-instruction entrypoints, local scoped instructions, nearby documentation, source structure, and project tracking conventions.
+3. Classify the task and decide what context is actually required. Do not load broad docs merely because they exist.
+4. Define the success criteria, affected owners, important risks, and exact verification route before implementation.
+5. Audit the current context for oversized mandatory reads, duplication, ambiguous ownership, contradictions, stale guidance, or missing high-value anchors.
+6. Decide whether the correct action is no documentation change, compaction, routing repair, or creation of the minimum missing context.
+7. Preserve valid repository standards such as root or nested `AGENTS.md`. Create `Agent/README.md` and `Agent/INDEX.md` only when the repository needs that routed foundation.
+8. Load references progressively. Open only the reference needed for the current phase or module.
+9. Establish canonical owners for durable rules and knowledge. Replace duplicated prose with pointers.
+10. Create or refresh `project-map.md` only when owner, entrypoint, boundary, or verification discovery is repeatedly expensive.
+11. Create topic docs or local scoped instructions only when a real domain, subtree, or workflow needs durable non-obvious guidance.
+12. Create error memory only for recurring verified failure patterns. Do not convert raw task history or hypotheses into error memory.
+13. Create tools, summaries, planning guidance, project rules, checklists, or Codex customization only when evidence shows they reduce future cost or risk.
+14. Promote new knowledge through `discovered -> candidate -> verified -> durable`; preserve source anchors and avoid promoting unfinished or unverified observations.
+15. Consolidate duplicate, stale, challenged, or superseded guidance instead of only appending.
+16. Update the task record during meaningful scope changes, decisions, evidence changes, failures, blockers, verification, and handoff points.
+17. Validate the resulting context architecture, exact verification guidance, active routes, canonical ownership, stale references, and secret handling.
+18. Before closing or pausing, update the task record with current status, decisions, changed surfaces, verification results, remaining risk, and next action. Update durable memory only if reusable verified knowledge actually changed.
 
 ## Reference Loading
 
