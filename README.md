@@ -160,7 +160,7 @@ Task execution history belongs in the project's existing coordination system, no
 - Requiring meaningful work to use the project's existing issue, ticket, plan, or task system for execution traceability.
 - Recommending local README or summary files for complex source areas when they would reduce repeated rereading.
 - Creating `Agent/project-rules.md` for non-secret operating constraints such as allowed environments, safe probes, and approval gates.
-- Creating `Agent/closing-checklists.md` so agents close work with the matching intent-based or topic-based checklist and report verification clearly.
+- Creating `Agent/checklists/INDEX.md` so agents close work with the matching intent-based or topic-based checklist and report verification clearly.
 - Creating `Agent/recommended-codex-customization.md` for copy-ready Codex personalization.
 - Adding safe rules for local, demo, QA, or test credentials with explicit user permission.
 
