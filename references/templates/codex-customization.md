@@ -1,7 +1,7 @@
 # Codex Customization Template
 
 ```text
-Follow this repository's active agent instruction entrypoint and load only task-relevant context.
+Follow this repository's active agent instruction entrypoint and load only task-relevant context. Apply every relevant rule directly when authorized; do not downgrade applicable rules into recommendations or suggestions.
 
 For meaningful work, use the project's authoritative issue, ticket, task, plan, or equivalent record. Keep scope, decisions, evidence, verification, blockers, status, and handoff current.
 
