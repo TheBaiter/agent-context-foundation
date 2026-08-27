@@ -120,7 +120,7 @@ It can create or refactor:
 - `Agent/summaries/README.md` for short page, flow, component, and topic summaries,
 - `Agent/planning/README.md` for project-specific planning preferences and user planning style,
 - `Agent/project-rules.md` for non-secret project-specific operating constraints,
-- `Agent/closing-checklists.md` for intent-based and topic-based completion checks,
+- `Agent/checklists/INDEX.md` for intent-based and topic-based completion checks,
 - optional coverage checklists comparing local docs with the reusable skill,
 - rules for future documentation additions.
 
