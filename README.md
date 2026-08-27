@@ -30,7 +30,8 @@ The skill follows these principles:
 - exact verification anchors,
 - durable task traceability,
 - no universal Git/review policy,
-- repository language/encoding preservation.
+- repository language/encoding preservation,
+- one temporary workspace for disposable QA/visual/debug artifacts.
 
 ## Why
 
@@ -112,6 +113,7 @@ references/
     checklists.md
     migration.md
     codex-customization.md
+    temporary-workspace.md
 
   templates/
     base-readme.md
@@ -142,6 +144,18 @@ Examples:
 Only after the module decides that output is needed should the agent load the corresponding template.
 
 Do not load every reference or template up front.
+
+## Temporary Agent Workspace
+
+Reuse the repository's existing temporary workspace when one already exists. Otherwise use a single root:
+
+```text
+.agent-temp/
+```
+
+Put disposable screenshots, visual QA captures, temporary reports, logs, scratch files, exports, and intermediate artifacts there instead of scattering them across the repository.
+
+Task planning and traceability do not belong there. If a temporary artifact becomes durable, move it to its canonical project location before closing the task.
 
 ## Error Memory
 
