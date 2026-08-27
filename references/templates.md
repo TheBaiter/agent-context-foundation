@@ -105,7 +105,7 @@ It may include:
 - `summaries/` for short page, flow, component, script, or topic summaries,
 - `planning/` for project-specific planning preferences,
 - `project-rules.md` for non-secret operating constraints,
-- `closing-checklists.md` for intent-based and topic-based completion checks,
+- `checklists/INDEX.md` for intent-based and topic-based completion checks,
 - `recommended-codex-customization.md` for copy-ready Codex setup text.
 
 ## Normal Rules
@@ -262,7 +262,7 @@ Do not read every document. Pick the smallest relevant set for the task.
 | Reusable scripts, local tools, encoding fixes, or learned procedures | `tools/README.md` |
 | Internal summaries for pages, flows, components, scripts, or recurring topics | `summaries/README.md` |
 | Project-specific planning style, phases, gates, or user planning preferences | `planning/README.md` |
-| Intent-based completion checks | `checklists/INDEX.md` or `closing-checklists.md` |
+| Intent-based completion checks | `checklists/INDEX.md` |
 | Coverage comparison between local Agent docs and the reusable skill | `skill-coverage-checklist.md` |
 
 ## Error Memory
@@ -283,7 +283,7 @@ Prefer this order for generated or refactored `Agent/` docs:
 3. `project-map.md`
 4. `recommended-codex-customization.md`
 5. `core/`
-6. `checklists/` or `closing-checklists.md`
+6. `checklists/`
 7. `tools/README.md` and `tools/scripts/`
 8. `error-memory/`
 9. `project-rules.md`, `planning/`, and `summaries/`
@@ -436,7 +436,7 @@ Implementation rules:
 
 Checklist rules:
 
-- Use `Agent/closing-checklists.md` when behavior, UI, API contracts, data, deploy, auth, scripts, dependencies, or operational documentation changed.
+- Use `Agent/checklists/INDEX.md` when behavior, UI, API contracts, data, deploy, auth, scripts, dependencies, or operational documentation changed.
 - Pick the checklist that matches the task topic.
 - If no checklist matches, create a short task-specific checklist before finishing.
 - In the final response, state which checklist was used, what was verified, and what remains risky or unverified.
@@ -738,7 +738,7 @@ YYYY-MM-DD
 
 ## Closing Checklists
 
-Use this as `Agent/closing-checklists.md` when the repository needs intent-based and topic-based closeout checks.
+Use this as `Agent/checklists/INDEX.md` when the repository needs intent-based and topic-based closeout checks.
 
 ```md
 # Closing Checklists
