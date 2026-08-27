@@ -427,17 +427,19 @@ Apply these rules when refactoring an existing `Agent/` folder:
 - keep error-memory cases under category folders when a category grows,
 - refresh or create `project-map.md` when broad orientation is useful, and prefer that map over repeated source-tree scanning.
 
-Default folder order:
+When an `Agent/` foundation is the repository's chosen route, keep existing modules in a predictable order without treating optional modules as mandatory:
 
-1. `README.md` - mandatory entry and golden rules.
-2. `INDEX.md` - mandatory router.
-3. `project-map.md` - generated or maintained project orientation.
-4. `recommended-codex-customization.md` and compatibility docs.
-5. `core/` - broad routed topic docs.
-6. `checklists/` or `closing-checklists.md` - closeout routing.
-7. `tools/README.md` and `tools/scripts/` - reusable agent tools.
-8. `error-memory/` - indexed recurring errors.
-9. `summaries/`, `planning/`, and `project-rules.md` - optional scoped memory.
+1. `README.md` - compact entry when this route is used.
+2. `INDEX.md` - compact router when this route is used.
+3. `project-map.md` - only when orientation is repeatedly expensive.
+4. `core/` or local scoped docs - only for real routed topic ownership.
+5. `checklists/` - only for specialized verification or closeout needs.
+6. `tools/` - only for reusable procedures or scripts.
+7. `error-memory/` - only for recurring verified failures.
+8. `summaries/`, `planning/`, and `project-rules.md` - only when their specific need is demonstrated.
+9. `recommended-codex-customization.md` and `.generated/` - only when requested or operationally useful.
+
+Do not create missing items merely to satisfy this order.
 
 ## Internal Summaries Rule
 
