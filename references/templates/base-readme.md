@@ -8,6 +8,7 @@ Use only when the repository needs an `Agent/README.md`.
 ## Core Rules
 
 - Use `INDEX.md` to load only context relevant to the current task.
+- Apply relevant agent rules directly when authorized. Do not reduce applicable rules to recommendations or suggestions.
 - Do not read the entire agent documentation tree by default.
 - Prefer canonical owners and pointers over duplicated guidance.
 - Preserve the repository's language and encoding; use UTF-8 unless a project constraint requires otherwise.
