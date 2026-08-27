@@ -30,6 +30,7 @@ Use the templates in `references/templates/base-readme.md` and `references/templ
 - Preserve repository language and encoding. Default to UTF-8 when no explicit constraint exists.
 - Follow the repository's own Git, review, approval, credential, and deployment policies.
 - Task execution history belongs in the project task system, not in durable agent docs.
+- Reuse the repository's existing temporary workspace for disposable QA/visual/debug artifacts; if none exists, use `.agent-temp/`.
 
 ## Add A Module Only With Evidence
 
