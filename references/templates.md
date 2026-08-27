@@ -18,17 +18,19 @@ Place this near the top of the repository root `README.md`:
 
 ## Golden Rules
 
-1. Read this file and `INDEX.md` before broad repo work.
+1. Read this file and `INDEX.md` before broad repo work when this foundation is the active repository route.
 2. Route by task and read only matching docs.
 3. Do not read the whole `Agent/` folder by default.
 4. Do not read all error memory by default.
-5. Never store secrets, tokens, passwords, production credentials, or private customer data.
-6. Keep new or updated `Agent/` docs English and ASCII-only.
-7. Update memory only when reusable knowledge changed.
-8. When creating `Agent/` for the first time, ask whether it should be committed to Git or added to `.gitignore`.
-9. If a user request conflicts with a documented rule, explain the conflict and ask for clarification before continuing.
-10. Before creating or publishing a branch or pull request, tell the user its purpose and scope. Keep pull requests as drafts unless requested otherwise, and do not start unrelated work while one is pending without asking how to proceed.
-11. Never merge a pull request without an explicit user decision after reporting its changed behavior, checks, and unresolved risks.
+5. Give each durable fact or rule one canonical owner; routers point instead of duplicating detailed guidance.
+6. Create optional docs or modules only when evidence shows they reduce future risk, confusion, or rediscovery.
+7. Never store secrets, tokens, passwords, production credentials, or private customer data.
+8. Keep new or updated `Agent/` docs English and ASCII-only unless the repository defines another explicit documentation policy.
+9. For meaningful work, use the project's existing issue, ticket, plan, or task system as the durable execution trace and update it during the work.
+10. Promote task learning into durable memory only when it is verified and reusable.
+11. When creating `Agent/` for the first time, ask whether it should be committed to Git or added to `.gitignore`.
+12. If a user request conflicts with a documented rule, explain the conflict and ask for clarification before continuing.
+13. Follow the repository's own Git, branch, review, and merge policy. Link Git artifacts to the task trace when practical.
 
 ## Initial Operating Checklist
 
@@ -36,13 +38,14 @@ Before changing files:
 
 1. Read the golden rules above.
 2. Classify the task as trivial, narrow, or domain-specific.
-3. Define scope, success criteria, and likely touched owners.
-4. Plan before editing. For trivial tasks, a one-line scope is enough; for complex tasks, use phases and checkpoints.
+3. For meaningful work, locate or create the authoritative task record in the project's existing coordination system.
+4. Record scope, success criteria, likely touched owners, known constraints, and an initial plan before substantial edits.
 5. Back the plan with routed docs and source inspection. Do not plan from assumptions alone.
 6. Decide whether error memory is relevant. If relevant, read only `Agent/error-memory/errors/INDEX.md` first, then only matching categories.
-7. Identify technical criteria, risks, verification commands, and the closing checklist before applying changes.
+7. Identify technical criteria, risks, exact verification commands, and the closing checklist before applying changes.
 8. Check whether the task conflicts with a documented rule. If it does, report the conflict before continuing.
-9. Ask the user before continuing when scope, credentials, Git tracking, or destructive actions are unclear.
+9. Update the task record when scope, decisions, evidence, failures, blockers, verification, or handoff state changes.
+10. Ask the user before continuing when scope, credentials, Git tracking, or destructive actions are unclear.
 
 ## Foundation Identity
 
@@ -108,15 +111,17 @@ It may include:
 ## Normal Rules
 
 1. Read source code before editing.
-2. Use the owner folder and existing local patterns.
-3. Prefer small, task-specific docs over one large manual.
-4. Use scripts/tools for fragile repeated transformations.
-5. Keep agent-owned scripts in `Agent/tools/scripts/` and document reusable commands in `Agent/tools/README.md`.
-6. Recommend a local README or summary when a complex component, script, flow, or folder would otherwise need to be rediscovered from source.
-7. Use `planning/README.md` when the task needs project-specific planning style or checkpoints.
-8. Run the checks that match the change.
-9. Do not modify `.gitignore` for agent docs without explicit user confirmation.
-10. Before finishing, state the route or checklist used, what was verified, and what remains risky or unverified.
+2. Use the canonical owner, owner folder, and existing local patterns.
+3. Prefer small task-specific docs and pointers over duplicated broad manuals.
+4. Do not create a new module when existing source, configuration, or tracking already owns the truth.
+5. Use scripts/tools for fragile repeated transformations.
+6. Keep agent-owned scripts in `Agent/tools/scripts/` and document reusable commands in `Agent/tools/README.md`.
+7. Recommend a local README or summary when a complex component, script, flow, or folder would otherwise need to be rediscovered from source.
+8. Use `planning/README.md` only when the project has durable planning conventions; keep individual task progress in the task record.
+9. Run the exact checks that match the affected surface.
+10. Update the task record during meaningful work and make the handoff/next action explicit before stopping.
+11. Do not modify `.gitignore` for agent docs without explicit user confirmation.
+12. Before finishing, state what was verified, what remains risky or unverified, and whether any verified reusable knowledge was promoted to durable memory.
 
 ## Minimal Reading Rule
 
@@ -151,19 +156,62 @@ Read only this entry, `INDEX.md`, and the target source file unless the change e
 Before implementation:
 
 1. Classify the task as trivial, narrow, or domain-specific.
-2. Identify the source files likely to change.
-3. Use `INDEX.md` only if extra documentation is needed.
-4. Decide whether error memory is relevant.
-5. If error memory is not relevant, do not read it.
-6. If a documented rule conflicts with the task, explain the conflict before continuing.
+2. For meaningful work, locate or create the authoritative issue, ticket, plan, or task record.
+3. Record scope, success criteria, current status, initial plan, and known constraints before substantial edits.
+4. Identify the source files or owners likely to change.
+5. Use `INDEX.md` only if extra documentation is needed.
+6. Decide whether error memory is relevant.
+7. If error memory is not relevant, do not read it.
+8. If a documented rule conflicts with the task, explain the conflict before continuing.
+
+During implementation:
+
+1. Update the task record when scope or plan changes.
+2. Record important decisions with their reasons and evidence.
+3. Record failures or blockers only when they affect continuation, explain a constraint, or are likely to matter at handoff.
+4. Record verification results as they become relevant.
 
 Before finishing:
 
-1. Run the checks that match the change.
+1. Run the exact checks that match the change.
 2. Use the matching closing checklist when behavior, contracts, scripts, deploy, auth, data, dependencies, or operational docs changed.
-3. Update summaries, project rules, tools, or docs only if reusable guidance changed.
-4. Update error memory only if a meaningful new error pattern was found.
-5. Tell the user which route or checklist was used, what was verified, and what remains risky or unverified.
+3. Update the task record with final or current status, verification, remaining risk, and next action.
+4. Update summaries, project rules, tools, or docs only if reusable verified guidance changed.
+5. Update error memory only if a recurring verified error pattern was established.
+6. Tell the user what was verified, what remains risky or unverified, and what durable knowledge changed, if any.
+
+## Task Traceability
+
+Meaningful work must use the project's existing coordination system as its durable execution trace.
+
+Prefer the project's current:
+
+- issue,
+- ticket,
+- task,
+- work item,
+- planning record,
+- or equivalent authoritative tracker.
+
+Do not create a second tracking system when one already exists.
+
+The task record should make the work resumable by recording:
+
+- goal and current status,
+- scope and success criteria,
+- plan or phases,
+- important decisions and reasons,
+- evidence or source anchors,
+- changes applied,
+- verification performed,
+- failures or blockers that affect continuation,
+- current handoff point and next action.
+
+Update the record while the work happens. Do not reconstruct the trace only at the end.
+
+Task history stays in the task record. Promote only verified reusable knowledge into durable `Agent/` docs or error memory.
+
+For trivial local edits, keep traceability proportionate and reuse existing task/commit context when sufficient.
 
 ## ASCII Rule
 
@@ -266,6 +314,10 @@ Golden rules:
 6. Keep new or updated `Agent/` docs English and ASCII-only.
 7. Update memory only when reusable knowledge changed.
 8. When creating `Agent/` for the first time, ask whether it should be committed to Git or added to `.gitignore`.
+9. For meaningful work, use the project's existing issue, ticket, plan, or task system as the durable execution trace and update it during work.
+10. Give each durable rule or fact one canonical owner; routers point instead of duplicating detail.
+11. Add optional documentation only when evidence shows it reduces future risk or rediscovery.
+12. Promote task learning into durable memory only after it is verified and reusable.
 
 Initial operating checklist:
 
@@ -324,12 +376,23 @@ Skill update check:
 
 New repository or missing agent docs:
 
-- If the repo has no `Agent/README.md` or `Agent/INDEX.md`, do not overthink a custom structure from scratch.
+- If the repo already has a valid root or nested `AGENTS.md` or another established agent-instruction entrypoint, preserve it. If no valid agent route exists, do not overthink a custom structure from scratch.
 - If `$agent-context-foundation` is installed, use it to create the agent documentation foundation.
 - The canonical install source is `TheBaiter/agent-context-foundation`.
 - If it is not installed, install it with `npx skills add TheBaiter/agent-context-foundation` when possible.
 - If direct install is not possible, use `$find-skills` and search for `agent-context-foundation` by `TheBaiter` before inventing a new layout.
 - If no skill is available, create the smallest `Agent/README.md` and `Agent/INDEX.md` first, then add only task-relevant docs.
+
+Task traceability:
+
+- For meaningful work, locate or create the authoritative task record before substantial edits.
+- Prefer the coordination system already used by the project; do not create a parallel tracker.
+- Record scope, success criteria, current status, and the initial plan.
+- Update the record when scope, plan, important decisions, evidence, failures, blockers, verification, or handoff state changes.
+- Record why important decisions were made and link precise evidence or source anchors when possible.
+- Before pausing or finishing, record the current point, remaining work, next action, verification, and risk.
+- Keep task chronology in the task record. Promote only verified reusable conclusions into durable docs or error memory.
+- For trivial local edits, keep the trace compact and proportionate.
 
 Tooling and encoding repairs:
 
