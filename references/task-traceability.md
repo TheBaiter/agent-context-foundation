@@ -1,352 +1,204 @@
 # Task Traceability
 
-Read this reference when creating or updating the operating rules for planning, issue tracking, task execution, handoff, or work history.
+Read when defining or auditing how meaningful work is planned, tracked, resumed, or handed off.
 
-Do not treat this file as durable project memory for individual tasks. It defines how task history should be recorded in the project's coordination system.
+This file owns execution-trace rules. It does not own durable project knowledge.
 
-## Purpose
+## Principle
 
-Every meaningful task should leave enough durable execution trace for another person or agent to understand:
+Every meaningful task should leave enough durable trace for another person or agent to understand:
 
-- what was being attempted,
-- what scope was accepted,
-- what decisions were made,
-- why those decisions were made,
-- what evidence was used,
+- what was attempted,
+- accepted scope and success criteria,
+- current plan,
+- important decisions and reasons,
+- relevant evidence,
 - what changed,
 - what was verified,
-- what failed or became blocked,
+- failures or blockers that affect continuation,
 - where the task stopped,
-- what should happen next.
+- next action.
 
-Traceability exists to make work inspectable and resumable.
+Traceability makes work inspectable and resumable.
 
-It is not a substitute for source code, tests, durable project documentation, or error memory.
+## Use The Existing System
 
-## Use The Existing Coordination System
+Prefer the project's authoritative:
 
-Prefer the system the project already uses.
+- GitHub Issue,
+- Jira/Linear/Azure/GitLab work item,
+- planning/task file,
+- ADR-linked task,
+- equivalent tracker.
 
-Examples:
+Do not create a parallel tracking system when one already owns task state.
 
-- GitHub Issues,
-- Jira,
-- Linear,
-- Azure DevOps work items,
-- GitLab issues,
-- an established planning file,
-- an ADR-linked task,
-- another project-owned task or ticket system.
+If no system exists and the work is meaningful, create the smallest durable task record that fits project conventions.
 
-Do not create a parallel tracking system when an existing one already owns task status.
+## When Required
 
-When several systems exist, use the one the project identifies as authoritative for the task.
+Use a durable task record for work that is multi-step, risky, architectural, migratory, investigative, likely to span phases, likely to require handoff, or likely to involve meaningful decisions.
 
-If the project has no task system and the work is meaningful enough to require handoff or multi-step execution, create the smallest durable plan or task record that fits the repository's existing conventions.
+For trivial local edits, keep traceability proportionate and reuse existing task or commit context when sufficient.
 
-## When A Trace Is Required
+## Before Substantial Work
 
-Create or locate a durable task record before substantial implementation when the work is:
+Record:
 
-- multi-step,
-- expected to span more than one meaningful phase,
-- likely to require handoff,
-- risky or destructive,
-- architectural,
-- a migration,
-- a broad refactor,
-- a bug investigation with uncertain root cause,
-- changing contracts, auth, data, deployment, dependencies, or operational behavior,
-- likely to involve several decisions,
-- likely to be interrupted or resumed later.
-
-For trivial, obvious, file-local changes, reuse an existing issue or commit context when available and keep the trace compact.
-
-Do not turn a one-line safe edit into a heavy planning ceremony.
-
-## Trace Before Implementation
-
-The trace should exist early enough to influence the work.
-
-At minimum, record before substantial edits:
-
-- task goal,
-- current status,
+- goal,
+- status,
 - scope,
 - success criteria,
-- initial plan or phases,
-- known constraints,
-- important assumptions.
+- initial plan,
+- known constraints or assumptions.
 
-Do not wait until the end and reconstruct the history from memory.
+Do not reconstruct this only after implementation.
 
-## Update During Work
+## Update Checkpoints
 
-Update the task record at meaningful checkpoints.
+Update the task record when one of these materially changes:
 
-Required checkpoint types:
+- scope,
+- plan,
+- implementation direction,
+- evidence,
+- important decision,
+- blocker,
+- failure affecting continuation,
+- verification result,
+- handoff state.
 
-### Scope change
-
-Record when the accepted scope expands, shrinks, or changes owner.
-
-### Decision
-
-Record a decision that changes implementation direction, architecture, risk, contract, or verification.
-
-### New evidence
-
-Record evidence that invalidates an assumption or materially changes the plan.
-
-### Failure
-
-Record a failed approach when the failure explains the current state, affects the next attempt, or may matter to handoff.
-
-Do not record every command or every failed micro-attempt.
-
-### Blocker
-
-Record what is blocked, why it is blocked, what evidence confirms the blocker, and what would unblock it.
-
-### Verification
-
-Record what was run or inspected and what the result proves.
-
-### Handoff or stop point
-
-Record the exact current state and the next useful action before leaving meaningful work incomplete.
+Do not log every command or micro-attempt.
 
 ## Decision Trace
 
-For meaningful decisions, capture:
+For an important decision, preserve:
 
 - decision,
 - reason,
-- evidence or source anchor,
-- alternatives considered when relevant,
-- consequences or tradeoffs,
-- whether the decision is temporary or durable.
+- evidence/anchor,
+- consequence or tradeoff,
+- whether it is temporary or a durable candidate.
 
-Keep decision records concise.
+If it becomes stable project knowledge, promote the conclusion to the canonical owner and leave the task record pointing to it.
 
-If a decision becomes stable project knowledge, promote the durable conclusion to the canonical project document or ADR and leave the task record pointing to it.
+## Evidence
 
-Do not copy the entire durable rule back into the task history.
-
-## Evidence And Anchors
-
-Prefer precise anchors over long pasted context.
-
-Useful anchors include:
+Prefer precise anchors:
 
 - file paths,
 - symbols,
-- line or section references when stable enough,
-- issue or PR links,
-- commit SHAs,
 - test names,
 - exact commands,
-- schema or migration identifiers,
-- external contract/version identifiers.
+- commits/PRs,
+- schemas/migrations,
+- contract/version identifiers.
 
-Do not paste large raw logs into the task record unless the raw text is necessary evidence.
+Summarize large logs instead of pasting them unless raw text is necessary evidence.
 
-Summarize the failure and link or attach the detailed artifact when possible.
+## Failures
 
-## Failures And Dead Ends
+Record a failed approach only when it:
 
-Traceability should make failure understandable without becoming an archive of noise.
+- changes the next step,
+- exposes a constraint,
+- explains the current implementation,
+- is likely to be repeated,
+- leaves cleanup,
+- or is the current blocker.
 
-Record a failed approach when at least one is true:
+Capture attempt, result, cause if known, learning, and next action.
 
-- it explains why the current implementation looks different,
-- another agent is likely to repeat it,
-- it exposed an important constraint,
-- it changed the plan,
-- it left partial work that must be cleaned up,
-- it is the current blocker.
+Recurring verified failures may later be promoted to error memory.
 
-For each important failure, record:
+## Planning Boundary
 
-- attempted approach,
-- observed result,
-- likely or verified cause,
-- what was learned,
-- whether it should be retried,
-- next action.
+A per-task plan belongs in the task record and should evolve with execution.
 
-Recurring verified failure patterns belong in error memory after the task, not only in the task record.
+Durable `Agent/planning/` guidance describes reusable project planning conventions, not the current task plan.
 
-## Relationship To Planning
+## Git Boundary
 
-A plan is part of the trace, not a separate disposable artifact.
+Link branches, commits, PRs, or reviews to the task record when practical.
 
-The plan should reflect the current execution state.
+Follow the repository's own Git/review/merge policy.
 
-Update it when:
+The foundation must not invent universal draft, merge, or task-switch rules.
 
-- a phase is completed,
-- a phase is abandoned,
-- the order changes,
-- new work is discovered,
-- verification changes the next step.
+## Memory Boundary
 
-Do not leave an obsolete original plan looking active after execution diverges from it.
+Task trace answers: "What happened in this task?"
 
-## Relationship To Git
+Durable memory answers: "What should future agents continue to know?"
 
-When Git is used, connect the work record to the code history when practical.
-
-Useful links include:
-
-- branch name,
-- commits,
-- pull request,
-- review outcome.
-
-A commit message alone is usually not enough trace for a complex task because it does not preserve planning, rejected alternatives, blockers, or handoff state.
-
-A pull request alone is also not enough when important investigation or decisions happened before the PR was opened.
-
-Follow the project's own branch, review, and merge policy. The foundation should not invent a universal Git workflow.
-
-## Relationship To Durable Memory
-
-Task trace answers:
-
-"What happened during this task?"
-
-Durable memory answers:
-
-"What should future agents know regardless of this task?"
-
-Do not promote task activity automatically.
-
-At task close:
+At close:
 
 1. review what was learned,
-2. identify reusable verified knowledge,
-3. update the canonical owner only if the knowledge is durable,
-4. update error memory only for recurring verified failures,
-5. leave transient attempts and task chronology in the task record.
+2. identify verified reusable conclusions,
+3. promote only those conclusions to canonical durable owners,
+4. keep chronology and temporary attempts in the task record.
 
-## Handoff Quality
+## Handoff
 
-Before stopping incomplete meaningful work, the trace must make the next action obvious.
-
-Include:
+Before pausing incomplete meaningful work, record:
 
 - current status,
-- completed phases,
-- incomplete phase,
-- files or owners currently involved,
-- unresolved question or blocker,
-- latest verification result,
-- known risk,
-- next recommended action.
+- completed and incomplete phase,
+- active owners/files,
+- unresolved blocker/question,
+- latest verification,
+- remaining risk,
+- next useful action.
 
-Another agent should not need to reconstruct the previous session merely to understand where to continue.
+A new agent should not need chat history or commit archaeology merely to continue.
 
 ## Completion
 
-Before marking a task complete, record:
+Before marking complete, record:
 
 - final outcome,
 - key decisions,
 - changed surfaces,
-- verification performed,
-- intentionally skipped verification,
-- remaining risk or follow-up,
-- links to commits/PRs when applicable,
-- durable docs or error memory updated as a result.
+- verification,
+- skipped verification,
+- remaining risk/follow-up,
+- relevant commits/PRs,
+- durable knowledge promoted, or explicitly none.
 
-If no reusable knowledge changed, say so instead of creating unnecessary memory.
+## Compact Fallback Template
 
-## Compact Task Record Template
-
-Use or adapt the project's own template first. If none exists, the following structure is sufficient:
+Use the project's own template first. If none exists:
 
 ```md
 ## Goal
-
-<What must be achieved and why?>
+...
 
 ## Status
-
 Planned | In progress | Blocked | Ready for review | Complete
 
-## Scope
-
-- In:
-- Out:
-
-## Success criteria
-
-- [ ] ...
-- [ ] ...
+## Scope / success criteria
+- ...
 
 ## Plan
-
-- [ ] Phase 1: ...
-- [ ] Phase 2: ...
-- [ ] Verification: ...
+- [ ] ...
 
 ## Decisions
-
-### <decision>
-
+- Decision:
 - Reason:
 - Evidence:
 - Consequence:
-- Status: temporary | durable candidate
 
-## Evidence / anchors
-
-- `path/to/file` - why it matters
-- `command` - what it verifies
-- issue/PR/commit - relation to the task
-
-## Changes
-
+## Changes / verification
 - ...
 
-## Verification
+## Blockers / failures
+- ...
 
-- Command/check:
-- Result:
-- What it proves:
-- Not verified:
-
-## Failures / blockers
-
-- Attempt:
-- Result:
-- Cause:
-- Learning:
-- Next action:
-
-## Current handoff
-
+## Handoff
 - Current point:
-- Remaining work:
+- Remaining:
 - Next action:
 - Risk:
 ```
 
-Delete empty sections rather than keeping boilerplate that adds no value.
-
-## Traceability Health Check
-
-A task record is healthy when:
-
-- its current status is accurate,
-- its plan matches the actual path,
-- meaningful decisions have reasons,
-- evidence is linked rather than vaguely described,
-- failures that affect continuation are recorded,
-- verification is explicit,
-- the next action is visible,
-- durable knowledge is promoted to the right owner,
-- task history is not duplicated into permanent context.
-
-A task record is unhealthy when another agent must infer where the work stopped from commits, chat history, or partial source changes alone.
+Delete unused sections instead of preserving empty ceremony.
