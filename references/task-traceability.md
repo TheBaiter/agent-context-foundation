@@ -68,6 +68,34 @@ Prefer one issue/task with progressive updates over separate records for discove
 
 Do not wait until after the code change to reconstruct why the issue existed.
 
+## Active Problem Context Boundary
+
+The authoritative issue/task owns the active problem state and its execution history.
+
+Do not copy unresolved bugs, regressions, defects, investigation chronology, temporary hypotheses, failed approaches, repair progress, changing status, or validation history into reusable repository context merely so future agents know the problem exists.
+
+This applies to agent instruction files, `Agent/` documentation, planning files, project summaries, project rules, local READMEs, error memory, and similar durable context unless the content has independently become verified reusable knowledge.
+
+Keeping the active history in the task system avoids:
+
+- duplicated ownership,
+- larger default context,
+- stale status copied into files,
+- conflicting versions of the same investigation,
+- repeated context cost for transient information.
+
+If repository-local discoverability is genuinely useful, keep only the smallest routing pointer needed to reach the authoritative record. A useful pointer normally contains no more than:
+
+- issue/task identifier or direct route,
+- a short neutral problem label,
+- an owner/surface only when needed for routing.
+
+Do not mirror the issue body, diagnosis, plan, progress log, or validation history next to the pointer.
+
+When the problem is resolved, remove an active-problem pointer if it no longer serves a durable routing purpose. Do not let closed-issue pointers accumulate into a second issue index without evidence that such an index is useful.
+
+After resolution, a verified lesson may be promoted into error memory or another durable canonical owner only when it remains reusable beyond that one issue. The durable entry should contain the reusable conclusion, not the task chronology.
+
 ## Staged Investigation And Repair
 
 For non-trivial problems, do not collapse the entire lifecycle into one reasoning pass.
@@ -204,16 +232,19 @@ Issue-first traceability does not imply GitHub specifically; use the repository'
 
 ## Memory Boundary
 
-Task trace answers: "What happened in this task?"
+Task trace answers: "What happened in this task, and what is its current state?"
 
-Durable memory answers: "What should future agents continue to know?"
+Durable memory answers: "What should future agents continue to know after this task is no longer active?"
+
+Do not use durable memory as a shadow issue tracker. While a problem is active, its chronology, hypotheses, plan, status, and verification belong in the authoritative task record. A repository-local pointer may route to that record, but must not duplicate it.
 
 At close:
 
 1. review what was learned,
 2. identify verified reusable conclusions,
 3. promote only those conclusions to canonical durable owners,
-4. keep chronology and temporary attempts in the task record.
+4. keep chronology and temporary attempts in the task record,
+5. remove stale active-problem pointers unless they still provide justified durable routing.
 
 ## Handoff
 
