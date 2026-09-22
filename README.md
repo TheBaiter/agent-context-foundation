@@ -29,6 +29,8 @@ The skill follows these principles:
 - staleness and retirement,
 - exact verification anchors,
 - durable task traceability,
+- issue-first lifecycle for meaningful discovered problems,
+- staged diagnosis/planning/implementation/revalidation for non-trivial fixes,
 - no universal Git/review policy,
 - repository language/encoding preservation,
 - one temporary workspace for disposable QA/visual/debug artifacts.
@@ -96,6 +98,14 @@ The task record should preserve enough information to resume the work:
 - relevant failures or blockers,
 - current handoff,
 - next action.
+
+When an agent discovers a concrete bug, regression, defect, or implementation problem that requires a meaningful change, it should create or reuse the authoritative issue/task before implementing the repair when the project has a tracker.
+
+Prefer one issue/task for the whole lifecycle. It should capture how the problem was found, confirming evidence, affected scope, diagnosis, repair plan, scope review, implementation, revalidation, and final closure evidence.
+
+For non-trivial problems, keep confirmation, diagnosis, planning, implementation, and revalidation as separate checkpoints instead of one monolithic reasoning pass. Independent final validation is preferred when practical; otherwise the implementing agent should perform a fresh review pass separated from implementation.
+
+Do not close the issue merely because code exists. Close it only after the intended fix is applied, required verification succeeds, regressions are considered, and remaining risk or follow-up is recorded.
 
 Task history stays in the task record.
 
@@ -237,6 +247,7 @@ A healthy version should have:
 - no obsolete active routes,
 - no hypothetical module structure,
 - no universal project-specific rules,
-- task history separated from durable memory.
+- task history separated from durable memory,
+- meaningful discovered problems traced from discovery through validated closure.
 
 The skill should become easier to extend by adding a module without making `SKILL.md` grow into a manual again.

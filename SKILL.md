@@ -41,6 +41,8 @@ When this skill applies, treat its applicable rules as actions to perform, not b
 - Never store secrets, production credentials, tokens, or private customer data in reusable agent context.
 - Preserve the repository's established language and encoding. Default to UTF-8 when no explicit portability constraint exists.
 - Follow the repository's own Git, review, approval, credential, security, and deployment policies.
+- For meaningful discovered bugs, regressions, defects, or implementation problems, create or reuse the project's authoritative issue/task before fixing them when a tracker is available; keep discovery, plan, implementation, verification, and closure evidence in that record.
+- Keep non-trivial discovery, diagnosis, repair planning, implementation, and revalidation as distinct checkpoints. Prefer independent final validation when practical; otherwise perform a fresh validation pass separated from implementation.
 - Keep disposable QA, visual, debugging, and intermediate artifacts in one repository temporary workspace. Reuse the project's existing temporary root; otherwise use `.agent-temp/`.
 - The correct result may be no documentation change.
 
@@ -52,7 +54,11 @@ For meaningful work, use the project's authoritative issue, ticket, task, work i
 
 Before substantial edits, record the goal, scope, success criteria, status, initial plan, and known constraints.
 
+If investigation discovers a concrete problem that merits a meaningful change, create or reuse its authoritative task record before implementing the repair. Prefer one issue/task for the problem lifecycle rather than splitting discovery, diagnosis, fix, and validation across unrelated records.
+
 Update the record when scope, important decisions, evidence, failures, blockers, verification, or handoff changes.
+
+Do not close a discovered-problem record merely because code was written. Close it only after the intended change is applied, required verification succeeds, and remaining risk or follow-up is recorded.
 
 Task history stays in the task record. Promote only verified reusable conclusions into durable agent context.
 
@@ -62,19 +68,21 @@ Detailed traceability rules are owned by `references/task-traceability.md`.
 
 ## Workflow
 
-1. Locate or create the authoritative task record when the work is meaningful.
+1. Locate or create the authoritative task record when the work is meaningful. If exploratory work reveals a concrete problem requiring a meaningful change, create or reuse that record before fixing it.
 2. Inspect the active agent instruction entrypoint, local scoped instructions, source structure, and existing project tracking conventions.
 3. Classify the task and load only the context required to make the next correct decision.
 4. Identify canonical owners, affected surfaces, constraints, risks, and exact verification routes.
 5. Audit for oversized default reads, duplication, ambiguous ownership, contradictions, stale guidance, or missing high-value anchors.
-6. Decide the minimum useful action: no change, compact, repair routing, migrate, or add one evidence-backed module.
-7. Load only the module reference required for that action.
-8. Load only the specific template required for output generation.
-9. Apply the smallest coherent change while preserving existing project conventions. Execute applicable rules directly rather than restating them as recommendations.
-10. Update the task record during meaningful execution checkpoints.
-11. Validate routing, ownership, staleness, secrets, language/encoding preservation, and exact verification guidance.
-12. Before finishing or pausing, update the task record with current status, verification, remaining risk, and next action.
-13. Promote durable knowledge only when it is verified and reusable.
+6. For a non-trivial discovered problem, separate confirmation/evidence, diagnosis/boundaries, repair planning/scope review, implementation, and fresh revalidation into distinct checkpoints recorded in the same authoritative task.
+7. Decide the minimum useful action: no change, compact, repair routing, migrate, or add one evidence-backed module.
+8. Load only the module reference required for that action.
+9. Load only the specific template required for output generation.
+10. Apply the smallest coherent change while preserving existing project conventions. Execute applicable rules directly rather than restating them as recommendations.
+11. Update the task record during meaningful execution checkpoints.
+12. Validate routing, ownership, staleness, secrets, language/encoding preservation, and exact verification guidance.
+13. Before finishing or pausing, update the task record with current status, verification, remaining risk, and next action.
+14. Promote durable knowledge only when it is verified and reusable.
+15. Close a discovered-problem task only after implementation and required revalidation are complete; otherwise leave it open with an explicit handoff.
 
 ## Module Router
 
@@ -184,6 +192,10 @@ Before finishing a foundation change, verify:
 - Are any old paths still referenced as active?
 - Does a template contain policy that belongs to a module or project rule?
 - Are task history and durable memory separated?
+- Do meaningful discovered problems have an authoritative task record before repair, without duplicate issue creation?
+- Were non-trivial discovery, diagnosis, planning, implementation, and revalidation kept as distinct checkpoints instead of one monolithic pass?
+- Was final validation independent when practical, or at least performed as a fresh pass separated from implementation?
+- Are discovered-problem records closed only after implementation and required verification are complete?
 - Are error-memory cases verified rather than copied from investigation history?
 - Are language and encoding inherited from the repository instead of globally forced?
 - Are Git/review/merge rules project-specific instead of universal?
