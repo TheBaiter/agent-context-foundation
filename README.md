@@ -30,6 +30,7 @@ The skill follows these principles:
 - exact verification anchors,
 - durable task traceability,
 - issue-first lifecycle for meaningful discovered problems,
+- active problem history owned by the authoritative task instead of repository context,
 - staged diagnosis/planning/implementation/revalidation for non-trivial fixes,
 - no universal Git/review policy,
 - repository language/encoding preservation,
@@ -102,6 +103,12 @@ The task record should preserve enough information to resume the work:
 When an agent discovers a concrete bug, regression, defect, or implementation problem that requires a meaningful change, it should create or reuse the authoritative issue/task before implementing the repair when the project has a tracker.
 
 Prefer one issue/task for the whole lifecycle. It should capture how the problem was found, confirming evidence, affected scope, diagnosis, repair plan, scope review, implementation, revalidation, and final closure evidence.
+
+That active history belongs in the issue/task, not duplicated into `AGENTS.md`, `Agent/` documentation, planning files, summaries, error memory, or other reusable repository context merely to remember the problem. If local discoverability is useful, keep only a compact pointer to the authoritative issue/task.
+
+This keeps transient investigation and status out of default agent context, reduces file growth and stale duplicated state, and preserves one exact route to the current source of truth.
+
+When the issue is resolved, remove stale active-problem pointers unless they still have a justified durable routing purpose. Only verified reusable conclusions should be promoted into durable agent documentation or error memory.
 
 For non-trivial problems, keep confirmation, diagnosis, planning, implementation, and revalidation as separate checkpoints instead of one monolithic reasoning pass. Independent final validation is preferred when practical; otherwise the implementing agent should perform a fresh review pass separated from implementation.
 
@@ -200,7 +207,7 @@ discovered -> candidate -> verified -> durable
 
 Stale cases may become challenged, superseded, or retired.
 
-Investigation chronology belongs in task traceability, not in error memory.
+Investigation chronology belongs in task traceability, not in error memory. Active issue state must not be mirrored into error memory; only verified reusable lessons belong there.
 
 ## Language And Encoding
 
@@ -248,6 +255,7 @@ A healthy version should have:
 - no hypothetical module structure,
 - no universal project-specific rules,
 - task history separated from durable memory,
+- active problem history stored in the authoritative task rather than duplicated into repository context,
 - meaningful discovered problems traced from discovery through validated closure.
 
 The skill should become easier to extend by adding a module without making `SKILL.md` grow into a manual again.
