@@ -1,6 +1,6 @@
 ---
 name: agent-context-foundation
-description: Use for substantive repository debugging, implementation, refactoring, migrations, or reviews when project instructions, issue/task traceability, recurring errors, or durable agent context affect the work. Also create, repair, compact, or audit AGENTS.md and Agent/ guidance. Skip trivial isolated edits and general questions.
+description: Use proactively for multi-step repository bug fixes, substantial feature implementation, refactors, migrations, and reviews to discover project instructions, follow issue/task history, preserve traceability, and avoid repeat errors. Also create, repair, compact, or audit AGENTS.md and Agent/ guidance. Skip trivial isolated edits and general questions.
 ---
 
 # Agent Context Foundation
