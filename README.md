@@ -223,23 +223,70 @@ The skill does not impose a universal branch, draft PR, merge, review, approval,
 
 Those rules belong to the repository or to an evidence-backed project-rules module.
 
-## Install
+## When It Activates
+
+A compatible agent discovers installed skills from their `name` and `description`. It may select this skill **without an explicit `$agent-context-foundation` request** when a substantive repository task involves existing project instructions, traceability for a meaningful fix or refactor, recurring failure knowledge, or agent-context maintenance.
+
+The skill is **not** a general prerequisite for every code edit. It should stay out of trivial changes, questions without repository context, and unrelated work. When selected during implementation, the agent should perform the requested work while applying only the relevant foundation rules; it should not conduct a full documentation audit by default.
+
+Skill selection is model- and host-dependent; writing a stronger description improves discoverability but cannot guarantee activation. The `agents/openai.yaml` launcher describes a manually selectable prompt. Its `default_prompt` is not an automatic execution hook.
+
+## Install And Verify
+
+The repository is distributed through the Vercel `skills` CLI. The default installation is **project-scoped**, so installing in one repository does not make it available in every other repository.
+
+For Codex **in all projects**:
 
 ```bash
-npx skills add TheBaiter/agent-context-foundation
+npx skills add TheBaiter/agent-context-foundation -g -a codex
+npx skills ls -g -a codex
 ```
 
-Canonical skill name:
+For Codex **only in the current project**, run these from that project directory:
+
+```bash
+npx skills add TheBaiter/agent-context-foundation -a codex
+npx skills ls -a codex
+```
+
+Use your target agent's identifier instead of `codex` for other supported clients. After repository updates, check the installed version and update when needed:
+
+```bash
+npx skills check
+npx skills update agent-context-foundation -g   # global installation
+npx skills update agent-context-foundation -p   # project installation
+```
+
+Inspect the installed skill list in a **new agent session** and verify that `agent-context-foundation` is exposed to that agent. A skill present on GitHub but absent from the session's discovery list cannot be implicitly selected.
+
+### Persistent Codex instructions: the missing reliability layer
+
+`SKILL.md` is **selected**, not loaded unconditionally. If the goal is consistent error reporting and verification in day-to-day coding, combine skill installation with Codex's **automatically read** `AGENTS.md` instructions.
+
+- For all Codex repositories: merge the concise excerpt from [`references/templates/codex-customization.md`](references/templates/codex-customization.md) into your existing `~/.codex/AGENTS.md` (or `$CODEX_HOME/AGENTS.md`).
+- For one repository only: merge it into that repository's existing root `AGENTS.md`.
+- Preserve more-specific repository rules and any `AGENTS.override.md`; never overwrite an existing instruction file blindly.
+- The excerpt includes a minimal issue/failure/verification baseline **even when the skill is not selected**. More detailed guidance remains in the skill.
+
+Use a **new Codex session** to verify the instruction sources were loaded and that a natural bugfix prompt both consults the relevant skill and produces an authoritative task record. Do not equate a skill being installed with an agent having used it.
+
+There is a third possible failure: the installed version may be outdated, disabled, or not linked to Codex. Confirm the local `SKILL.md` contents and the agent's actual skill list after updating. For a reliable reinstall, use `npx skills add TheBaiter/agent-context-foundation -g -a codex` in the intended scope and inspect the installed files; command success alone is not proof that the active session is using the new instructions.
+
+Canonical skill name: `$agent-context-foundation`.
+
+Direct manual invocation remains supported:
 
 ```text
-$agent-context-foundation
+Use $agent-context-foundation to audit this repository's agent context.
 ```
 
-Example:
+## Trigger Regression Cases
 
-```text
-Use $agent-context-foundation to audit this repository's agent context, preserve existing conventions, and make the smallest evidence-backed improvement.
-```
+Test **both** selection and behavior: a fresh agent must actually load the skill when expected, reuse/create an authoritative issue for a meaningful discovered defect, preserve material failure evidence, perform fresh regression checks, and leave the issue open if blocked. Include naturally phrased user requests that do **not** mention issue tracking or the skill.
+
+`evals/activation-cases.csv` covers implicit positive cases, explicit invocation, and negative controls. Test these in a fresh agent session with the skill installed, using an expendable repository/fixture and verifying whether the agent **actually reads `SKILL.md`**. Merely following similar advice does not prove the skill was activated.
+
+Static inspection verifies the metadata and regression fixtures but cannot measure real model selection. Record misses/false positives against the cases, then adjust the description rather than adding broad mandatory instructions.
 
 ## Self-Audit
 

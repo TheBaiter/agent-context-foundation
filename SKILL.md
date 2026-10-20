@@ -1,6 +1,6 @@
 ---
 name: agent-context-foundation
-description: Create, repair, compact, or audit repository agent context using minimum viable context, progressive disclosure, canonical ownership, evidence-based modules, durable task traceability, and verified memory. Use when agent instructions are missing, oversized, duplicated, stale, hard to route, or repeatedly cause rediscovery or mistakes.
+description: Use proactively for multi-step repository bug fixes, substantial feature implementation, refactors, migrations, and reviews to discover project instructions, follow issue/task history, preserve traceability, and avoid repeat errors. Also create, repair, compact, or audit AGENTS.md and Agent/ guidance. Skip trivial isolated edits and general questions.
 ---
 
 # Agent Context Foundation
@@ -10,6 +10,18 @@ description: Create, repair, compact, or audit repository agent context using mi
 Make repository context cheaper to load, easier to route, safer to maintain, and easier to resume.
 
 This skill is a decision engine. It should not become the repository's universal operating manual.
+
+
+## Activation Boundary
+
+The skill may be selected **implicitly**, without the user naming it, when the actual repository task needs an instruction route, authoritative work trace, verified recurring-error knowledge, or maintenance of reusable agent context.
+
+- Typical matches: a multi-step bug fix, risky refactor or migration, substantial feature with handoff, investigation requiring a task record, or repair of `AGENTS.md`/`Agent/` guidance.
+- Non-matches: general programming explanations, brainstorming without repository access, cosmetic or trivial isolated edits, and unrelated tasks.
+- Do not infer activation merely from the words "code", "repository", "test", or "agent". Apply the task-specific boundary above.
+- On a coding task, **do the requested coding work**. Load only applicable context/traceability rules; do not turn every task into a full context-health audit or generate new documentation without evidence.
+- Do not claim the skill automatically executes in every session: selection depends on the host exposing this skill and the agent matching the task to its metadata.
+
 
 ## Operational Application
 
@@ -69,24 +81,34 @@ For trivial local work, keep traceability proportionate and reuse existing task 
 
 Detailed traceability rules are owned by `references/task-traceability.md`.
 
-## Workflow
+## Workflow Selection
 
-1. Locate or create the authoritative task record when the work is meaningful. If exploratory work reveals a concrete problem requiring a meaningful change, create or reuse that record before fixing it.
-2. Inspect the active agent instruction entrypoint, local scoped instructions, source structure, and existing project tracking conventions.
-3. Classify the task and load only the context required to make the next correct decision.
-4. Identify canonical owners, affected surfaces, constraints, risks, and exact verification routes.
-5. Audit for oversized default reads, duplication, ambiguous ownership, contradictions, stale guidance, or missing high-value anchors.
-6. For a non-trivial discovered problem, separate confirmation/evidence, diagnosis/boundaries, repair planning/scope review, implementation, and fresh revalidation into distinct checkpoints recorded in the same authoritative task.
-7. Keep the issue/task as the owner of active problem details. Add a repository-local pointer only when it materially improves routing; do not mirror the issue body into agent context.
-8. Decide the minimum useful action: no change, compact, repair routing, migrate, or add one evidence-backed module.
-9. Load only the module reference required for that action.
-10. Load only the specific template required for output generation.
-11. Apply the smallest coherent change while preserving existing project conventions. Execute applicable rules directly rather than restating them as recommendations.
-12. Update the task record during meaningful execution checkpoints.
-13. Validate routing, ownership, staleness, secrets, language/encoding preservation, and exact verification guidance.
-14. Before finishing or pausing, update the task record with current status, verification, remaining risk, and next action.
-15. Promote durable knowledge only when it is verified and reusable.
-16. Close a discovered-problem task only after implementation and required revalidation are complete; otherwise leave it open with an explicit handoff. Remove stale active-problem pointers unless they still serve a durable routing purpose.
+Choose the route according to the **work actually requested**. An engineering task is not automatically a context-health audit.
+
+### A. Engineering work: fix, implement, refactor, migrate, or review
+
+1. Follow the active repository instructions, including any applicable `AGENTS.md` and project `Agent/README.md` route. Locate the authoritative tracker, source owners, and exact verification commands.
+2. For meaningful work, find/reuse the existing issue or task record; record the goal, scope, success criteria, relevant constraints, and initial plan. When discovering a concrete defect that warrants a meaningful repair, create or reuse its record **before** implementation if a tracker is available.
+3. For a non-trivial defect, keep **confirmation -> diagnosis -> plan and scope review -> implementation -> fresh revalidation -> closure or handoff** as distinguishable checkpoints in that one task record. Read `references/task-traceability.md` for their operational contract.
+4. Perform the requested code/review work, applying only the relevant project constraints. Record material decisions, failures, scope changes, and evidence in the task record as they occur, not reconstructed from memory afterward.
+5. Recheck the original failure and likely regressions, use the relevant tests/checks, and inspect the resulting diff. Independent validation is preferred when practical; otherwise conduct a distinct fresh review pass.
+6. Update the authoritative task with the actual result, tests run or skipped, remaining risk, commit/PR anchor, and next action. Close only after its verification/closure gate passes; otherwise leave it open with an explicit handoff.
+7. Promote a **verified reusable lesson** to error memory or other canonical durable context only when it will help future work. Do not copy the issue's active chronology into `Agent/`.
+
+**Error classification:** A reproducible product bug, regression, defect, or meaningful implementation mistake belongs in the authoritative task/issue lifecycle. A failed command, denied permission, transient tooling error, or unsuccessful attempt belongs in that task's trace **when it materially affects the decision, next action, or verification**, not in a separate issue by default. Only verified, reusable lessons belong in durable `Agent/error-memory/`. Do not equate "document errors" with appending every console error to a growing memory file.
+
+If the tracker is inaccessible, preserve the available evidence in the smallest project-authorized handoff and report the blocker. Do not claim an issue was created. For tiny isolated edits, keep the process proportionate and do not manufacture an issue.
+
+### B. Agent-context foundation work: create, repair, compact, or audit instructions
+
+1. Inspect active root/local agent instructions, existing `Agent/` routes, source structure, and the project's tracking system.
+2. Identify canonical owners and classify problems as irrelevant default reads, duplication, contradictory ownership, stale memory, or missing high-value anchors.
+3. Decide the smallest evidence-backed action: no change, compact, repair routing, migrate, or add one justified module.
+4. Load only the applicable module from the router below and a template only when generating a file.
+5. Apply the change, preserving project conventions, language, verification anchors, and task-trace ownership.
+6. Validate the final instruction route and verify that no contradictory active paths or duplicated task chronology remain. Update the authoritative task record and any verified durable knowledge; leave an explicit handoff if incomplete.
+
+When a task genuinely combines both routes, perform the requested engineering work first; adjust the foundation only for a demonstrated reusable gap. Do not run a full context audit by default.
 
 ## Module Router
 
@@ -94,6 +116,7 @@ Read a module only when its condition is true.
 
 | Need | Read |
 | --- | --- |
+| Meaningful issue/task trace, discovered defects, or final revalidation | `references/task-traceability.md` |
 | Create or repair the base instruction route | `references/modules/foundation.md` |
 | Repository orientation is repeatedly expensive | `references/modules/project-map.md` |
 | Verified recurring failure knowledge exists | `references/modules/error-memory.md` |
