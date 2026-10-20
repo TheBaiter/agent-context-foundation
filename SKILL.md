@@ -1,6 +1,6 @@
 ---
 name: agent-context-foundation
-description: Create, repair, compact, or audit repository agent context using minimum viable context, progressive disclosure, canonical ownership, evidence-based modules, durable task traceability, and verified memory. Use when agent instructions are missing, oversized, duplicated, stale, hard to route, or repeatedly cause rediscovery or mistakes.
+description: Use for substantive repository debugging, implementation, refactoring, migrations, or reviews when project instructions, issue/task traceability, recurring errors, or durable agent context affect the work. Also create, repair, compact, or audit AGENTS.md and Agent/ guidance. Skip trivial isolated edits and general questions.
 ---
 
 # Agent Context Foundation
@@ -10,6 +10,18 @@ description: Create, repair, compact, or audit repository agent context using mi
 Make repository context cheaper to load, easier to route, safer to maintain, and easier to resume.
 
 This skill is a decision engine. It should not become the repository's universal operating manual.
+
+
+## Activation Boundary
+
+The skill may be selected **implicitly**, without the user naming it, when the actual repository task needs an instruction route, authoritative work trace, verified recurring-error knowledge, or maintenance of reusable agent context.
+
+- Typical matches: a multi-step bug fix, risky refactor or migration, substantial feature with handoff, investigation requiring a task record, or repair of `AGENTS.md`/`Agent/` guidance.
+- Non-matches: general programming explanations, brainstorming without repository access, cosmetic or trivial isolated edits, and unrelated tasks.
+- Do not infer activation merely from the words "code", "repository", "test", or "agent". Apply the task-specific boundary above.
+- On a coding task, **do the requested coding work**. Load only applicable context/traceability rules; do not turn every task into a full context-health audit or generate new documentation without evidence.
+- Do not claim the skill automatically executes in every session: selection depends on the host exposing this skill and the agent matching the task to its metadata.
+
 
 ## Operational Application
 
