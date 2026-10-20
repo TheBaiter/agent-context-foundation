@@ -259,18 +259,18 @@ npx skills update agent-context-foundation -p   # project installation
 
 Inspect the installed skill list in a **new agent session** and verify that `agent-context-foundation` is exposed to that agent. A skill present on GitHub but absent from the session's discovery list cannot be implicitly selected.
 
-### Optional repository-level discovery bridge
+### Persistent Codex instructions: the missing reliability layer
 
-If implicit selection is still unreliable in a particular Codex project, add a **small** instruction in that project's existing root `AGENTS.md`, without copying the full skill:
+`SKILL.md` is **selected**, not loaded unconditionally. If the goal is consistent error reporting and verification in day-to-day coding, combine skill installation with Codex's **automatically read** `AGENTS.md` instructions.
 
-```md
-For substantive repository debugging, refactors, migrations, and task handoffs
-that need instruction routing or task traceability, use the installed
-`$agent-context-foundation` skill and apply only its relevant rules.
-Do not activate it for trivial isolated changes or general questions.
-```
+- For all Codex repositories: merge the concise excerpt from [`references/templates/codex-customization.md`](references/templates/codex-customization.md) into your existing `~/.codex/AGENTS.md` (or `$CODEX_HOME/AGENTS.md`).
+- For one repository only: merge it into that repository's existing root `AGENTS.md`.
+- Preserve more-specific repository rules and any `AGENTS.override.md`; never overwrite an existing instruction file blindly.
+- The excerpt includes a minimal issue/failure/verification baseline **even when the skill is not selected**. More detailed guidance remains in the skill.
 
-This relies on the skill already being installed and visible to Codex. It is a repository-specific hint, not a global guarantee, and is unnecessary if the existing instruction route already handles discovery adequately.
+Use a **new Codex session** to verify the instruction sources were loaded and that a natural bugfix prompt both consults the relevant skill and produces an authoritative task record. Do not equate a skill being installed with an agent having used it.
+
+There is a third possible failure: the installed version may be outdated, disabled, or not linked to Codex. Confirm the local `SKILL.md` contents and the agent's actual skill list after updating. For a reliable reinstall, use `npx skills add TheBaiter/agent-context-foundation -g -a codex` in the intended scope and inspect the installed files; command success alone is not proof that the active session is using the new instructions.
 
 Canonical skill name: `$agent-context-foundation`.
 
@@ -281,6 +281,8 @@ Use $agent-context-foundation to audit this repository's agent context.
 ```
 
 ## Trigger Regression Cases
+
+Test **both** selection and behavior: a fresh agent must actually load the skill when expected, reuse/create an authoritative issue for a meaningful discovered defect, preserve material failure evidence, perform fresh regression checks, and leave the issue open if blocked. Include naturally phrased user requests that do **not** mention issue tracking or the skill.
 
 `evals/activation-cases.csv` covers implicit positive cases, explicit invocation, and negative controls. Test these in a fresh agent session with the skill installed, using an expendable repository/fixture and verifying whether the agent **actually reads `SKILL.md`**. Merely following similar advice does not prove the skill was activated.
 
