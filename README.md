@@ -253,7 +253,8 @@ Use your target agent's identifier instead of `codex` for other supported client
 
 ```bash
 npx skills check
-npx skills update agent-context-foundation
+npx skills update agent-context-foundation -g   # global installation
+npx skills update agent-context-foundation -p   # project installation
 ```
 
 Inspect the installed skill list in a **new agent session** and verify that `agent-context-foundation` is exposed to that agent. A skill present on GitHub but absent from the session's discovery list cannot be implicitly selected.
