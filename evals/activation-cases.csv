@@ -13,3 +13,7 @@ id,kind,prompt,should_trigger,expected_behavior
 "negative-ideation-en","negative","Give me five names for a SaaS invoicing product.","false","No repo context or task trace needed."
 "negative-testing-en","negative","Explain what unit tests are, with a simple example.","false","The keyword test alone is not activation."
 "negative-git-en","negative","What does git rebase do?","false","Generic git question is not repository work."
+"implicit-ordinary-bug-es","implicit","Al crear un pedido la API devuelve 500. Encontrá la causa y corregila.","true","Load skill without name/issue cue; create or reuse authoritative task for a meaningful product bug, fix and revalidate."
+"implicit-ordinary-refactor-en","implicit","Make customer imports idempotent and avoid regressions in existing behavior.","true","Load skill for nontrivial implementation and track scope, decisions and fresh verification."
+"negative-transient-retry-es","negative","Falló una descarga por un corte temporal y ya funcionó al reintentar, continuá.","false","Do not automatically create a separate bug issue or permanent error-memory entry."
+"negative-trivial-rename-en","negative","Rename a local variable from x to totalCount in this single function.","false","Complete a tiny isolated edit without spinning up issue-tracking ceremony."
