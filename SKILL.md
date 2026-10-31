@@ -1,6 +1,6 @@
 ---
 name: agent-context-foundation
-description: Create, repair, compact, or audit repository agent context using minimum viable context, progressive disclosure, canonical ownership, evidence-based modules, durable task traceability, and verified memory. Use when agent instructions are missing, oversized, duplicated, stale, hard to route, or repeatedly cause rediscovery or mistakes.
+description: Re-anchor the current task boundary, related issues, permissions, and regression risks for substantive repository implementation, debugging, refactoring, and agent-context maintenance. Use when agents drift from requested scope, confuse access with persistence, ignore issue decisions, or need durable traceability; skip trivial/general questions.
 ---
 
 # Agent Context Foundation
@@ -29,6 +29,9 @@ When this skill applies, treat its applicable rules as actions to perform, not b
 
 - Preserve a valid existing instruction standard such as root or nested `AGENTS.md`; do not create a competing authority.
 - Load only context relevant to the current task.
+- Before substantive implementation, re-anchor the current request against the authoritative task, latest explicit decisions, relevant linked issues, local instructions, and actual source; remembered chat context alone is not enough.
+- Separate capability access, app authentication, external-provider authorization, execution safety, and data persistence; denying one does not silently deny the others.
+- Recheck the accepted task boundary after user corrections, material discoveries, and before final validation; preserve allowed behavior in addition to enforcing restrictions.
 - Execute applicable skill rules directly when authorized; do not treat them as passive recommendations.
 - Give each durable rule, fact, contract, decision, or procedure one canonical owner.
 - Prefer pointers to owners over duplicated prose.
@@ -48,6 +51,18 @@ When this skill applies, treat its applicable rules as actions to perform, not b
 - The correct result may be no documentation change.
 
 Detailed context principles are owned by `references/foundation-principles.md`.
+
+## Task Boundary Gate
+
+For substantive implementation, debugging, refactoring, or changes to a feature contract, **perform this gate before editing**. Repeat the relevant steps whenever the user changes a requirement, an issue changes, or implementation evidence contradicts the plan. Keep the first pass proportional; deepen only for cross-cutting, uncertain, or high-risk work.
+
+1. **Re-anchor:** identify the user's latest objective and the authoritative issue/task. Read its *current* description, recent decisions/comments and linked dependencies, the applicable `AGENTS.md` / `Agent/` / local instructions, and relevant source/contracts. Do not infer the current contract from an old assistant summary or a single historical comment. Reconcile contradictions explicitly; distinguish decisions that supersede prior assumptions.
+2. **Set the boundary:** for each affected actor/mode and operation, record what must remain **allowed**, **denied**, **unchanged**, or **not yet implemented**; distinguish access, identity, authorization, read/write behavior, local/remote execution, data lifetime/persistence, and task phase. Name in-scope surfaces, explicit exclusions, and dependencies. A ban on storing data or requiring app login is **not** by itself a ban on viewing catalogs or making separately authorized, temporary external requests.
+3. **Choose the smallest coherent route:** check every relevant UI control, API/server gate, adapter/integration, import/export, session, and test contract. Avoid sweeping disables, new login requirements, or removal of integrations based on assumptions. Preserve existing security controls; a public interface does **not** make private data or an unsafe external connector public.
+4. **Write acceptance checks:** at minimum prove allowed functions still work (positive), forbidden effects stay forbidden (negative), neighboring modes retain their contract (regression), and dependent or unimplemented features are honestly labeled. If safe execution or essential verification is blocked, isolate that subfeature, record the blocker/next action, and continue authorized independent work. Do not silently redefine the goal.
+5. **Revalidate against the latest boundary:** inspect the actual diff and evidence, including paths outside the immediate component where gates apply. Update the authoritative issue with scope changes, failures, verification and untested risks; do not close or claim functionality that was not verified.
+
+For complex or cross-feature work, read `references/task-boundaries.md` for the canonical detailed procedure and scope matrix. Keep per-task snapshots and active decisions in the task record, not in durable agent documentation.
 
 ## Task Traceability
 
@@ -69,7 +84,13 @@ For trivial local work, keep traceability proportionate and reuse existing task 
 
 Detailed traceability rules are owned by `references/task-traceability.md`.
 
-## Workflow
+## Workflow Routing
+
+- **Product/engineering task:** execute the Task Boundary Gate and `references/task-traceability.md` when meaningful, then implement and validate the *product task* using its local instructions. Do not transform the user's feature request into a repository-context audit or generate agent documents unless context is itself defective.
+- **Agent-context maintenance task:** use the foundation workflow below and load only evidence-backed modules. Context maintenance is not the default outcome of an engineering task.
+- **Trivial work:** use proportionate checks; no issue, matrix, or module merely for ceremony.
+
+## Context-Maintenance Workflow
 
 1. Locate or create the authoritative task record when the work is meaningful. If exploratory work reveals a concrete problem requiring a meaningful change, create or reuse that record before fixing it.
 2. Inspect the active agent instruction entrypoint, local scoped instructions, source structure, and existing project tracking conventions.

@@ -9,7 +9,7 @@ This file owns execution-trace rules. It does not own durable project knowledge.
 Every meaningful task should leave enough durable trace for another person or agent to understand:
 
 - what was attempted,
-- accepted scope and success criteria,
+- accepted scope and success criteria (including positive and negative capability boundaries),
 - current plan,
 - important decisions and reasons,
 - relevant evidence,
@@ -106,7 +106,7 @@ Use distinct checkpoints with one concrete objective at a time:
 2. **Diagnose** — identify the cause or narrow the cause hypothesis, affected owners, and boundaries.
 3. **Plan** — define the smallest coherent repair, success criteria, regression risks, and verification route.
 4. **Scope review** — challenge whether the plan is too broad, too narrow, speculative, or missing adjacent impact.
-5. **Implement** — apply the repair against the recorded plan and note material deviations.
+5. **Implement** — apply the repair against the recorded boundary and plan, including UI and API/integration consequences, and note material deviations.
 6. **Revalidate** — perform a fresh verification pass against the original problem, success criteria, and likely regressions.
 7. **Close or hand off** — close only when implementation and required verification are complete; otherwise leave the record open with the exact next action.
 
@@ -133,7 +133,7 @@ Do not close a discovered-problem issue/task until:
 - the intended repair is actually applied,
 - required tests/checks/verification have succeeded or any skipped verification is explicitly justified,
 - the original failure or defect is rechecked where practical,
-- relevant regressions have been considered,
+- relevant regressions have been considered, including whether permitted capabilities remain available and restricted effects remain blocked in each affected mode,
 - material deviations from the plan are documented,
 - remaining risk and follow-up are recorded,
 - the implementation anchor such as commit, PR, or deployed change is linked when practical.
@@ -142,6 +142,8 @@ If one of those conditions is not met, keep the record open and state the blocke
 
 ## Before Substantial Work
 
+Re-read the currently authoritative issue/task, its recent substantive decisions and relevant linked issues; do not rely solely on a previously loaded chat summary or an old comment. Reconcile newer explicit user decisions with older plans. If scope is unclear, investigate the applicable source/contracts before deciding to disable a feature. For non-trivial feature work, apply the `SKILL.md` Task Boundary Gate and `references/task-boundaries.md` when modes or integrations cross authorization/persistence boundaries.
+
 Record:
 
 - goal,
@@ -149,7 +151,10 @@ Record:
 - scope,
 - success criteria,
 - initial plan,
-- known constraints or assumptions.
+- known constraints or assumptions,
+- affected actors/modes and allowed, denied, preserved, deferred capabilities,
+- boundary owners (UI, API/server, integration, storage, import/export) and dependency issues,
+- evidence for decisions or explicit gaps still under investigation.
 
 For a discovered problem, also record how it was found and the evidence that makes it real enough to act on.
 
@@ -159,7 +164,7 @@ Do not reconstruct this only after implementation.
 
 Update the task record when one of these materially changes:
 
-- scope,
+- scope or the current user/issue contract (including superseded restrictions),
 - plan,
 - implementation direction,
 - evidence,

@@ -11,6 +11,7 @@ Its job is not to impose one universal agent workflow. Its job is to help agents
 ```text
 SKILL.md
   -> decide what the task needs
+  -> re-anchor the live issue, feature boundary, and permitted behavior
   -> load one relevant module
   -> load one specific template only if output must be generated
   -> apply the minimum coherent change
@@ -29,6 +30,9 @@ The skill follows these principles:
 - staleness and retirement,
 - exact verification anchors,
 - durable task traceability,
+- task-boundary re-anchoring and issue-decision freshness,
+- separation of capability access from authentication and persistence,
+- positive/negative/regression checks across modes and integrations,
 - issue-first lifecycle for meaningful discovered problems,
 - active problem history owned by the authoritative task instead of repository context,
 - staged diagnosis/planning/implementation/revalidation for non-trivial fixes,
@@ -84,6 +88,12 @@ checklists/      -> specialized recurring verification is needed
 
 Do not create empty folders, hypothetical error categories, or documentation merely because a template exists.
 
+## Task Boundaries Before Implementation
+
+For substantive engineering work, the skill requires the agent to check the **latest task/issue decisions**, affected actors/modes and the actual implementation *before* deciding what to change. It must distinguish feature access from login requirements, provider permissions, transient execution and persistence. A stateless/guest mode may legitimately permit editing, catalogs or separately authorized temporary connections while still forbidding cloud saves, identity reuse or unsafe public endpoints.
+
+Use the compact gate in `SKILL.md`, and read `references/task-boundaries.md` when the boundary spans modes, APIs, data sources or multiple issues. Validate what **must keep working** as well as what **must be blocked**. The current scope matrix and decision history belong in the authoritative task, not in generic agent memory. Engineering tasks are not automatically agent-context audits.
+
 ## Task Traceability
 
 Meaningful work should use the project's existing issue, ticket, task, work item, plan, or equivalent system.
@@ -128,6 +138,7 @@ agents/
 references/
   foundation-principles.md
   task-traceability.md
+  task-boundaries.md
 
   modules/
     foundation.md
@@ -166,7 +177,8 @@ Examples:
 - creating or repairing the base route -> read `references/modules/foundation.md`,
 - recurring failure knowledge -> read `references/modules/error-memory.md`,
 - migration/compaction -> read `references/modules/migration.md`,
-- project-specific planning conventions -> read `references/modules/planning.md`.
+- project-specific planning conventions -> read `references/modules/planning.md`,
+- feature boundaries crossing guest/auth/API/persistence modes -> read `references/task-boundaries.md` (no module required).
 
 Only after the module decides that output is needed should the agent load the corresponding template.
 
