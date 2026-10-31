@@ -1,15 +1,15 @@
 ---
 name: agent-context-foundation
-description: Keep coding-agent context focused, prevent task-boundary drift, and trace confirmed agent mistakes with minimal issue and error-memory pointers. Use for substantive repository changes, debugging, regressions or agent-context maintenance; load issues and detailed references only when evidence requires them.
+description: Use at the start of repository software tasks (implement features, fix bugs, refactor, review code, write tests, or maintain agent instructions), even when not named. Read AGENTS.md/Agent routing, make the smallest complete safe change, check regressions, and trace meaningful mistakes. Load issues only when specifically relevant; skip general non-repository questions.
 ---
 
 # Agent Context Foundation
 
 ## Purpose
 
-Make repository context cheaper to load, easier to route, safer to maintain, and easier to resume.
+Provide a lightweight, repeatable start-of-task discipline: find the project's instructions, preserve its boundaries, make the smallest complete change, verify effects, and retain useful error memory.
 
-This skill is a decision engine. It should not become the repository's universal operating manual.
+This skill is a decision engine, not a universal manual. Its discovery metadata improves implicit selection but cannot force loading: for every-session reliability, use a short standing AGENTS.md bridge in the host project (documented in README).
 
 ## Operational Application
 
@@ -26,6 +26,17 @@ Apply relevant rules directly when authorized; do not merely recommend them. Loa
 - Follow project policy for tests, branches and deployment. Disposable QA/debug artifacts belong in the project's existing temporary workspace, or `.agent-temp/` if needed.
 
 Detailed principles: `references/foundation-principles.md`.
+
+## Default Startup And Smallest Complete Change
+
+When selected for any repository task (including a simple fix or review):
+
+1. **Locate existing instructions once per task:** follow loaded root/scoped `AGENTS.md` and check the project's `Agent/README.md` or existing equivalent when present; route via its `INDEX.md` if needed. Do not confuse project `Agent/` (context), skill `agents/openai.yaml` (metadata), and Codex `.agents/skills/` (installation). Read only sections relevant to the task.
+2. **Missing context route:** if there is no useful instruction entrypoint and persistent guidance is justified, create the smallest compatible `AGENTS.md` or `Agent/README.md` + `INDEX.md` when repository edits are authorized; otherwise request authorization or report the limitation. Do not create empty structures, overwrite existing rules, or block a trivial fix on documentation setup.
+3. **Ponytail-compatible minimalism:** prefer no new code when existing behavior suffices; otherwise reuse existing components/contracts and choose the **smallest complete fix**, not merely the fewest edited lines. Follow affected callers, integration points and tests only as needed. Reject speculative abstractions, dependencies, migrations and unrelated features.
+4. **Verify and stop:** check requested behavior, adjacent regressions and security/data effects proportionately. Keep error issues and concise memory references under the procedure below. Do not reread the same context on every step.
+
+If the skill was not selected, standing `AGENTS.md` rules are the minimal fallback; do not claim the skill was executed merely because similar guidance was followed.
 
 ## Context Budget And Task Boundary Gate
 
@@ -54,7 +65,7 @@ For ordinary meaningful work, reuse a task record if one is already provided or 
 
 - **Product/engineering task:** apply the cheap Context Budget/Boundary Gate; load detailed task trace or boundary references only for confirmed errors, non-trivial cross-mode risks or genuine handoffs. Implement and validate the product request, not an agent-documentation audit.
 - **Agent-context maintenance task:** use the foundation workflow below and load only evidence-backed modules. Context maintenance is not the default outcome of an engineering task.
-- **Trivial work:** use proportionate checks; no issue, matrix, or module merely for ceremony.
+- **Trivial repository work:** follow the startup and minimal-change rules briefly; no issue, matrix, or module merely for ceremony. **Non-repository questions:** the skill does not apply.
 
 ## Context-Maintenance Workflow
 

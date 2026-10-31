@@ -6,7 +6,7 @@ Read when creating, repairing, or compacting a repository's agent instruction fo
 
 Preserve the repository's established instruction standard when it is valid. Root or nested `AGENTS.md`, local instruction files, or another existing convention may already be the correct authority.
 
-Create a new `Agent/` route only when the repository lacks a usable route or when routed supporting context will materially reduce future discovery cost.
+Check existing `AGENTS.md` first, then the repository's `Agent/README.md`/`Agent/INDEX.md` or established equivalent. Create a new `Agent/` route only when none is usable or when scoped supporting context materially reduces rediscovery. If file edits are authorized, create the smallest entrypoint directly; otherwise ask for authorization. Never block an unrelated simple fix merely to scaffold docs.
 
 ## Minimum
 

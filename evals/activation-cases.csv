@@ -1,0 +1,13 @@
+id,type,prompt,expected_skill_load,expected_behavior
+"ordinary-fix","positive","El editor no carga los registros. Encontrá el problema y corregilo.","true","Check project instructions then smallest coherent fix and tests."
+"ordinary-feature","positive","Agregá un filtro por fechas sin romper el resto del panel.","true","Use existing patterns and targeted regression check."
+"ordinary-review","positive","Revisá este cambio y detectá posibles regresiones.","true","Read relevant instructions and inspect changed behavior."
+"ordinary-refactor","positive","Simplificá este módulo sin cambiar su comportamiento observable.","true","Reuse existing code and validate unchanged contract."
+"agent-context","positive","Nuestras instrucciones de Agent y AGENTS se contradicen, arreglalas.","true","Find canonical owner and compact conflicting instructions."
+"issue-named","positive","Retomá la issue 105 y aplicá la corrección pendiente.","true","Fetch the named issue and only needed linked decisions."
+"mistake","positive","La solución que hiciste bloqueó una capacidad que funcionaba. Corregí la regresión.","true","Create or reuse focused error issue and a short memory pointer."
+"minimal-diff","positive","Hacé lo mínimo para solucionar este bug y probá que nada más cambió.","true","Smallest complete change with meaningful regression checks."
+"generic-question","negative","¿Qué es un closure en JavaScript?","false","Answer without repository preflight."
+"ideation","negative","Dame ideas para una marca.","false","Do not load an engineering skill."
+"unrelated-user-text","negative","Traducí este párrafo al inglés.","false","Transform text directly."
+"trivial-tool-retry","negative","Un comando falló por red, ya se arregló al reintentarlo. Seguí.","false","Do not manufacture a persistent issue for a harmless retry."

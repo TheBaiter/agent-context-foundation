@@ -2,9 +2,61 @@
 
 [![Skill](https://img.shields.io/badge/skill-agent--context--foundation-blue)](https://github.com/TheBaiter/agent-context-foundation)
 
-A modular agent skill for creating, repairing, compacting, and auditing repository context.
+A lightweight agent skill for ordinary repository coding tasks and agent-context maintenance. Its job is to guide the smallest complete safe change while preserving scoped instructions, regression checks and a compact error trail.
 
 Its job is not to impose one universal agent workflow. Its job is to help agents discover the right context, load only what matters, preserve reusable knowledge, and leave meaningful work traceable.
+
+## Activation: Skill Discovery Is Not Automatic Execution
+
+**Two distinct layers are required for consistent startup behavior:**
+
+- **Standing guidance:** Codex automatically reads active global and repository `AGENTS.md` instructions. This is where the short mandatory baseline belongs.
+- **On-demand skill:** Codex initially sees skill name/description and may select the full `SKILL.md` for matching tasks. A positive `allow_implicit_invocation` flag permits selection; it does not itself start or force the skill. `agents/openai.yaml` is launcher metadata, not a startup hook.
+
+The updated description now matches normal tasks such as `fix the bug`, `implement this feature`, `refactor` and `review this code`, without requiring a literal skill mention. Installing only in one repository does **not** expose the skill in every other repository.
+
+### Codex installation and update
+
+```bash
+# Make this skill visible in Codex across repositories
+npx skills add TheBaiter/agent-context-foundation -g -a codex
+npx skills ls -g -a codex
+
+# Check/update installed copies when the repository changes
+npx skills check
+npx skills update agent-context-foundation -g
+
+# For an installation scoped only to the current repository:
+npx skills add TheBaiter/agent-context-foundation -a codex
+npx skills update agent-context-foundation -p
+```
+
+Merge the short [Codex standing bridge](references/templates/codex-customization.md) into the existing `~/.codex/AGENTS.md` or the target repository `AGENTS.md`, without replacing other rules or an effective `AGENTS.override.md`. A global file affects Codex sessions on that machine; a repository file affects that project. Use a **new session** to check that both the standing instructions and the updated skill are visible. A GitHub update alone does not update any user's installation.
+
+For other coding agents, use their supported persistent-instruction files and skill installation scope; behavior varies by host. **No skill text alone can guarantee implicit activation in every agent.**
+
+### Project instruction layout
+
+- `AGENTS.md`: startup instructions recognized by Codex (root/scoped or global).
+- `Agent/README.md` and `Agent/INDEX.md`: optional project-specific routing and durable context.
+- `Agent/error-memory/INDEX.md`: short pointers to verified agent mistakes, with the issue as owner of detail.
+- `agents/openai.yaml` in **this skill repo**: optional skill UI metadata, not your project's instruction folder.
+- `.agents/skills/`: one recognized repository-level skill installation location.
+
+Check existing conventions first. If a needed `Agent/` foundation is absent, create a tiny route when repository edits are authorized, otherwise request permission. Do not create competing folders or bulk-load an entire agent history.
+
+### Smallest complete change and Ponytail
+
+For repository code, prefer reusing an existing implementation, changing the least necessary surface, and including affected callers/tests/security boundaries. Minimal diff is not an excuse to leave a half-working feature. This aligns with [Ponytail](https://github.com/DietrichGebert/ponytail), a separate optional skill; it is **not a dependency** of Agent Context Foundation.
+
+```bash
+# Optional: install Ponytail independently for Codex
+npx skills add DietrichGebert/ponytail -g -a codex --skill ponytail
+```
+
+### Trigger and behavior checks
+
+See `evals/activation-cases.csv` for prompts that should select the skill and negative controls for unrelated tasks. Evaluate in fresh installed-agent sessions: distinguish *skill listed*, *skill actually loaded*, and *behavior followed*. Static metadata checks **cannot prove** runtime activation; if selection fails, keep the standing `AGENTS.md` baseline and report the miss rather than claiming success.
 
 ## Core Model
 
@@ -193,23 +245,9 @@ The skill does not impose a universal branch, draft PR, merge, review, approval,
 
 Those rules belong to the repository or to an evidence-backed project-rules module.
 
-## Install
+## Manual invocation
 
-```bash
-npx skills add TheBaiter/agent-context-foundation
-```
-
-Canonical skill name:
-
-```text
-$agent-context-foundation
-```
-
-Example:
-
-```text
-Use $agent-context-foundation to audit this repository's agent context, preserve existing conventions, and make the smallest evidence-backed improvement.
-```
+The canonical skill name is `$agent-context-foundation`. Explicit invocation remains available when implicit matching misses; the persistent bridge is the primary way to request it on every repository task.
 
 ## Self-Audit
 
