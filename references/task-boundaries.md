@@ -1,21 +1,20 @@
 # Task Boundaries And Scope Re-Anchoring
 
-Read this reference for substantive tasks whose outcome depends on multiple modes, permissions, integration points, issue decisions, or data lifetime. `SKILL.md` owns the lightweight mandatory gate; this file owns its deeper method. Do not turn this into an indiscriminate checklist for trivial edits.
+Load this only when multiple modes, permissions, integrations, or data lifetimes create a real ambiguity or regression risk. The default lightweight gate is in `SKILL.md`. Do not spend more context reconstructing the project than the task requires.
 
-## 1. Recover the *current* contract, not a remembered one
+## 1. Recover only the missing decision
 
-At task start, after each material user correction, and before final validation:
+Start from the current user request, session context and directly affected source/contracts. Read local agent instructions through the project's existing short entrypoint, not every instruction file.
 
-1. State the requested outcome in one sentence. Identify the authoritative existing task/issue before creating another. Read its current body **and** newest substantive updates/comments, linked dependencies and related work items. Do not use chat continuity, an old plan, or the latest commit alone as proof of product intent.
-2. Inspect local active instructions (`AGENTS.md`, scoped instructions, `Agent/README.md` or its actual project equivalent), contracts and the code paths that implement the requested behavior. Read only enough to establish ownership and effects.
-3. Classify statements as **explicit current requirement**, **verified current behavior**, **historical/superseded decision**, **proposed solution**, or **unverified assumption**. Compare dates, explicit overrides and issue status. A comment created later is evidence, not automatic authority over a current explicit requirement. If sources conflict, do not silently choose the more restrictive or convenient implementation; record the conflict, resolve through explicit project/user direction where available, and isolate undecidable work.
-4. Record the exact issue/commit/source anchors used so a later agent can recheck them. Track related issues as dependencies; reuse the primary issue unless the discovered defect is independently scoped and cannot be tracked there.
+Read an issue **only when** the user cites its number, a relevant error-memory line points to it and details are needed, an unresolved contract depends on it, or evidence conflicts. Fetch the one known issue first. Read its most relevant decision/comment only if needed; follow related issues selectively. Do not browse all issues, full histories or unrelated branches as a preflight.
 
-Do not interpret an issue as completed, nor a feature as implemented, merely because a plan, prototype, source branch, or comment describes it.
+Classify an important statement as current explicit requirement, observed behavior, superseded decision, proposal, or assumption. Source truth confirms implementation, not always intended behavior; explicit current user requirements can supersede older issue decisions. If the task is clear without an issue, proceed.
+
+Keep the essential scope/owner/evidence in the existing task or a compact working note; do not produce a standing matrix or new issue for a straightforward modification.
 
 ## 2. Build a small boundary contract
 
-Make a compact matrix in the active task record, only for affected surfaces:
+For a genuinely cross-mode change, use a compact matrix in the existing task record or working context, only for affected surfaces:
 
 | Dimension | Questions to answer |
 | --- | --- |
@@ -51,7 +50,7 @@ When there is an option between quick workaround and coherent repair, compare: r
 - **Premature:** treats planned integration as shipped, test authored as passed, or deploy blocked as a ban on implementing an authorized change.
 - **Unsafe:** interprets public UX as permission to bypass server authorization, expose secrets or run arbitrary remote queries.
 
-For material changes, put the selected alternative, rejected alternatives and why in the authoritative issue. Update that decision if the current user instruction or source evidence changes it.
+For material tracked changes, keep the decisive trade-off in the existing authoritative task. Create an error issue only when a concrete agent mistake or defect needs correction, not for every alternative considered.
 
 ## 5. Prove both permission and prohibition
 
@@ -64,7 +63,7 @@ At least four kinds of checks belong in non-trivial acceptance criteria:
 
 Tests must distinguish **written**, **executed**, **passed**, and **not executed**. A locally unavailable test should be authored where possible, anchored in the issue with exact command and expected result, and marked for manual execution if required by the project. Do not use GitHub Actions when project policy prohibits them. Never claim production readiness based on source review alone.
 
-Re-read the task boundary and inspect the final diff in a fresh review pass; challenge over-restrictions and missing adjacent surfaces. If a regression or material failed approach is discovered, preserve evidence and next action in the authoritative issue. Promote to `Agent/error-memory/` only verified, reusable failure patterns after they have independent durability; do not mirror active problem history.
+Recheck the requested boundary and inspect the final diff; challenge over-restrictions and missing adjacent surfaces. For a confirmed agent-caused regression, create/reuse its issue, record root cause and fix/verification, close only after validation, and leave a one-line `Agent/error-memory/INDEX.md` reference. A detailed memory case is optional and must be verified, not copied from issue history.
 
 ## 6. Example: guest editor with temporary data
 
@@ -82,4 +81,4 @@ The error is to infer from *no account or internal DB* that every data catalog, 
 
 ## Completion and handoff
 
-Leave the authoritative issue with: current allowed/denied/deferred matrix or compact equivalent; decisive issue/source anchors; implementation and dependency state; actual test results versus pending checks; detected regressions or risks; next action. An incomplete security or PC-test gate blocks only the claims/phases that depend on it, never justifies silently changing user requirements or declaring success. Do not keep this active history in reusable agent context.
+If an issue is involved, leave its decision/verification/handoff concise and accurate; otherwise report the essential result without creating a tracker entry. An incomplete security or PC-test gate blocks only claims/phases that depend on it. Never store active issue histories in reusable agent context; a one-line error pointer is enough.

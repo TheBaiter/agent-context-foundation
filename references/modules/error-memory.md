@@ -1,22 +1,19 @@
 # Error Memory Module
 
-Read only when the task involves reusable failure knowledge or an existing error-memory route.
+Read only to add/revisit a confirmed error pointer, or when a reusable failure requires more than the short index entry. Do not preload the index or cases for unrelated work.
 
 ## Minimum Structure
 
 ```text
 Agent/error-memory/
-  README.md
-  errors/
-    INDEX.md
+  INDEX.md             # one-line issue pointers (small default)
+  errors/              # only if a justified detailed case exists
+    <verified-case>.md
 ```
 
-Do not pre-create categories such as PowerShell, Node, Git, database, API, frontend, deployment, or performance. Categories appear only after a real verified case exists.
+Reuse the project's existing canonical error-memory route when present. Otherwise create only the small `Agent/error-memory/INDEX.md` after a confirmed meaningful agent error; detailed case files and categories remain optional. Do not pre-create empty structures.
 
-Use:
-- `references/templates/error-memory-readme.md`
-- `references/templates/error-memory-index.md`
-- `references/templates/error-case.md`
+Optional templates for justified detailed memory: `references/templates/error-memory-readme.md`, `references/templates/error-memory-index.md`, `references/templates/error-case.md`. A one-line pointer needs no template.
 
 ## Promotion Gate
 
@@ -24,7 +21,7 @@ Use:
 
 `discovered -> candidate -> verified -> durable`
 
-Keep attempts, hypotheses, and temporary findings in the task record. Promote a case only when the root cause and fix are verified and the lesson is reusable.
+Keep attempts, hypotheses and temporary findings in the issue. Record a **verified short pointer** after resolving an agent mistake (`#issue — symptom/cause — preventive rule`) without creating a long case. Promote a detailed case only when root cause/fix are verified and the lesson is reusable.
 
 A single case may qualify when it is expensive, dangerous, non-obvious, or likely to recur.
 
@@ -40,8 +37,8 @@ Do not keep contradictory cases active.
 
 ## Reading
 
-Start from `errors/INDEX.md`. Load only the matching category or case. Never bulk-load error history.
+Use the index as a tiny routing aid **only when a matching symptom/surface appears**. Read just the matching line; fetch that issue or case only when the one-line reminder cannot resolve the decision. Never bulk-load issue history.
 
 ## Writing
 
-Store root cause, verified fix, applicability, prevention, and useful anchors. Do not store raw session history, secrets, large logs, or every failed attempt.
+For a short pointer: issue ID/link + brief failure/cause + preventive rule in one line. Update rather than duplicate. For a detailed verified case: store root cause, verified fix, applicability and anchors; no raw session history, secrets, large logs or every failed attempt. Retire obsolete pointers.

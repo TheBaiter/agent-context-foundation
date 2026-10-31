@@ -1,6 +1,6 @@
 # Task Traceability
 
-Read when defining or auditing how meaningful work is planned, tracked, resumed, or handed off.
+Read for confirmed agent mistakes, genuine task handoffs, or meaningful tracking policy. Do not load this reference for every ordinary code edit.
 
 This file owns execution-trace rules. It does not own durable project knowledge.
 
@@ -33,19 +33,19 @@ Prefer the project's authoritative:
 
 Do not create a parallel tracking system when one already owns task state.
 
-If no system exists and the work is meaningful, create the smallest durable task record that fits project conventions.
+If an error needs tracking but no issue system exists, use the smallest durable task record allowed by project conventions; do not invent a new service.
 
 ## When Required
 
-Use a durable task record for work that is multi-step, risky, architectural, migratory, investigative, likely to span phases, likely to require handoff, or likely to involve meaningful decisions.
+Do not require a new issue or a search through existing issues merely because work is multi-step. Reuse a task/issue when supplied by the user, required by project process, or needed to resume a substantial tracked effort.
 
-When investigation or implementation discovers a concrete bug, regression, defect, or implementation problem that merits a meaningful change, create or reuse its authoritative task record before implementing the repair when the project has a tracker.
+When the **agent makes a confirmed meaningful error** (wrong implementation, regression, invalid assumption with product impact, or avoidable procedural mistake), create a focused issue in the existing tracker unless one already owns that same error. Document the error and correction through verified closure. Concrete defects discovered while working should likewise use the project's issue convention; avoid tickets for harmless transient retries or unrelated hypotheticals.
 
-For trivial local edits, keep traceability proportionate and reuse existing task or commit context when sufficient.
+For trivial local edits, rely on the change and concise completion notes; no ceremony.
 
 ## Discovered Problem Workflow
 
-A discovered problem should normally have one authoritative issue/task that follows the problem from discovery through closure.
+A confirmed meaningful agent-caused problem should have one authoritative issue/task from discovery through validated closure, but need not force a history search when the issue identifier is already known.
 
 Reuse an existing record when it already owns the same problem. Do not create duplicate issues just to satisfy process.
 
@@ -92,9 +92,9 @@ If repository-local discoverability is genuinely useful, keep only the smallest 
 
 Do not mirror the issue body, diagnosis, plan, progress log, or validation history next to the pointer.
 
-When the problem is resolved, remove an active-problem pointer if it no longer serves a durable routing purpose. Do not let closed-issue pointers accumulate into a second issue index without evidence that such an index is useful.
+After validated resolution, keep a **single-line pointer** to an agent-caused confirmed error in the canonical `Agent/error-memory/INDEX.md` (or existing equivalent) while it helps avoid repeating the mistake: issue ID, brief symptom/cause and prevention. The detailed resolution remains in the closed issue. Remove obsolete pointers and merge duplicates rather than appending indefinitely.
 
-After resolution, a verified lesson may be promoted into error memory or another durable canonical owner only when it remains reusable beyond that one issue. The durable entry should contain the reusable conclusion, not the task chronology.
+A full standalone error-memory case is optional; promote it only for verified reusable lessons. The one-line index pointer is not a second issue log and must not contain status histories or long narratives.
 
 ## Staged Investigation And Repair
 
@@ -142,7 +142,7 @@ If one of those conditions is not met, keep the record open and state the blocke
 
 ## Before Substantial Work
 
-Re-read the currently authoritative issue/task, its recent substantive decisions and relevant linked issues; do not rely solely on a previously loaded chat summary or an old comment. Reconcile newer explicit user decisions with older plans. If scope is unclear, investigate the applicable source/contracts before deciding to disable a feature. For non-trivial feature work, apply the `SKILL.md` Task Boundary Gate and `references/task-boundaries.md` when modes or integrations cross authorization/persistence boundaries.
+Begin with the user's current instruction, available context and the minimum relevant source. **Do not read issues by default.** Fetch only an explicitly named issue, one that owns a confirmed error, or a specific decision needed to resolve a conflict. Load `references/task-boundaries.md` only if permissions/integrations truly complicate the boundary.
 
 Record:
 
@@ -206,7 +206,9 @@ Summarize large logs instead of pasting them unless raw text is necessary eviden
 
 ## Failures
 
-Record a failed approach only when it:
+Record agent mistakes in their dedicated existing/new issue when they have material impact; include symptom, cause (or unknown), fix, verification, prevention and commit. Routine tool retries do not each need their own issue.
+
+Record a failed approach in an existing task only when it:
 
 - changes the next step,
 - exposes a constraint,
@@ -217,7 +219,7 @@ Record a failed approach only when it:
 
 Capture attempt, result, cause if known, learning, and next action.
 
-Recurring verified failures may later be promoted to error memory.
+Keep a one-line issue pointer in `Agent/error-memory/INDEX.md` for a confirmed agent-caused error after resolution while relevant. Promote a detailed failure case only if independently verified and reusable.
 
 ## Planning Boundary
 
@@ -243,13 +245,12 @@ Durable memory answers: "What should future agents continue to know after this t
 
 Do not use durable memory as a shadow issue tracker. While a problem is active, its chronology, hypotheses, plan, status, and verification belong in the authoritative task record. A repository-local pointer may route to that record, but must not duplicate it.
 
-At close:
+At validated closure:
 
-1. review what was learned,
-2. identify verified reusable conclusions,
-3. promote only those conclusions to canonical durable owners,
-4. keep chronology and temporary attempts in the task record,
-5. remove stale active-problem pointers unless they still provide justified durable routing.
+1. Complete the issue's symptom/cause/repair/tests/commit and close it; leave unverified errors open with the next check.
+2. Update one compact `Agent/error-memory/INDEX.md` pointer for a confirmed agent error, even after closure if still preventive.
+3. Promote a longer reusable lesson only when verified and worth its context cost.
+4. Retire stale pointers and keep chronology inside the issue.
 
 ## Handoff
 
@@ -278,7 +279,7 @@ Before marking complete, record:
 - relevant commits/PRs,
 - durable knowledge promoted, or explicitly none.
 
-For a discovered problem, also confirm that the record contains discovery evidence, diagnosis/boundaries, repair plan, scope review, and a separate revalidation result.
+For an agent-caused error, confirm the issue states what failed, why (if known), how it was fixed, what was actually tested, and the pointer in Agent error memory. Close only after necessary checks succeed.
 
 ## Compact Fallback Template
 

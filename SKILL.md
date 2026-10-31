@@ -1,6 +1,6 @@
 ---
 name: agent-context-foundation
-description: Re-anchor the current task boundary, related issues, permissions, and regression risks for substantive repository implementation, debugging, refactoring, and agent-context maintenance. Use when agents drift from requested scope, confuse access with persistence, ignore issue decisions, or need durable traceability; skip trivial/general questions.
+description: Keep coding-agent context focused, prevent task-boundary drift, and trace confirmed agent mistakes with minimal issue and error-memory pointers. Use for substantive repository changes, debugging, regressions or agent-context maintenance; load issues and detailed references only when evidence requires them.
 ---
 
 # Agent Context Foundation
@@ -29,7 +29,7 @@ When this skill applies, treat its applicable rules as actions to perform, not b
 
 - Preserve a valid existing instruction standard such as root or nested `AGENTS.md`; do not create a competing authority.
 - Load only context relevant to the current task.
-- Before substantive implementation, re-anchor the current request against the authoritative task, latest explicit decisions, relevant linked issues, local instructions, and actual source; remembered chat context alone is not enough.
+- Before substantive implementation, establish the user's current goal and affected boundary from the current request, already available context, applicable local instructions and smallest relevant source; consult issues only on a specific trigger.
 - Separate capability access, app authentication, external-provider authorization, execution safety, and data persistence; denying one does not silently deny the others.
 - Recheck the accepted task boundary after user corrections, material discoveries, and before final validation; preserve allowed behavior in addition to enforcing restrictions.
 - Execute applicable skill rules directly when authorized; do not treat them as passive recommendations.
@@ -44,61 +44,52 @@ When this skill applies, treat its applicable rules as actions to perform, not b
 - Never store secrets, production credentials, tokens, or private customer data in reusable agent context.
 - Preserve the repository's established language and encoding. Default to UTF-8 when no explicit portability constraint exists.
 - Follow the repository's own Git, review, approval, credential, security, and deployment policies.
-- For meaningful discovered bugs, regressions, defects, or implementation problems, create or reuse the project's authoritative issue/task before fixing them when a tracker is available; keep discovery, plan, implementation, verification, and closure evidence in that record.
-- Keep active problem state, investigation chronology, temporary hypotheses, repair progress, and validation history in the authoritative issue/task instead of duplicating them into reusable repository context. When repository-local discoverability is useful, keep only a compact pointer to the authoritative record and remove it when it becomes stale.
+- When the agent causes or discovers a confirmed meaningful error/regression, create or reuse one issue in the project's existing tracker, record cause/fix/verification, and close it once the repair is genuinely validated; do not invent an issue for every harmless retry.
+- Keep investigation and repair history in the issue, not copied into agent files. Preserve a one-line problem/issue reference in the existing canonical Agent error-memory index (or create that small index when needed), including after validated closure when it helps prevent recurrence; open the issue only for matching cases.
 - Keep non-trivial discovery, diagnosis, repair planning, implementation, and revalidation as distinct checkpoints. Prefer independent final validation when practical; otherwise perform a fresh validation pass separated from implementation.
 - Keep disposable QA, visual, debugging, and intermediate artifacts in one repository temporary workspace. Reuse the project's existing temporary root; otherwise use `.agent-temp/`.
 - The correct result may be no documentation change.
 
 Detailed context principles are owned by `references/foundation-principles.md`.
 
-## Task Boundary Gate
+## Context Budget And Task Boundary Gate
 
-For substantive implementation, debugging, refactoring, or changes to a feature contract, **perform this gate before editing**. Repeat the relevant steps whenever the user changes a requirement, an issue changes, or implementation evidence contradicts the plan. Keep the first pass proportional; deepen only for cross-cutting, uncertain, or high-risk work.
+**Default: do the task, not an exhaustive context audit.** Use the current request and context already in the session. Read the relevant existing agent instruction entrypoint (`AGENTS.md`, `Agent/README.md` or actual equivalent) and the narrowest code/contract owner. Do **not** preload every issue, recent comment, linked issue, module, repository directory, or error history.
 
-1. **Re-anchor:** identify the user's latest objective and the authoritative issue/task. Read its *current* description, recent decisions/comments and linked dependencies, the applicable `AGENTS.md` / `Agent/` / local instructions, and relevant source/contracts. Do not infer the current contract from an old assistant summary or a single historical comment. Reconcile contradictions explicitly; distinguish decisions that supersede prior assumptions.
-2. **Set the boundary:** for each affected actor/mode and operation, record what must remain **allowed**, **denied**, **unchanged**, or **not yet implemented**; distinguish access, identity, authorization, read/write behavior, local/remote execution, data lifetime/persistence, and task phase. Name in-scope surfaces, explicit exclusions, and dependencies. A ban on storing data or requiring app login is **not** by itself a ban on viewing catalogs or making separately authorized, temporary external requests.
-3. **Choose the smallest coherent route:** check every relevant UI control, API/server gate, adapter/integration, import/export, session, and test contract. Avoid sweeping disables, new login requirements, or removal of integrations based on assumptions. Preserve existing security controls; a public interface does **not** make private data or an unsafe external connector public.
-4. **Write acceptance checks:** at minimum prove allowed functions still work (positive), forbidden effects stay forbidden (negative), neighboring modes retain their contract (regression), and dependent or unimplemented features are honestly labeled. If safe execution or essential verification is blocked, isolate that subfeature, record the blocker/next action, and continue authorized independent work. Do not silently redefine the goal.
-5. **Revalidate against the latest boundary:** inspect the actual diff and evidence, including paths outside the immediate component where gates apply. Update the authoritative issue with scope changes, failures, verification and untested risks; do not close or claim functionality that was not verified.
+1. **Cheap boundary:** state the requested outcome; distinguish what stays allowed, forbidden, unchanged, or deferred. Check only the dimensions that matter (identity, authorization, external integration, read/write, persistence, feature flag). Never infer that lack of login or cloud saving forbids unrelated catalogs, offline editing, or explicitly authorized temporary connections.
+2. **Issue-read triggers, not a default:** consult the *specific* issue only when the request names it; a matching short error-memory pointer is relevant; the change depends on an unresolved earlier decision/contract; available context conflicts; or a confirmed error needs to be recorded. If the current request plus source resolves the task, **read zero issues**. Follow linked dependencies only if they actually block a decision. Do not search/list all issues for orientation.
+3. **Progressive escalation:** begin with the minimum relevant files. Expand to API/integration/security owners or `references/task-boundaries.md` only when the observed behavior or risk requires them. Stop gathering context when the desired boundary, code owner, and relevant verification are clear. A high-risk cross-mode change merits deeper checks; a local edit does not need a full matrix.
+4. **Check the outcome:** validate permitted behavior (positive), restricted effects (negative), adjacent modes (regression) in proportion to the change. Revisit the user-requested boundary on material corrections or contradictions, not on every micro-step. Tests authored, passed, and unrun must be distinguished.
 
-For complex or cross-feature work, read `references/task-boundaries.md` for the canonical detailed procedure and scope matrix. Keep per-task snapshots and active decisions in the task record, not in durable agent documentation.
+**If the agent makes a meaningful mistake:** use the correction-and-memory procedure below. Never replace a requested implementation with lengthy analysis of issues.
 
-## Task Traceability
+## Error Correction, Issue Lifecycle And Short Memory
 
-For meaningful work, use the project's authoritative issue, ticket, task, work item, plan, or equivalent record.
+When the agent introduces a defect, regression, wrong assumption, avoidable tool misuse, or incorrect restriction with material impact:
 
-Before substantial edits, record the goal, scope, success criteria, status, initial plan, and known constraints.
+1. Confirm the symptom, check whether an issue already owns **that error**, then create one if needed; do not scan unrelated issues or make duplicates. If the user supplied an issue ID, use it directly.
+2. Record **what failed**, **why** (or explicitly unknown), **what changed to fix it**, **how it was verified**, **regression risks**, and a commit/reference. Update only at meaningful checkpoints; keep the detailed history in the issue.
+3. Repair and perform a fresh validation pass. **Close the issue when the repair and its required verification are actually complete**; if blocked or untested, leave it open with the exact missing check and next step. Do not claim a pass because a test was merely written.
+4. In the existing `Agent/error-memory/INDEX.md` (or the project's canonical error-memory index), add or update **one concise line**: `#issue — symptom/cause — prevention or corrected rule`. Create only this small index if no route exists and the error warrants a durable reminder. Keep this reference after issue closure if it remains useful; remove it when obsolete. **Do not copy issue timelines, logs, or full diagnoses into Agent/**.
+5. Read that line when the same area or symptom recurs; fetch the full issue **only** if the line and current source are insufficient. Promote a detailed reusable case through `references/modules/error-memory.md` only when justified.
 
-If investigation discovers a concrete problem that merits a meaningful change, create or reuse its authoritative task record before implementing the repair. Prefer one issue/task for the problem lifecycle rather than splitting discovery, diagnosis, fix, and validation across unrelated records.
-
-Do not copy that active problem history into `AGENTS.md`, `Agent/` docs, planning files, summaries, error memory, or other reusable context merely to remember it. If agents need a repository-local signal that the problem exists, store only the smallest useful pointer to the authoritative task record.
-
-Update the record when scope, important decisions, evidence, failures, blockers, verification, or handoff changes.
-
-Do not close a discovered-problem record merely because code was written. Close it only after the intended change is applied, required verification succeeds, and remaining risk or follow-up is recorded.
-
-Task history stays in the task record. Promote only verified reusable conclusions into durable agent context.
-
-For trivial local work, keep traceability proportionate and reuse existing task or commit context when sufficient.
-
-Detailed traceability rules are owned by `references/task-traceability.md`.
+For ordinary meaningful work, reuse a task record if one is already provided or project policy demands it; **do not open or read issues merely for ceremony**. See `references/task-traceability.md` for the error lifecycle and `references/task-boundaries.md` only for a complex boundary.
 
 ## Workflow Routing
 
-- **Product/engineering task:** execute the Task Boundary Gate and `references/task-traceability.md` when meaningful, then implement and validate the *product task* using its local instructions. Do not transform the user's feature request into a repository-context audit or generate agent documents unless context is itself defective.
+- **Product/engineering task:** apply the cheap Context Budget/Boundary Gate; load detailed task trace or boundary references only for confirmed errors, non-trivial cross-mode risks or genuine handoffs. Implement and validate the product request, not an agent-documentation audit.
 - **Agent-context maintenance task:** use the foundation workflow below and load only evidence-backed modules. Context maintenance is not the default outcome of an engineering task.
 - **Trivial work:** use proportionate checks; no issue, matrix, or module merely for ceremony.
 
 ## Context-Maintenance Workflow
 
-1. Locate or create the authoritative task record when the work is meaningful. If exploratory work reveals a concrete problem requiring a meaningful change, create or reuse that record before fixing it.
+1. Establish the task from the current request and minimal relevant project context. Read/create an issue only on the triggers above; for confirmed agent errors, use the correction lifecycle.
 2. Inspect the active agent instruction entrypoint, local scoped instructions, source structure, and existing project tracking conventions.
 3. Classify the task and load only the context required to make the next correct decision.
 4. Identify canonical owners, affected surfaces, constraints, risks, and exact verification routes.
 5. Audit for oversized default reads, duplication, ambiguous ownership, contradictions, stale guidance, or missing high-value anchors.
 6. For a non-trivial discovered problem, separate confirmation/evidence, diagnosis/boundaries, repair planning/scope review, implementation, and fresh revalidation into distinct checkpoints recorded in the same authoritative task.
-7. Keep the issue/task as the owner of active problem details. Add a repository-local pointer only when it materially improves routing; do not mirror the issue body into agent context.
+7. Keep active error details in the issue; write one compact Agent error-memory index pointer for the confirmed failure, not a mirrored issue history.
 8. Decide the minimum useful action: no change, compact, repair routing, migrate, or add one evidence-backed module.
 9. Load only the module reference required for that action.
 10. Load only the specific template required for output generation.
@@ -107,7 +98,7 @@ Detailed traceability rules are owned by `references/task-traceability.md`.
 13. Validate routing, ownership, staleness, secrets, language/encoding preservation, and exact verification guidance.
 14. Before finishing or pausing, update the task record with current status, verification, remaining risk, and next action.
 15. Promote durable knowledge only when it is verified and reusable.
-16. Close a discovered-problem task only after implementation and required revalidation are complete; otherwise leave it open with an explicit handoff. Remove stale active-problem pointers unless they still serve a durable routing purpose.
+16. Close the confirmed-error issue after the fix and required revalidation, or leave it open with the missing checks. Keep a concise preventive error-memory pointer while relevant; retire obsolete entries.
 
 ## Module Router
 

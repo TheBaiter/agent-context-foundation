@@ -11,8 +11,9 @@ Its job is not to impose one universal agent workflow. Its job is to help agents
 ```text
 SKILL.md
   -> decide what the task needs
-  -> re-anchor the live issue, feature boundary, and permitted behavior
-  -> load one relevant module
+  -> establish the task boundary from the request and minimum relevant source
+  -> read a specific issue only if a trigger exists
+  -> load a relevant module only if needed
   -> load one specific template only if output must be generated
   -> apply the minimum coherent change
   -> validate
@@ -30,10 +31,10 @@ The skill follows these principles:
 - staleness and retirement,
 - exact verification anchors,
 - durable task traceability,
-- task-boundary re-anchoring and issue-decision freshness,
+- task-boundary checks without routine issue-history retrieval,
 - separation of capability access from authentication and persistence,
 - positive/negative/regression checks across modes and integrations,
-- issue-first lifecycle for meaningful discovered problems,
+- issue-based correction and closure for confirmed meaningful agent errors,
 - active problem history owned by the authoritative task instead of repository context,
 - staged diagnosis/planning/implementation/revalidation for non-trivial fixes,
 - no universal Git/review policy,
@@ -88,45 +89,23 @@ checklists/      -> specialized recurring verification is needed
 
 Do not create empty folders, hypothetical error categories, or documentation merely because a template exists.
 
-## Task Boundaries Before Implementation
+## Context Budget And Task Boundaries
 
-For substantive engineering work, the skill requires the agent to check the **latest task/issue decisions**, affected actors/modes and the actual implementation *before* deciding what to change. It must distinguish feature access from login requirements, provider permissions, transient execution and persistence. A stateless/guest mode may legitimately permit editing, catalogs or separately authorized temporary connections while still forbidding cloud saves, identity reuse or unsafe public endpoints.
+The default is the current request + relevant local agent instructions + narrow code/contract owner. Do not automatically read issues, their comments, linked tasks, every module or an entire repository. **Only consult a specific issue when directly named, needed to resolve a real contradiction/dependency, or relevant to a confirmed error.** Stop context retrieval once the requested behavior, owner and validation route are clear.
 
-Use the compact gate in `SKILL.md`, and read `references/task-boundaries.md` when the boundary spans modes, APIs, data sources or multiple issues. Validate what **must keep working** as well as what **must be blocked**. The current scope matrix and decision history belong in the authoritative task, not in generic agent memory. Engineering tasks are not automatically agent-context audits.
+For complex cross-mode work, use `references/task-boundaries.md` selectively. Keep access distinct from login, external authorization and data persistence: a guest mode without cloud saving can still allow catalog browsing or safely scoped temporary integration when the actual contract permits it. Verify allowed and denied behavior plus adjacent regressions.
 
-## Task Traceability
+## Errors, Traceability And Memory
 
-Meaningful work should use the project's existing issue, ticket, task, work item, plan, or equivalent system.
+When an agent causes a meaningful error or regression, create or reuse one issue in the project's existing tracker and record: **what happened, why it failed (if known), how it was corrected, what tests were run and the preventive rule**. After a fresh successful validation, close the issue. If validation is blocked, leave it open with the exact pending check; do not report an unverified fix as complete.
 
-The task record should preserve enough information to resume the work:
+Write one compact pointer to `Agent/error-memory/INDEX.md` or the existing canonical equivalent:
 
-- goal and status,
-- scope and success criteria,
-- plan,
-- important decisions and reasons,
-- evidence,
-- verification,
-- relevant failures or blockers,
-- current handoff,
-- next action.
+`#123 — disabled guest catalog due to cloud-save assumption — check access and persistence separately`
 
-When an agent discovers a concrete bug, regression, defect, or implementation problem that requires a meaningful change, it should create or reuse the authoritative issue/task before implementing the repair when the project has a tracker.
+That line remains useful even after the issue is closed, while detail stays in the issue. A future agent reads only a relevant pointer and opens the full issue when it cannot resolve a recurring case. No duplicate issue body, long timeline, universal issue preflight or blanket scan. A more detailed reusable memory case is optional, subject to evidence and maintenance value.
 
-Prefer one issue/task for the whole lifecycle. It should capture how the problem was found, confirming evidence, affected scope, diagnosis, repair plan, scope review, implementation, revalidation, and final closure evidence.
-
-That active history belongs in the issue/task, not duplicated into `AGENTS.md`, `Agent/` documentation, planning files, summaries, error memory, or other reusable repository context merely to remember the problem. If local discoverability is useful, keep only a compact pointer to the authoritative issue/task.
-
-This keeps transient investigation and status out of default agent context, reduces file growth and stale duplicated state, and preserves one exact route to the current source of truth.
-
-When the issue is resolved, remove stale active-problem pointers unless they still have a justified durable routing purpose. Only verified reusable conclusions should be promoted into durable agent documentation or error memory.
-
-For non-trivial problems, keep confirmation, diagnosis, planning, implementation, and revalidation as separate checkpoints instead of one monolithic reasoning pass. Independent final validation is preferred when practical; otherwise the implementing agent should perform a fresh review pass separated from implementation.
-
-Do not close the issue merely because code exists. Close it only after the intended fix is applied, required verification succeeds, regressions are considered, and remaining risk or follow-up is recorded.
-
-Task history stays in the task record.
-
-Only verified reusable conclusions are promoted into durable agent documentation or error memory.
+Ordinary work does not require a new issue or routine issue reading. The project's own task/commit conventions still apply. See `references/task-traceability.md` and `references/modules/error-memory.md` only when needed.
 
 ## Repository Architecture
 
@@ -174,11 +153,11 @@ It should be enough to determine which module, if any, applies.
 
 Examples:
 
-- creating or repairing the base route -> read `references/modules/foundation.md`,
+- creating or repairing the base route -> read `references/modules/foundation.md` (only if routing is actually defective),
 - recurring failure knowledge -> read `references/modules/error-memory.md`,
 - migration/compaction -> read `references/modules/migration.md`,
 - project-specific planning conventions -> read `references/modules/planning.md`,
-- feature boundaries crossing guest/auth/API/persistence modes -> read `references/task-boundaries.md` (no module required).
+- uncertain feature boundaries crossing guest/auth/API/persistence modes -> read `references/task-boundaries.md` only if necessary.
 
 Only after the module decides that output is needed should the agent load the corresponding template.
 
@@ -198,28 +177,7 @@ Task planning and traceability do not belong there. If a temporary artifact beco
 
 ## Error Memory
 
-Error memory is evidence-driven.
-
-The minimum structure is:
-
-```text
-Agent/error-memory/
-  README.md
-  errors/
-    INDEX.md
-```
-
-Categories are created only after real verified cases exist.
-
-Knowledge moves through:
-
-```text
-discovered -> candidate -> verified -> durable
-```
-
-Stale cases may become challenged, superseded, or retired.
-
-Investigation chronology belongs in task traceability, not in error memory. Active issue state must not be mirrored into error memory; only verified reusable lessons belong there.
+Use an existing `Agent/error-memory/INDEX.md` or equivalent for one-line references to confirmed agent errors, with issue number, short cause and prevention. Create it when the first meaningful agent error warrants a pointer; do not create empty category trees. Keep the full repair narrative in its issue, close only on verified repair, and preserve the short pointer after closure while useful. Long reusable cases are evidence-driven and optional; do not preload them.
 
 ## Language And Encoding
 
@@ -268,6 +226,7 @@ A healthy version should have:
 - no universal project-specific rules,
 - task history separated from durable memory,
 - active problem history stored in the authoritative task rather than duplicated into repository context,
-- meaningful discovered problems traced from discovery through validated closure.
+- closed error issues referenced by short Agent error-memory pointers,
+- no systematic issue reading for ordinary work.
 
 The skill should become easier to extend by adding a module without making `SKILL.md` grow into a manual again.
