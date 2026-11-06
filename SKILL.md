@@ -132,7 +132,7 @@ Implementation truth belongs in code; operating rules in scoped instructions; du
 
 ## First Run
 
-If context is missing, describe the existing instruction route and smallest justified repair. Do not produce a catalog of modules, demand approvals without a real boundary, or invent Git/security policies.
+For a writable repository task, repair a missing root `AGENTS.md` standing bridge and the minimal `Agent/` routing (only if no equivalent exists), preserving existing instructions. For read-only environments, report the precise blocker. Do not produce a module catalog, demand approvals without a real boundary, or invent Git/security policies.
 
 ## Context Health Audit
 
