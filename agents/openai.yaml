@@ -1,6 +1,6 @@
 interface:
   display_name: "Agent Context Foundation"
-  short_description: "Minimal safe repo changes, scoped agent context, regression checks"
-  default_prompt: "Use $agent-context-foundation for this repository task. Check existing AGENTS.md and the relevant Agent/ route once; identify the requested boundary and choose the smallest complete safe change using existing code. Read only task-relevant files and issues when needed, implement and verify positive/negative behavior and regressions, then record meaningful agent-caused mistakes in one issue with a concise Agent error-memory pointer. Do not turn routine engineering into a context audit."
+  short_description: "Standing AGENTS routing, correction memory and verified repo work"
+  default_prompt: "Use $agent-context-foundation throughout this repository task. Read root AGENTS.md and relevant Agent/ routing; in writable projects bootstrap/merge a missing root AGENTS.md bridge without overwriting existing rules. Make the smallest complete change, run actual checks/regressions, capture genuine UI/test screenshots when visual evidence is required and possible, and log agent mistakes including user corrections in a focused issue plus concise Agent error-memory pointer. Report any verification or activation blocker without claiming success."
 policy:
   allow_implicit_invocation: true
