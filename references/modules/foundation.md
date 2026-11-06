@@ -6,7 +6,7 @@ Read when creating, repairing, or compacting a repository's agent instruction fo
 
 Preserve the repository's established instruction standard when it is valid. Root or nested `AGENTS.md`, local instruction files, or another existing convention may already be the correct authority.
 
-Check existing `AGENTS.md` first, then the repository's `Agent/README.md`/`Agent/INDEX.md` or established equivalent. Create a new `Agent/` route only when none is usable or when scoped supporting context materially reduces rediscovery. If file edits are authorized, create the smallest entrypoint directly; otherwise ask for authorization. Never block an unrelated simple fix merely to scaffold docs.
+For a writable repository engineering task, **ensure a root `AGENTS.md` file exists as a standing bridge** to the project's applicable `Agent/README.md` and `Agent/INDEX.md` (or an existing equivalent). If absent, create the minimal root file before product changes. If present, merge only the missing bridge and preserve generated/scoped rules. Create a new `Agent/` README and INDEX only when no usable equivalent exists; do not create empty categories. If edits are unavailable, report the exact blocker, do permissible work, and never claim the bridge was installed. Do not bulk-read issue histories for this bootstrap.
 
 ## Minimum
 
