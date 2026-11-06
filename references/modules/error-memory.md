@@ -21,7 +21,7 @@ Use:
 
 `discovered -> candidate -> verified -> durable`
 
-Keep attempts, hypotheses and temporary findings in the issue. Record a **verified short pointer** after resolving an agent mistake (`#issue — symptom/cause — preventive rule`) without creating a long case. Promote a detailed case only when root cause/fix are verified and the lesson is reusable.
+Keep attempts, hypotheses and temporary findings in the issue. As soon as a meaningful agent mistake is confirmed, including an oversight pointed out by the user, create/reuse its issue and a **short preventive pointer** (`#issue — symptom/cause — preventive rule`) without creating a long case; keep the issue open until the repair is actually verified. The pointer must never assert an unverified fix or contain the issue history. Promote a detailed case only when root cause/fix are verified and the lesson is reusable.
 
 A single case may qualify when it is expensive, dangerous, non-obvious, or likely to recur.
 
