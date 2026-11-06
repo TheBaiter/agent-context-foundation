@@ -11,7 +11,7 @@ Agent/error-memory/
     <verified-case>.md
 ```
 
-Reuse the project's existing canonical error-memory route when present. Otherwise create only the small `Agent/error-memory/INDEX.md` after a confirmed meaningful agent error; detailed case files and categories remain optional. Do not pre-create empty structures.
+Reuse the project's existing canonical error-memory route when present. Otherwise create only the small `Agent/error-memory/INDEX.md` when a meaningful agent error is confirmed, even if the user discovered it and its repair still awaits validation; detailed case files and categories remain optional. Do not pre-create empty structures.
 
 Optional templates for justified detailed memory: `references/templates/error-memory-readme.md`, `references/templates/error-memory-index.md`, `references/templates/error-case.md`. A one-line pointer needs no template.
 
