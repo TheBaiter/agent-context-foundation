@@ -10,7 +10,7 @@ Its job is not to impose one universal agent workflow. Its job is to help agents
 
 **Two distinct layers are required for consistent startup behavior:**
 
-- **Standing guidance:** Codex automatically reads active global and repository `AGENTS.md` instructions. This is where the short mandatory baseline belongs.
+- **Standing guidance:** Codex reads effective global/repository `AGENTS.md` instructions. **Each target coding repository needs its own root `AGENTS.md` bridge** (or an already effective equivalent), in addition to the skill repository's own file. This is where the short mandatory baseline belongs.
 - **On-demand skill:** Codex initially sees skill name/description and may select the full `SKILL.md` for matching tasks. A positive `allow_implicit_invocation` flag permits selection; it does not itself start or force the skill. `agents/openai.yaml` is launcher metadata, not a startup hook.
 
 The updated description now matches normal tasks such as `fix the bug`, `implement this feature`, `refactor` and `review this code`, without requiring a literal skill mention. Installing only in one repository does **not** expose the skill in every other repository.
@@ -43,7 +43,7 @@ For other coding agents, use their supported persistent-instruction files and sk
 - `agents/openai.yaml` in **this skill repo**: optional skill UI metadata, not your project's instruction folder.
 - `.agents/skills/`: one recognized repository-level skill installation location.
 
-Check existing conventions first. If a needed `Agent/` foundation is absent, create a tiny route when repository edits are authorized, otherwise request permission. Do not create competing folders or bulk-load an entire agent history.
+**Bootstrap for writable target repositories:** check root `AGENTS.md` first. If missing, create it with the [standing bridge](references/templates/codex-customization.md). If present, merge only the missing bridge without deleting local rules or generated sections. Make it route to `Agent/README.md` and `Agent/INDEX.md` or an established equivalent. If the project has neither of those nor an equivalent, create the minimal two files. `AGENTS.md` is a file in the project root; `Agent/` is a folder for project context. This initialization is part of the **first writable engineering task**, not merely optional documentation work. If the agent cannot write, report the blocker and don't claim it was installed. Do not scan every issue/history just to bootstrap.
 
 ### Smallest complete change and Ponytail
 
@@ -147,9 +147,13 @@ The default is the current request + relevant local agent instructions + narrow 
 
 For complex cross-mode work, use `references/task-boundaries.md` selectively. Keep access distinct from login, external authorization and data persistence: a guest mode without cloud saving can still allow catalog browsing or safely scoped temporary integration when the actual contract permits it. Verify allowed and denied behavior plus adjacent regressions.
 
+## Verification and proof of work
+
+Every code, example and demo must be checked against the requested outcome before being reported as working. Review the actual diff and run appropriate behavior/regression tests; provide exact commands/results, not assumed success. For visual UI demonstrations, **open the actual running screen and share a genuine screenshot of the observed state** when runtime and capture tooling are available. If the user requires screenshot evidence for another test, capture the real test result when supported. A code screenshot or generated mockup is not evidence that the UI worked. If tools cannot run or capture the required state, report what remains unverified and leave the relevant task/issue pending instead of claiming completion.
+
 ## Errors, Traceability And Memory
 
-When an agent causes a meaningful error or regression, create or reuse one issue in the project's existing tracker and record: **what happened, why it failed (if known), how it was corrected, what tests were run and the preventive rule**. After a fresh successful validation, close the issue. If validation is blocked, leave it open with the exact pending check; do not report an unverified fix as complete.
+When an agent causes a meaningful error, **including one discovered or corrected by the user that the agent should have identified**, create or reuse one issue in the project's existing tracker and record: **what happened, why it failed (if known), how it was corrected, what tests were run and the preventive rule**. After a fresh successful validation, close the issue. If validation is blocked, leave it open with the exact pending check; do not report an unverified fix as complete.
 
 Write one compact pointer to `Agent/error-memory/INDEX.md` or the existing canonical equivalent:
 
@@ -265,6 +269,9 @@ A healthy version should have:
 - task history separated from durable memory,
 - active problem history stored in the authoritative task rather than duplicated into repository context,
 - closed error issues referenced by short Agent error-memory pointers,
-- no systematic issue reading for ordinary work.
+- no systematic issue reading for ordinary work,
+- a real root `AGENTS.md` standing bridge in every writable target repo, merged with local rules,
+- explicit fresh validation and genuine visual/test evidence when applicable,
+- user-discovered agent oversights recorded as agent errors, not discarded as comments.
 
 The skill should become easier to extend by adding a module without making `SKILL.md` grow into a manual again.
