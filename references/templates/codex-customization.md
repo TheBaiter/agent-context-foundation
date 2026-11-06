@@ -7,16 +7,22 @@ Install the skill globally or in the target repository, then **merge**, do not o
 Codex reads this standing file at session start. A skill's `SKILL.md` is **not** a standing file: it is loaded only after selection. Instructions may request skill use, but cannot guarantee host support or selection. Keep the bridge short to protect context budget.
 
 ```md
-## Repository engineering baseline
-At the start of each repository coding/review task, use the installed `agent-context-foundation` skill when available, even when the user does not name it. Read only the active scoped AGENTS.md and the relevant project Agent/README.md or established equivalent; use Agent/INDEX.md to route details selectively. Do not preload all issues or history.
+## Agent Context Foundation — standing repository rules
+At the start of **every repository coding, review, fix, test, documentation or maintenance task**, read this root/scoped AGENTS.md and the relevant project Agent/README.md and Agent/INDEX.md (or an established equivalent); follow their applicable rules. Route selectively; do not preload all issue histories.
 
-If the project has no usable context route, add a minimal compatible entrypoint only when file edits are authorized and durable guidance is warranted; otherwise ask or report the blocker without stopping independent work.
+Use the installed `agent-context-foundation` skill for these tasks even when not explicitly named. If the skill is not available, obey this baseline and report the activation limitation; never claim to have loaded it.
 
-Choose the smallest **complete** safe change: reuse existing behavior, respect request scope, account for affected callers/API/integrations, avoid speculative code, and check relevant tests/regressions. No new ticket for trivial work. For a confirmed material agent-caused mistake, create/reuse a focused issue, record failure/cause/fix/verification, close only after verified repair, and retain a one-line issue pointer in the project's canonical Agent error-memory index.
+If this project is writable and lacks an effective root AGENTS.md bridge or an Agent/ route (or equivalent), create/merge the minimal missing files while preserving existing rules. Do not overwrite generated/scoped instructions.
 
-If the skill is unavailable or not selected, follow this compact baseline directly. Obey more specific local policies and do not claim that you loaded an unavailable skill.
+Choose the smallest **complete** change. Validate the resulting diff, actual behavior and regressions before showing an example or declaring completion. For UI/visual results, inspect the running application and share genuine screenshots of the observed state/tests when capture is available; if unavailable, mark visual verification pending. Report actual tests and skipped checks distinctly.
+
+For every confirmed meaningful agent mistake **including corrections discovered by the user**, create or reuse a focused issue: failure, missed check/cause, fix, actual validation and preventive rule. Keep one short pointer in `Agent/error-memory/INDEX.md` or the project's canonical equivalent. Close the issue only after required verification succeeds. Do not create issues for harmless transient retries.
+
+Follow local security and Git policies. Do not execute GitHub Actions for testing where prohibited. 
 ```
 
 Do not install the full skill text in `AGENTS.md`, add an untested auto-run hook, or make every task perform a context audit. Existing `AGENTS.override.md` and more local instructions may supersede the bridge.
 
-Verify in a **fresh Codex session** by checking the instruction sources loaded and whether the agent actually reads `SKILL.md` on an ordinary request that does not name the skill. Observe a trivial task too: it should remain lightweight. No repository-only change can alter a user's global Codex instructions.
+For a target repository without a root `AGENTS.md`, the code block above can be its initial file. If a root file exists, **append only the missing contract**, preserving generated blocks, project-specific restrictions, and scoped/override instructions. Create `Agent/README.md` and `Agent/INDEX.md` only when there is no existing equivalent, and use those files as concise routers to actual project documents.
+
+Verify in a **fresh Codex session** that the effective instructions were loaded and the agent actually selected `SKILL.md` for an ordinary coding request that did not name the skill. Check a user-correction case and a visual screenshot case separately. Observe a trivial task too: it should stay lightweight. A new GitHub commit or installed skill alone cannot rewrite downstream repositories or global Codex instructions.
