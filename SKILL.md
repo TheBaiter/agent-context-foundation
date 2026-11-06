@@ -1,6 +1,6 @@
 ---
 name: agent-context-foundation
-description: Use at the start of repository software tasks (implement features, fix bugs, refactor, review code, write tests, or maintain agent instructions), even when not named. Read AGENTS.md/Agent routing, make the smallest complete safe change, check regressions, and trace meaningful mistakes. Load issues only when specifically relevant; skip general non-repository questions.
+description: Use at the start and throughout repository coding, review, bugfix, feature, test, or agent-instruction tasks, even when not named. Ensure the target repo has a standing AGENTS.md bridge to Agent/ context, record confirmed agent errors including user corrections, and validate changes/regressions with actual evidence and screenshots for visual work.
 ---
 
 # Agent Context Foundation
@@ -10,6 +10,15 @@ description: Use at the start of repository software tasks (implement features, 
 Provide a lightweight, repeatable start-of-task discipline: find the project's instructions, preserve its boundaries, make the smallest complete change, verify effects, and retain useful error memory.
 
 This skill is a decision engine, not a universal manual. Its discovery metadata improves implicit selection but cannot force loading: for every-session reliability, use a short standing AGENTS.md bridge in the host project (documented in README).
+
+## Standing Project Entry Point (Required For Writable Repository Tasks)
+
+This skill repository's own root `AGENTS.md` **does not apply to other projects**. For each target repository where code or instruction edits are authorized, establish its **root `AGENTS.md` file** as the persistent entry point. `AGENTS.md` is a *file*, not a folder; `Agent/` is the project-context folder. Check existing root/scoped `AGENTS.md` and project instructions first; **merge a short foundation bridge**, never overwrite or duplicate local instructions. The bridge must tell the agent to read the applicable `Agent/README.md` and `Agent/INDEX.md` (or established equivalent), route to relevant rules, use `agent-context-foundation` when installed, record confirmed errors, and validate actual changes before closure. Use `references/templates/codex-customization.md` as the canonical bridge.
+
+- **At project startup or the first writable engineering task:** if no root `AGENTS.md` exists, create it with the standing bridge before modifying product code. If it exists without an effective foundation route, add only the missing bridge, retaining all existing rules and generated sections. If there is no usable `Agent/` context or equivalent, establish only `Agent/README.md` and `Agent/INDEX.md` with real routing; never manufacture empty modules. This is a required initialization check, **not** a reason to scan all project issues or documents.
+- **At every subsequent task:** read the applicable standing instructions and relevant `Agent/` routing, then use only task-matching context. Recheck before final completion; do not assume prior session memory remains active.
+- **Read-only, unavailable filesystem, restrictive project policy or absent installation:** do not claim the bridge was created or the skill loaded. Report the missing entry point and exact blocker. Do independent permitted work while keeping the bootstrap pending.
+- **Actual activation limit:** metadata and a project's `AGENTS.md` can request this skill but cannot force an unsupported agent host to select or install it. Verify in a **fresh target-agent session**. An update to GitHub does not update local installed copies.
 
 ## Operational Application
 
@@ -21,7 +30,7 @@ Apply relevant rules directly when authorized; do not merely recommend them. Loa
 - Prefer current user intent, existing context, local instructions and narrow source evidence. **Issue reading is conditional, never routine orientation.**
 - Keep a single canonical owner for each rule, fact or contract; load by pointer, not duplicated histories. Add modules only when verified evidence justifies their cost.
 - Distinguish app login, permission to view/use a feature, authorization of external services, execution safety, and persistence. A restriction in one dimension must not silently disable another.
-- Track material agent-caused errors in one issue with cause, fix and actual validation, then keep a one-line `Agent/error-memory/INDEX.md` pointer while preventive. Do not duplicate issue narratives.
+- Track confirmed agent mistakes, including **mistakes identified by the user** (missed checks, ignored constraints, unjustified assumptions, defects and regressions), in one issue with cause, fix and actual validation, then keep a one-line `Agent/error-memory/INDEX.md` pointer. Do not blame the user or skip recording an oversight because the user discovered it. Avoid duplicate issue narratives and harmless transient-error noise.
 - Keep reusable memory verified and retire stale guidance; preserve precise code/test anchors, project language/encoding, and security boundaries. Never store secrets in agent context.
 - Follow project policy for tests, branches and deployment. Disposable QA/debug artifacts belong in the project's existing temporary workspace, or `.agent-temp/` if needed.
 
@@ -31,10 +40,10 @@ Detailed principles: `references/foundation-principles.md`.
 
 When selected for any repository task (including a simple fix or review):
 
-1. **Locate existing instructions once per task:** follow loaded root/scoped `AGENTS.md` and check the project's `Agent/README.md` or existing equivalent when present; route via its `INDEX.md` if needed. Do not confuse project `Agent/` (context), skill `agents/openai.yaml` (metadata), and Codex `.agents/skills/` (installation). Read only sections relevant to the task.
-2. **Missing context route:** if there is no useful instruction entrypoint and persistent guidance is justified, create the smallest compatible `AGENTS.md` or `Agent/README.md` + `INDEX.md` when repository edits are authorized; otherwise request authorization or report the limitation. Do not create empty structures, overwrite existing rules, or block a trivial fix on documentation setup.
+1. **Read standing project instructions at the start of every task:** follow root/scoped `AGENTS.md`, then the project's `Agent/README.md` and `Agent/INDEX.md` or their existing equivalent to find relevant rules; read matching rules rather than every document. Do not confuse project `Agent/` (context), skill `agents/openai.yaml` (metadata), and Codex `.agents/skills/` (installation).
+2. **Repair missing standing route:** on a writable repository task, create/merge the root `AGENTS.md` bridge if absent and, if no equivalent exists, the minimal `Agent/README.md` + `Agent/INDEX.md` context route. Preserve local/generated instructions. In read-only or blocked environments, report the missing route and keep it pending without obstructing independent work.
 3. **Ponytail-compatible minimalism:** prefer no new code when existing behavior suffices; otherwise reuse existing components/contracts and choose the **smallest complete fix**, not merely the fewest edited lines. Follow affected callers, integration points and tests only as needed. Reject speculative abstractions, dependencies, migrations and unrelated features.
-4. **Verify and stop:** check requested behavior, adjacent regressions and security/data effects proportionately. Keep error issues and concise memory references under the procedure below. Do not reread the same context on every step.
+4. **Validate before demos and closeout:** re-read the resulting diff and user acceptance criteria, check requested behavior, adjacent regressions and security/data effects, and present **actual** test evidence. For visual UI work, capture and share screenshots of the observed state when tools permit. Never present an unverified example or simulation as a successful execution. Keep error issues and memory references current; do not reread context on every micro-step.
 
 If the skill was not selected, standing `AGENTS.md` rules are the minimal fallback; do not claim the skill was executed merely because similar guidance was followed.
 
@@ -51,10 +60,10 @@ If the skill was not selected, standing `AGENTS.md` rules are the minimal fallba
 
 ## Error Correction, Issue Lifecycle And Short Memory
 
-When the agent introduces a defect, regression, wrong assumption, avoidable tool misuse, or incorrect restriction with material impact:
+When an agent makes a confirmed meaningful mistake — including a regression, a missed user requirement, a wrong assumption, an unchecked claim, or a correction discovered/reported by the **user** that the agent should have caught — record it as the agent's error. Do not exclude user-provided corrections. A changed preference or harmless transient retry is not automatically a defect:
 
 1. Confirm the symptom, check whether an issue already owns **that error**, then create one if needed; do not scan unrelated issues or make duplicates. If the user supplied an issue ID, use it directly.
-2. Record **what failed**, **why** (or explicitly unknown), **what changed to fix it**, **how it was verified**, **regression risks**, and a commit/reference. Update only at meaningful checkpoints; keep the detailed history in the issue.
+2. Record **what failed**, **who/how detected it (including user correction)**, **why the agent missed it** (or explicitly unknown), **what changed to fix it**, **how it was verified**, **regression risks**, and a commit/reference. Update only at meaningful checkpoints; keep the detailed history in the issue.
 3. Repair and perform a fresh validation pass. **Close the issue when the repair and its required verification are actually complete**; if blocked or untested, leave it open with the exact missing check and next step. Do not claim a pass because a test was merely written.
 4. In the existing `Agent/error-memory/INDEX.md` (or the project's canonical error-memory index), add or update **one concise line**: `#issue — symptom/cause — prevention or corrected rule`. Create only this small index if no route exists and the error warrants a durable reminder. Keep this reference after issue closure if it remains useful; remove it when obsolete. **Do not copy issue timelines, logs, or full diagnoses into Agent/**.
 5. Read that line when the same area or symptom recurs; fetch the full issue **only** if the line and current source are insufficient. Promote a detailed reusable case through `references/modules/error-memory.md` only when justified.
@@ -133,7 +142,17 @@ Correct the actual cause: distracting reads, unclear ownership, contradictory or
 
 Confirm that the default context load is smaller; task boundaries remain correct; no issue is read without a trigger; matching modules and links resolve; no active issue narrative is copied into Agent; confirmed mistakes have verified issue records and concise pointers; permissions/security and existing project conventions are preserved; and no unnecessary files were created.
 
+## Evidence And Completion Gate
+
+**Never mark a task or example as fully validated based only on code edits, a plausibility argument, or written tests.** On every task, after implementation:
+
+1. Re-read the applicable root/scoped `AGENTS.md`, the requested success criteria, changed files and relevant contracts. Compare actual diff to intended scope and inspect for omissions, regressions, duplicated effects, security risks and stale instructions.
+2. Run the tests or manual checks actually available for the changed surface, including a positive behavior check, a negative restriction check where applicable, and adjacent regression checks. Record exact command/check, observed result, and what remains unrun. **No GitHub Actions** as a substitute for local/manual verification where forbidden by project policy.
+3. **When presenting a UI, screenshot, visual demo, interaction or example:** actually launch/inspect the result and **capture a genuine screenshot** of what the agent observed, with the relevant tested state and, when useful, the test result. Share a path/link or attached evidence when the host supports it. Do not substitute mockups, generated images, repository screenshots, source code, or claimed appearances for actual runtime proof. For CLI/backend/document-only changes, preserve precise command output/commit evidence; also screenshot tested output if the user requires it and capture is supported.
+4. If GUI/runtime access, screenshot capture, test execution, or other required evidence is unavailable, name the missing check, reason, residual risk, and next action. **Do not claim visual/E2E success, attach a fake screenshot, or close an issue whose necessary validation is outstanding.** Other successfully performed static checks may be reported as such.
+5. Before the final response, ensure any confirmed agent mistake (including user correction of the agent's oversight) has its focused issue and one-line `Agent/error-memory/INDEX.md` prevention pointer. Keep open issues open when full verification is pending.
+
 ## Completion
 
-Report the actual change, validation performed, unverified risks, and the issue/commit or next action. Never claim a test or integration was executed when it was only described.
+Report the actual change, checks performed **with observed evidence**, screenshots where the applicable requirement was actually met, unverified risks, and issue/commit or next action. Never claim a test, screenshot, integration, or fresh-agent activation was executed when it was only described.
 
