@@ -7,3 +7,5 @@ Keep this file short. Entries are unresolved observations, not proof of a comple
 ## Codex native hooks pilot — 2026-11-15
 
 - [#12](https://github.com/TheBaiter/agent-context-foundation/issues/12): Codex lifecycle adapter and **local repo pilot config** added to main; 11 local Python unit tests passed. Hook script blob matches tested local source. Official Codex hooks require project trust and separate `/hooks` trust. **Unverified**: actual Windows/PowerShell command, Codex hook execution, implicit skill selection and real agent corrections across sessions. Do not sync this pilot to downstream projects or close the issue until host checks pass.
+
+- 2026-11-15 | [#13](https://github.com/TheBaiter/agent-context-foundation/issues/13) | **V3 feature branch review**: host benchmark/acceptance prepared. Real Windows, trusted hook execution, implicit skill selection, user-correction capture and next-session retrieval remain unverified. Do not close the epic after static tests.

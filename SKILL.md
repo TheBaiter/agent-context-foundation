@@ -47,6 +47,10 @@ When selected for any repository task (including a simple fix or review):
 
 If the skill was not selected, standing `AGENTS.md` rules are the minimal fallback; do not claim the skill was executed merely because similar guidance was followed.
 
+## V3 Architecture: Runtime-Backed Project Memory (Opt-In)
+
+Compare [peer mechanisms](references/benchmarks/host-adapters.md) and use [real-host acceptance](evals/host-acceptance.md) before claiming always-on behavior. V3 combines (1) reproducible host bootstrap and local diagnosis, (2) the existing decision-driven skill and project AGENTS.md route, and (3) project-owned PENDING capture plus verified INDEX promotion and actual QA. The baseline remains valid in unsupported hosts; **the hook firing does not prove that the skill loaded or that the agent followed every rule**. Record and validate actual behavior in a new host session. Never store raw user prompts, transcripts or secrets by default; never require a database or overwrite existing hooks/Agent memory just to imitate another project.
+
 ## Host Lifecycle Adapter (Optional, Verified Per Host)
 
 Skills are **not** mandatory execution hooks. For local Codex, see `integrations/codex/README.md`: a separately trusted, opt-in hook adapter injects short Agent/ routing at SessionStart, UserPromptSubmit and SubagentStart, and requests **one** closeout review at Stop when Git state changed. It does not store prompts or transcripts and cannot prove semantic correctness. Do not automatically overwrite existing hooks, alter .gitignore, or claim runtime success without a fresh actual Codex test. Without hooks the standing root AGENTS.md baseline remains essential.
