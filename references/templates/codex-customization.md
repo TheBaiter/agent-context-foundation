@@ -8,17 +8,16 @@ Codex reads this standing file at session start. A skill's `SKILL.md` is **not**
 
 ```md
 ## Agent Context Foundation — standing repository rules
-At the start of **every repository coding, review, fix, test, documentation or maintenance task**, read this root/scoped AGENTS.md and the relevant project Agent/README.md and Agent/INDEX.md (or an established equivalent); follow their applicable rules. Route selectively; do not preload all issue histories.
+At the start of every repository coding, review, test, documentation, automation, delegated, resumed or handoff task, read the applicable root/scoped AGENTS.md and project Agent/README.md + Agent/INDEX.md (or equivalents). Skim the compact project error-memory INDEX and pending entries once, opening only relevant details.
 
-Use the installed `agent-context-foundation` skill for these tasks even when not explicitly named. If the skill is not available, obey this baseline and report the activation limitation; never claim to have loaded it.
+Use the installed `agent-context-foundation` skill even without being named. If unavailable, outdated or not selected, follow this baseline and disclose the limitation; never claim it loaded. Merge a minimal missing root AGENTS/Agent route when authorized, preserving scoped/generated instructions.
 
-If this project is writable and lacks an effective root AGENTS.md bridge or an Agent/ route (or equivalent), create/merge the minimal missing files while preserving existing rules. Do not overwrite generated/scoped instructions.
+Make the smallest complete change; validate actual behavior, contracts and adjacent regressions before closeout. For visual UI work capture real runtime/test screenshots when possible; otherwise mark checks pending.
 
-Choose the smallest **complete** change. Validate the resulting diff, actual behavior and regressions before showing an example or declaring completion. For UI/visual results, inspect the running application and share genuine screenshots of the observed state/tests when capture is available; if unavailable, mark visual verification pending. Report actual tests and skipped checks distinctly.
+On any meaningful agent mistake, including a user correction, immediately append a short task/symptom/evidence/next-check note to project-owned `Agent/error-memory/PENDING.md` (or the project's existing equivalent). Continue independent safe work. Before final delivery review this task's pending errors, group duplicates, verify fixes, write reusable prevention to the short `Agent/error-memory/INDEX.md` with a task/issue anchor, and leave unresolved items pending. Do not merely promise to remember in chat.
 
-For every confirmed meaningful agent mistake **including corrections discovered by the user**, create or reuse a focused issue: failure, missed check/cause, fix, actual validation and preventive rule. Keep one short pointer in `Agent/error-memory/INDEX.md` or the project's canonical equivalent. Close the issue only after required verification succeeds. Do not create issues for harmless transient retries.
+Project memory may be Git-tracked or Git-ignored/local-only by project choice; do not change ignore rules automatically. Respect project security/Git policy, and do not use GitHub Actions for tests where prohibited.
 
-Follow local security and Git policies. Do not execute GitHub Actions for testing where prohibited. 
 ```
 
 Do not install the full skill text in `AGENTS.md`, add an untested auto-run hook, or make every task perform a context audit. Existing `AGENTS.override.md` and more local instructions may supersede the bridge.

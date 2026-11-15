@@ -1,44 +1,31 @@
-# Error Memory Module
+# Project-Owned Error Memory
 
-Read only to add/revisit a confirmed error pointer, or when a reusable failure requires more than the short index entry. Do not preload the index or cases for unrelated work.
+Read for a meaningful mistake, a user correction or relevant recurring failure. **Memory is stored in files in the project**, not a model's chat history. The repository decides whether files are Git-tracked/shared or gitignored/local-only. Never silently alter `.gitignore` or publish private content.
 
-## Minimum Structure
+## Minimum On-Disk Structure
 
 ```text
 Agent/error-memory/
-  INDEX.md             # one-line issue pointers (small default)
-  errors/              # only if a justified detailed case exists
-    <verified-case>.md
+  INDEX.md       # short, verifiable lessons and pointers
+  PENDING.md     # optional, created on first unreviewed meaningful mistake
 ```
 
-Reuse the project's existing canonical error-memory route when present. Otherwise create only the small `Agent/error-memory/INDEX.md` when a meaningful agent error is confirmed, even if the user discovered it and its repair still awaits validation; detailed case files and categories remain optional. Do not pre-create empty structures.
+Reuse established equivalent routes. No empty categories or duplicated error systems.
 
-Optional templates for justified detailed memory: `references/templates/error-memory-readme.md`, `references/templates/error-memory-index.md`, `references/templates/error-case.md`. A one-line pointer needs no template.
+## Task-Start Gate
 
-## Promotion Gate
+Skim the small `INDEX.md` and `PENDING.md` entries once; retrieve only relevant detailed issues/cases. If the index grows, route by area without preloading all histories. A task started by a different agent/model must be able to find the same guidance.
 
-Use:
+## During Task (Fast Capture)
 
-`discovered -> candidate -> verified -> durable`
+For each meaningful agent mistake, including a user-discovered ignored instruction or missed requirement, append one concise note to `PENDING.md`: area/task, observed symptom, detection/evidence, immediate risk, next check. Identify unknown causes as unknown. Do not wait for the final response or assume chat memory will persist. Continue safe work; do not interrupt with issue creation for every incident. Skip harmless transient retries. Redact secrets.
 
-Keep attempts, hypotheses and temporary findings in the issue. As soon as a meaningful agent mistake is confirmed, including an oversight pointed out by the user, create/reuse its issue and a **short preventive pointer** (`#issue — symptom/cause — preventive rule`) without creating a long case; keep the issue open until the repair is actually verified. The pointer must never assert an unverified fix or contain the issue history. Promote a detailed case only when root cause/fix are verified and the lesson is reusable.
+## Mandatory Closeout (Learning)
 
-A single case may qualify when it is expensive, dangerous, non-obvious, or likely to recur.
+1. Review the task's pending notes even without a reminder; group duplicates by cause and distinguish errors from changed preferences.
+2. Repair and run actual behavior/regression checks where possible. If unavailable, label the fix and verification pending.
+3. Promote a **verified reusable** lesson as one short `INDEX.md` line with area, cause/symptom, preventive check and issue/task/test anchor. Maintain detailed evidence in the task/issue. Reuse/create a focused issue when independently actionable or required by project policy; not for every minor error.
+4. Mark consolidated entries resolved/remove them only after transfer; retain unresolved notes and next action. Supersede obsolete or phase-expired rules based on current evidence.
+5. Report what was persisted, the tests actually observed and what remains open.
 
-## Case Lifecycle
-
-Use status only when needed:
-
-- active,
-- challenged,
-- superseded.
-
-Do not keep contradictory cases active.
-
-## Reading
-
-Use the index as a tiny routing aid **only when a matching symptom/surface appears**. Read just the matching line; fetch that issue or case only when the one-line reminder cannot resolve the decision. Never bulk-load issue history.
-
-## Writing
-
-For a short pointer: issue ID/link + brief failure/cause + preventive rule in one line. Update rather than duplicate. For a detailed verified case: store root cause, verified fix, applicability and anchors; no raw session history, secrets, large logs or every failed attempt. Retire obsolete pointers.
+Gitignored local memory survives sessions in the same workspace but not a fresh clone; Git-tracked memory becomes cross-project-copy/shared only after appropriate commit/push. If filesystem write is blocked, say so; do not claim a model will remember on its own.

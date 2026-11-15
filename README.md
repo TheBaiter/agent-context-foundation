@@ -151,17 +151,24 @@ For complex cross-mode work, use `references/task-boundaries.md` selectively. Ke
 
 Every code, example and demo must be checked against the requested outcome before being reported as working. Review the actual diff and run appropriate behavior/regression tests; provide exact commands/results, not assumed success. For visual UI demonstrations, **open the actual running screen and share a genuine screenshot of the observed state** when runtime and capture tooling are available. If the user requires screenshot evidence for another test, capture the real test result when supported. A code screenshot or generated mockup is not evidence that the UI worked. If tools cannot run or capture the required state, report what remains unverified and leave the relevant task/issue pending instead of claiming completion.
 
-## Errors, Traceability And Memory
+## Project Memory: Capture During Work, Learn At Closeout
 
-When an agent causes a meaningful error, **including one discovered or corrected by the user that the agent should have identified**, create or reuse one issue in the project's existing tracker and record: **what happened, why it failed (if known), how it was corrected, what tests were run and the preventive rule**. After a fresh successful validation, close the issue. If validation is blocked, leave it open with the exact pending check; do not report an unverified fix as complete.
+The desired memory is **stored within each project**, not inside a model's chat. It can be versioned in Git for sharing across models, agents and contributors, or remain local-only through project-controlled `.gitignore` rules. The skill never changes the project's sharing policy on its own.
 
-Write one compact pointer to `Agent/error-memory/INDEX.md` or the existing canonical equivalent:
+- **Startup:** root/scoped `AGENTS.md` routes to `Agent/README.md` and `Agent/INDEX.md`; briefly skim the compact `Agent/error-memory/INDEX.md` and any unresolved `PENDING.md` once. Do not load entire case histories.
+- **During work:** when a meaningful mistake appears, including a correction pointed out by the user, append a short note to `Agent/error-memory/PENDING.md` with task/area, symptom, evidence and next action. Continue safe implementation; do not file a ticket for every incidental error.
+- **Closeout:** review all of this task's pending errors, group duplicates, verify root causes and repairs, then promote tested reusable prevention into one-line `INDEX.md` pointers with an appropriate issue/task/test anchor. Keep unverified items pending and disclose gaps; no empty verbal promise of memory.
+- **Cross-session:** a new model/agent reads the project's files. Gitignored files persist only in the same workspace; shared memory requires commit/push or equivalent synchronization.
 
-`#123 — disabled guest catalog due to cloud-save assumption — check access and persistence separately`
+See `references/modules/error-memory.md` for exact lifecycle and privacy limits.
 
-That line remains useful even after the issue is closed, while detail stays in the issue. A future agent reads only a relevant pointer and opens the full issue when it cannot resolve a recurring case. No duplicate issue body, long timeline, universal issue preflight or blanket scan. A more detailed reusable memory case is optional, subject to evidence and maintenance value.
+### Diagnose missing activation
 
-Ordinary work does not require a new issue or routine issue reading. The project's own task/commit conventions still apply. See `references/task-traceability.md` and `references/modules/error-memory.md` only when needed.
+The `AGENTS.md` in this skill's GitHub repository does **not** apply to its consumers. The target project needs its own root standing bridge, and an actually installed **current** copy of the skill. Project-vendored `.agents/skills/agent-context-foundation/SKILL.md` can remain stale even when this repository's `main` changes.
+
+Verify these separately in a fresh agent session: (1) the host read effective root/global `AGENTS.md` and routed into project `Agent/`; (2) the exact installed/selected skill content matches `main` (check the project copy and `skills-lock.json`, not just the remote README); and (3) a user-correction scenario writes project memory, verifies the repair and consolidates it at closeout. `evals/activation-cases.csv` provides positive/negative examples. Static frontmatter checks do not prove implicit selection.
+
+A remote Git commit does not update local Codex installations or already vendored project skill copies. Update them through the supported skill manager and restart the agent session; do not claim automatic startup without runtime evidence.
 
 ## Repository Architecture
 
