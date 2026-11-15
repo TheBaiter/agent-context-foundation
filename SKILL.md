@@ -47,6 +47,10 @@ When selected for any repository task (including a simple fix or review):
 
 If the skill was not selected, standing `AGENTS.md` rules are the minimal fallback; do not claim the skill was executed merely because similar guidance was followed.
 
+## Host Lifecycle Adapter (Optional, Verified Per Host)
+
+Skills are **not** mandatory execution hooks. For local Codex, see `integrations/codex/README.md`: a separately trusted, opt-in hook adapter injects short Agent/ routing at SessionStart, UserPromptSubmit and SubagentStart, and requests **one** closeout review at Stop when Git state changed. It does not store prompts or transcripts and cannot prove semantic correctness. Do not automatically overwrite existing hooks, alter .gitignore, or claim runtime success without a fresh actual Codex test. Without hooks the standing root AGENTS.md baseline remains essential.
+
 ## Context Budget And Task Boundary Gate
 
 **Default: do the task, not an exhaustive context audit.** Use the current request and context already in the session. Read the relevant existing agent instruction entrypoint (`AGENTS.md`, `Agent/README.md` or actual equivalent) and the narrowest code/contract owner. Do **not** preload every issue, recent comment, linked issue, module, repository directory, or error history.

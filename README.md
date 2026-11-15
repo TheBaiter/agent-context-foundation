@@ -8,10 +8,11 @@ Its job is not to impose one universal agent workflow. Its job is to help agents
 
 ## Activation: Skill Discovery Is Not Automatic Execution
 
-**Two distinct layers are required for consistent startup behavior:**
+**Three complementary layers improve startup reliability (the third is opt-in and host-specific):**
 
 - **Standing guidance:** Codex reads effective global/repository `AGENTS.md` instructions. **Each target coding repository needs its own root `AGENTS.md` bridge** (or an already effective equivalent), in addition to the skill repository's own file. This is where the short mandatory baseline belongs.
 - **On-demand skill:** Codex initially sees skill name/description and may select the full `SKILL.md` for matching tasks. A positive `allow_implicit_invocation` flag permits selection; it does not itself start or force the skill. `agents/openai.yaml` is launcher metadata, not a startup hook.
+- **Optional host hooks:** [Codex adapter](integrations/codex/README.md) can inject minimal project routing on lifecycle events and request one extra closeout review after repository changes, if installed and trusted. Hooks improve execution reliability but do not prove agent reasoning or test outcomes. Different agent hosts require different integrations.
 
 The updated description now matches normal tasks such as `fix the bug`, `implement this feature`, `refactor` and `review this code`, without requiring a literal skill mention. Installing only in one repository does **not** expose the skill in every other repository.
 

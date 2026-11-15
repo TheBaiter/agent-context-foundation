@@ -1,0 +1,43 @@
+{
+  "description": "Opt-in Agent Context Foundation lifecycle prompts and one-time closeout gate",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact|fork",
+        "hooks": [{
+          "type": "command",
+          "command": "python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/agent_context_hook.py\"",
+          "commandWindows": "powershell -NoProfile -Command \"$root = git rev-parse --show-toplevel; py -3 (Join-Path $root '.codex/hooks/agent_context_hook.py')\"",
+          "timeout": 10,
+          "additionalContextLimit": 1000
+        }]
+      }
+    ],
+    "UserPromptSubmit": [
+      {"hooks": [{
+        "type": "command",
+        "command": "python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/agent_context_hook.py\"",
+        "commandWindows": "powershell -NoProfile -Command \"$root = git rev-parse --show-toplevel; py -3 (Join-Path $root '.codex/hooks/agent_context_hook.py')\"",
+        "timeout": 10,
+        "additionalContextLimit": 1000
+      }]}
+    ],
+    "SubagentStart": [
+      {"hooks": [{
+        "type": "command",
+        "command": "python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/agent_context_hook.py\"",
+        "commandWindows": "powershell -NoProfile -Command \"$root = git rev-parse --show-toplevel; py -3 (Join-Path $root '.codex/hooks/agent_context_hook.py')\"",
+        "timeout": 10,
+        "additionalContextLimit": 1000
+      }]}
+    ],
+    "Stop": [
+      {"hooks": [{
+        "type": "command",
+        "command": "python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/agent_context_hook.py\"",
+        "commandWindows": "powershell -NoProfile -Command \"$root = git rev-parse --show-toplevel; py -3 (Join-Path $root '.codex/hooks/agent_context_hook.py')\"",
+        "timeout": 10
+      }]}
+    ]
+  }
+}
