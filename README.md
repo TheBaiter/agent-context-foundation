@@ -59,6 +59,12 @@ npx skills add DietrichGebert/ponytail -g -a codex --skill ponytail
 
 See `evals/activation-cases.csv` for prompts that should select the skill and negative controls for unrelated tasks. Evaluate in fresh installed-agent sessions: distinguish *skill listed*, *skill actually loaded*, and *behavior followed*. Static metadata checks **cannot prove** runtime activation; if selection fails, keep the standing `AGENTS.md` baseline and report the miss rather than claiming success.
 
+## V3 feature-branch pilot
+
+This branch adds a native-host integration approach rather than claiming that `SKILL.md` can force itself to run. The design adapts [Superpowers](https://github.com/obra/superpowers) startup/bootstrap, [Beads](https://github.com/gastownhall/beads) installation and diagnostics, [Claude-Mem](https://github.com/thedotmack/claude-mem) lifecycle capture and retrieval, and [Everything Claude Code](https://github.com/affaan-m/ECC) verified-learning concepts. Project memory stays in `Agent/` files and no database is required.
+
+See [mechanism comparisons](references/benchmarks/host-adapters.md) and [host acceptance criteria](evals/host-acceptance.md). Local tests cannot establish Codex Windows execution, trust, skill-selection or cross-session memory PASS. [Epic #13](https://github.com/TheBaiter/agent-context-foundation/issues/13) remains open.
+
 ## Core Model
 
 ```text
