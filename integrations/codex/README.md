@@ -4,6 +4,10 @@
 
 Official Codex documentation: https://learn.chatgpt.com/docs/hooks
 
+## Pilot in this skill's own repository
+
+A source-controlled `.codex/hooks.json` points directly to `integrations/codex/agent_context_hook.py` for **this repository only**. It is an opt-in local pilot: Codex still requires trust review via `/hooks` and a trusted project configuration before running it. No global hook configuration or other project was changed. If your host does not support command hooks, this file does not execute.
+
 ## Install in one trusted test repository
 
 1. Keep existing AGENTS.md, Agent/README.md, Agent/INDEX.md, and project error-memory files. Install/update the skill into .agents/skills/agent-context-foundation/ first.
