@@ -88,8 +88,9 @@ def marker_path(root: Path, data: dict) -> Path | None:
 def context(event: str, root: Path, correction: bool = False) -> dict:
     message = (
         'Agent Context Foundation: before repository work, read effective AGENTS.md, '
-        'Agent/README.md and Agent/INDEX.md. Skim the short error-memory INDEX '
-        'and PENDING, open only relevant details. Use the installed skill if selected. '
+        'Agent/README.md and Agent/INDEX.md. Skim the short '
+        'Agent/error-memory/INDEX.md and Agent/error-memory/PENDING.md, '
+        'open only relevant details. Use the installed skill if selected. '
         'For meaningful agent errors including user corrections, record a short '
         'project-owned PENDING entry during the task. Before handoff validate changes '
         'and regressions, consolidate only verified prevention, disclose missing QA. '
